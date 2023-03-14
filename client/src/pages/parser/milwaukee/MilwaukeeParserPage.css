@@ -1,0 +1,58 @@
+
+.MilwaukeeParserPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.MilwaukeeParserPage_inputBox {
+    padding: 10px;
+    width: 500px;
+    border: 1px solid lightgray;
+    font-size: 16px;
+}
+
+.MilwaukeeParserPage_box {
+    border: 1px dashed lightgray;
+    display: flex;
+    flex-direction: column;
+}
+
+.MilwaukeeParserPage_box_file {
+    margin: 15px;
+}
+
+.MilwaukeeParserPage_box_input {
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.MilwaukeeParserPage_box button {
+    padding: 10px;
+    margin: 5px;
+}
+
+.MilwaukeeParserPage_box_div {
+    margin: 0 15px;
+    font-size: small;
+    cursor: pointer;
+}
+
+.MilwaukeeParserPage label,
+.MilwaukeeParserPage_box label {
+    text-align: center;
+    width: 100%;
+}
+
+.MilwaukeeParserPage_box span {
+    text-align: center;
+    font-size: small;
+    margin: 0 15px;
+}
+
+.MilwaukeeParserPage_button {
+    padding: 10px;
+    width: 100%;
+}

@@ -1,0 +1,42 @@
+.NewsPage {
+    text-align: center;
+}
+
+.NewsPage p {
+    font-size: 1.1rem;
+}
+
+.NewsPage video {
+    width: 580px;
+    /* height: 400px; */
+}
+
+@media(max-width: 768px) {
+    .NewsPage {
+        width: 600px;
+    }
+    .NewsPage video {
+        width: 450px;
+        /* height: 300px; */
+    }
+}
+
+@media(max-width: 520px) {
+    .NewsPage {
+        width: 400px;
+    }
+    .NewsPage video {
+        width: 350px;
+        /* height: 250px; */
+    }
+}
+
+@media(max-width: 420px) {
+    .NewsPage {
+        width: 350px;
+    }
+    .NewsPage video {
+        width: 280px;
+        /* height: 200px; */
+    }
+}

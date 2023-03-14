@@ -1,0 +1,89 @@
+.CartPage {
+}
+
+.CartPage,
+.CardTitle,
+.CardBody {
+    display:flex;
+    justify-content:center; 
+    align-items:center;
+}
+
+.CartTable {
+    font-size: 16px;
+}
+
+table  {
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+}
+thead tr {
+    background-color: rgb(218, 218, 218);
+}
+th {
+    padding: 10px;
+    border: 1px solid rgb(173, 173, 173);
+}
+
+.CartCard {
+    width: 100vw;
+    padding: 15px;
+    padding-bottom: 40px;
+    text-align: center;
+}
+
+.CardTitle {
+    margin: 30px 0;
+}
+
+.CardBody {
+    margin: 30px 0;
+}
+
+.CartThDivRow {
+    display:flex;
+    flex-direction:row; 
+    align-items:center; 
+    justify-content:center;
+}
+.CartButtonValue {
+    width: 30px;
+}
+.CartValue {
+    padding: 0 10px; 
+}
+.CartButtonDelete {
+    margin: 10px 15px;
+}
+
+@media(max-width:540px) {
+    .CartTable {
+        font-size: 14px;
+    }
+    .CartButtonDelete {
+        margin: 15px 5px 5px 5px;
+    }
+    .CartValue {
+        padding: 0 7px; 
+    }
+    th {
+        padding: 10px 5px;
+    }
+}
+
+@media(max-width:440px) {
+    .CartTable {
+        font-size: 12px;
+    }
+    .CartCard {
+        padding: 5px;
+    }
+    th {
+        padding: 10px 2px;
+    }
+}
+
+@media(max-width:350px) {
+    .CartHide {
+        display:none;
+    }
+}

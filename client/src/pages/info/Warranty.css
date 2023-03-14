@@ -1,0 +1,29 @@
+.Warranty {
+    margin-bottom: 10px;
+}
+
+.Warranty header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.Warranty label {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.Warranty p,
+.Warranty strong,
+.Warranty li {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.Warranty li {
+    list-style-type: circle;
+    padding-left: 10px;
+    margin-left: 10px;
+}

@@ -1,0 +1,36 @@
+.Lk {    
+    text-align: center;
+}
+
+.LkCards {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;    
+    align-items: center;
+    text-align: center;
+}
+
+.LkCards_Card {
+    width: 12rem;
+    height: 15rem;
+    border: 1px solid lightgray;
+    border-radius: 1.2rem;
+    cursor: pointer;
+
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.LkCards_Card:hover {
+    border: 2px solid orange;
+}
+
+@media(max-width: 500px) {
+    .LkCards {
+        flex-direction: column;
+    }    
+    .LkCards_Card {
+        margin-bottom: 10px;
+    }
+}

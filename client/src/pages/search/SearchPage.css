@@ -1,0 +1,63 @@
+
+.SearchPage {
+    background-color: var(--main-white-color);
+    padding: 10px 10px;
+}
+
+.SearchPage h2 {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.SearchColCategory button {
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+
+.SearchRow {
+    display: flex;
+    flex-direction: row;
+}
+.SearchColCategory {
+    width:30%;
+}
+.SearchColContent {
+    width:70%;
+}
+
+.SearchColContent h3,
+.SearchColContent h5 {
+    margin-bottom: 20px;
+}
+
+
+@media (max-width: 991px) {
+    .SearchColCategory {
+        width:100%;
+    }
+    .SearchColContent {
+        width:100%;
+    }
+    .SearchRow {
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 575px) {
+    .SearchProductList {
+        border: 1px dashed rgb(0, 0, 0);
+        padding: 10px 0 0 0;
+    }
+}
+
+
+@media (max-width: 555px) {
+    .SearchProductList {
+        border: none;
+        padding: 0;
+    }
+}
+

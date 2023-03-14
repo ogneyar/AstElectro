@@ -1,0 +1,32 @@
+.LoginPage {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.LoginPage_Card {
+    padding: 25px;
+    width: 500px;
+}
+
+.LoginPage_Card_header {
+    margin: auto;
+}
+
+.LoginPage_Card_Form {
+    display: flex;
+    flex-direction: column;
+}
+
+.LoginPage_Card_Form_Row {
+    display: flex;
+    justify-content: space-between; 
+    margin-top: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.LoginPage_changePassword {
+    display: flex;
+    justify-content: flex-end;
+}

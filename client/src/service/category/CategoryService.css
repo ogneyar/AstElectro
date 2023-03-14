@@ -1,0 +1,22 @@
+.CategoryService {
+    width:95%;
+    cursor: pointer;
+    margin: 0;
+    margin-bottom: 20px;
+    background-color: var(--main-orange-color);
+}
+.CategoryItemService {
+    border-left: 1px solid var(--main-white-color);
+}
+
+.CategoryNavLink,
+.CategoryNavLink:hover {
+    color: var(--main-black-color);
+}
+
+@media (max-width: 991px) { /* < 992px */
+    .CategoryService {
+        width:100%;
+        margin-bottom: 10px;
+    }
+}

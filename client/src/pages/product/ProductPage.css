@@ -1,0 +1,160 @@
+
+.ProductPage {
+    background-color: var(--main-white-color);
+    padding: 40px 20px 30px 20px;
+}
+.ProductMainBox {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.ProductName {
+    padding: 0 20px;
+}
+.ProductName,
+.ProductImage, 
+.ProductImageDiv,
+.ProductRating,
+.ProductColCard,
+.ProductCard {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+.ProductName a,
+.ProductImage a {
+    text-decoration: none;
+    color: black;
+}
+.ProductName a:hover {
+    color: grey;
+}
+
+.ProductImage {
+    padding-bottom: 10px;
+    flex-direction: row; 
+}
+.ProductImageDiv {
+    padding-top:5px;
+}
+.ProductImage_ImageBig {
+    cursor: zoom-in;
+    border: 1px dashed lightgrey;
+}
+
+.ProductImageSmall {
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid lightgrey;
+}
+
+.ProductCard {
+    justify-content: space-around;
+    width: 300px; 
+    height: 275px; 
+    font-size: 32px;
+    border: 5px solid lightgray;
+}
+
+.ProductCard_Price{
+    padding: 0 5px;
+    text-align: center;
+}
+
+.ProductCardDivButtonBuy {
+    padding: 20px;
+}
+.ProductCardButtonBuy {
+    padding: 20px 0;
+}
+
+.ProductDescription,
+.ProductInfo,
+.ProductSize {
+    padding: 10px 20px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column; 
+}
+.ProductDescriptionDiv {
+    border: 1px dashed lightgrey; 
+    padding: 10px; 
+    margin-top: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.ProductInfoRowLight {
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.ProductInfoRowTansparent {
+    background-color: transparent;
+    padding: 10px;
+}
+
+.ProductInfo li,
+.ProductInfo td
+ {
+    border: 1px solid lightgrey;
+    padding: 10px;
+}
+
+@media(max-width:991px) {
+    .ProductMainBox {
+        padding: 0 90px;
+    }
+}
+
+@media(max-width:767px) {
+    .ProductMainBox {
+        padding: 0 30px;
+    }
+}
+
+@media(max-width:400px) {
+    .ProductMainBox {
+        padding: 0;
+    }
+}
+
+/*----------------------------------------------*/
+/* Увелечительное стекло для изображений товара */
+/*----------------------------------------------*/
+
+
+@media(min-width: 520px) {
+.ProductPage_ImagesMagnifier {
+    /* visibility: hidden;
+    display: none; */
+    position: fixed;
+    z-index: 10000;
+    width: 500px;
+    height: 500px;
+    border: 1px dashed rgb(192, 192, 192);
+    cursor: none;
+}
+
+.ProductPage_ImagesMagnifier img {
+    width: 100%;
+    height: 100%;
+    /* object-fit: cover; */
+    object-fit: none;
+    /* object-position: 0 0; */
+}
+}
+/*----------------------------------------------*/
+
+
+.ProductCard_Price_redPrice {
+    /* color: rgb(212, 2, 2); */
+    color: var(--main-red-color);
+    font-weight: 700;
+}
+
+.ProductCard_Price_oldPrice {
+    text-decoration: line-through;
+}

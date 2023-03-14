@@ -1,0 +1,17 @@
+.Button {
+	padding: 5px;
+       
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.standartButton {
+    background-color: var(--main-white-color);
+    color: var(--main-black-color);
+
+    border-color: var(--main-black-color); 
+}
+
+.standartButton:hover {
+    opacity: 0.5;   
+}

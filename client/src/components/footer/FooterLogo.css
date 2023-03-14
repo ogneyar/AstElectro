@@ -1,0 +1,14 @@
+.FooterLogo {
+    background-color: var(--main-white-color);
+    padding: 10px;
+    display:flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* width:100%; */
+}
+
+.FooterLogoImage {
+    width: 150px;
+    /* height: 80px; */
+    
+}

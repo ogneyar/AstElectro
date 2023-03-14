@@ -1,0 +1,96 @@
+
+.ButtonBuy {
+    font-weight: 800;
+    padding: 5px 10px;
+}
+
+.NotificationDiv {
+    display: flex; 
+    justify-content:center; 
+    flex-wrap: nowrap;
+    margin: 20px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.NotificationCart {
+    display: flex; 
+    justify-content:space-between; 
+}
+@media (max-width: 991px) {
+    .NotificationCart {
+        flex-wrap: wrap;
+    }
+}
+.NotificationCart_product {
+    display: flex; 
+    justify-content:space-between; 
+}
+.NotificationCart_product_body {
+    margin: 0 10px;
+}
+.NotificationCart_product_name {
+    color: green;
+}
+.NotificationCart_product_article {
+    font-size: 14px;
+    color: grey;
+}
+
+.NotificationCart_price { 
+    display: flex; 
+    justify-content:space-between; 
+    align-items: center;
+    text-align: center;
+}
+.NotificationCart_price div {
+    margin: 5px;
+}
+.NotificationCart_price label {
+    font-size: 14px;
+}
+
+.NotificationDivButtons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.NotificationDivButtons Button {
+    margin: 10px;
+    padding: 10px 5px;
+    font-weight: 700;
+}
+
+.NotificationCart_price_value {
+    min-width: 120px;
+}
+.NotificationCart_price_value small {
+    padding: 0 10px;
+}
+.NotificationCart_price_value input {
+    padding: 0 5px;
+    margin: 0 2px;
+    text-align: center;
+}
+.NotificationCart_price_value_minus,
+.NotificationCart_price_value_plus,
+.NotificationCart_price_delete {
+    cursor: pointer;
+}
+.NotificationCart_price_value_minus {
+    border: 1px solid grey;
+}
+.NotificationCart_price_value_plus {
+    border: 1px solid grey;
+}
+.NotificationCart_price_value_data {
+    border: 1px solid lightgrey;
+    margin: 0 5px;
+}
+
+.NotificationCart_price_delete {
+    color: red;
+    font-weight: 700;
+    font-size: 24px;
+}

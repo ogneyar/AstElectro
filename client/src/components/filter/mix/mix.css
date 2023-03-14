@@ -1,0 +1,9 @@
+
+.Mix {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}

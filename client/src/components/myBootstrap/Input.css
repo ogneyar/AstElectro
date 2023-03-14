@@ -1,0 +1,17 @@
+.Input {
+    padding: 5px;
+    
+    border-width: 1px;
+    border-radius: 5px;
+}
+
+.standartInput {
+    background-color: #fff;
+    color: #000;
+    border-color: #000;
+}
+
+.standartInput:hover {
+    opacity: 0.8;
+}
+

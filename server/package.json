@@ -1,0 +1,50 @@
+{
+  "name": "ast_server",
+  "version": "0.0.1",
+  "description": "server ast",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "old": "nodemon --max-http-header-size=16384 server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
+    "btoa": "^1.2.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "encoding": "^0.1.13",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-validator": "^6.12.1",
+    "express-xml-bodyparser": "^0.3.0",
+    "iconv-lite": "^0.6.3",
+    "jsonwebtoken": "^9.0.0",
+    "mathjs": "^10.1.0",
+    "mysql2": "^2.2.5",
+    "needle": "^3.1.0",
+    "nodemailer": "^6.6.3",
+    "qs": "^6.10.1",
+    "sequelize": "^6.9.0",
+    "serve-favicon": "^2.5.0",
+    "sharp": "^0.30.7",
+    "uuid": "^8.3.2",
+    "xlsx": "^0.17.1",
+    "xml-js": "^1.6.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "nodemonConfig": {
+    "ext": "js, mjs, json, css, html",
+    "ignore": [
+      "tmp/*",
+      "prices/*",
+      "static/info/*"
+    ]
+  }
+}

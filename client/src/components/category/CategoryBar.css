@@ -1,0 +1,39 @@
+
+#CategoryBarPC {
+    display: flex;
+    visibility: visible;
+    opacity: 1;
+}
+#CategoryBarMobile {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+@media (max-width: 991px) { /* < 992px */
+    #CategoryBarPC {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+    }
+    #CategoryBarMobile {
+        display: flex;
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.CategoryBar label {
+    width: 100vw;
+    border: 1px solid rgb(201, 201, 201);
+    padding: 15px;
+    border-radius: 5px;
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    cursor: pointer;
+    background-color: #fff;
+}
+.CategoryBar label i {
+    font-size: 24px;
+}

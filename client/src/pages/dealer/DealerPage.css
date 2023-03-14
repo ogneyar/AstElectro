@@ -1,0 +1,93 @@
+
+.DealerPage {
+    padding: 0px;
+}
+
+.DealerPage_header {
+    padding: 5px 0px 20px 0px;
+    text-align: center;
+    border-bottom: 1px solid grey;
+    font-size: 1.5rem;
+}
+
+.DealerPage_body {
+    padding: 20px 10px 20px 10px;
+    font-size: 1.3rem;
+}
+.DealerPage_body a {
+    border: 1px dashed grey;
+}
+
+.DealerPage_description {
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: rgb(223, 223, 223);
+    color: rgb(0, 0, 88);
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 600;
+    /* white-space: pre; */ 
+    /* hyphens: auto; */ /* перенос части слова */
+}
+
+.DealerPage_description pre {
+    color: rgb(128, 0, 110);
+}
+
+.DealerPage_description pre span {
+    color: red;
+}
+
+.DealerPage_description hr {
+    margin: 10px 0;
+}
+
+@media(max-width: 530px) {
+    .DealerPage_header {
+        font-size: 1.3rem;
+        padding: 0px 0px 10px 0px;
+    }
+    .DealerPage_body {
+        font-size: 1.1rem;
+        padding: 10px 5px 20px 5px;
+    }
+    .DealerPage_description {
+        font-size: 1rem;
+        padding: 10px 10px;
+        margin-bottom: 15px;
+    }
+}
+
+@media(max-width: 450px) {
+    .DealerPage_header {
+        font-size: 1.2rem;
+        padding: 0px 0px 10px 0px;
+    }
+    .DealerPage_body {
+        font-size: 1rem;
+        padding: 10px 5px 20px 5px;
+    }
+    .DealerPage_description {
+        font-size: 0.8rem;
+        font-weight: 500;
+        padding: 5px 5px;
+        margin-bottom: 10px;
+    }
+}
+
+@media(max-width: 350px) {
+    .DealerPage_header {
+        font-size: 1rem;
+        padding: 0px 0px 10px 0px;
+    }
+    .DealerPage_body {
+        font-size: 0.8rem;
+        padding: 5px 5px 20px 5px;
+    }
+    .DealerPage_description {
+        font-size: 0.7rem;
+        font-weight: 500;
+        padding: 0px 5px;
+        margin-bottom: 5px;
+    }
+}

@@ -1,0 +1,56 @@
+
+:root {
+    --height-banner: 200px;
+}
+
+/* .Banner {} */
+
+.Banner_padding_top {
+    padding-top: 20px;
+}
+.Banner_padding_bottom {
+    padding-bottom: 20px;
+}
+
+.Banner_img {
+    position: relative;
+    width: 100%;
+}
+
+.Banner_img img {
+    width: 100%;
+}
+
+.Banner_button {
+    position: absolute;
+    z-index: 100;
+    background-color: green;
+    color: white;
+    border: 1px solid white;
+    /* bottom: 52px;
+    right: 7px;
+    border-radius: 15px;
+    padding: 0 12px 7px 12px;
+    font-size: 2rem; */
+}
+.Banner_button:hover {
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+}
+
+@media(max-width: 575px) {
+    .Banner {
+        padding-top: 10px;
+    }
+}
+
+/* @media(min-width: 2000px) {
+    .Banner_button {
+        bottom: 77px;
+        right: 12px;
+        border-radius: 15px;
+        padding: 0 12px 7px 12px;
+        font-size: 3.2rem;
+    }
+} */

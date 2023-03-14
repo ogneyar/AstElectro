@@ -1,0 +1,12 @@
+
+.Email {
+    position: relative;
+}
+
+.emailHelpLabel {
+    position: absolute;
+    font-size: 0.8rem;
+    top: 30px;
+    left: 10px;
+    color: rgb(163, 79, 202);
+}

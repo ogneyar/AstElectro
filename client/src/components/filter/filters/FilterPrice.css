@@ -1,0 +1,44 @@
+
+.FilterPrice {
+    display: flex;
+    margin-right: 5px;
+    padding: 0 10px;
+    background-color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid var(--main-silver-color);
+    user-select: none;
+}
+
+.FilterPrice_span:first-child {
+    margin-right: 20px;
+    /* color: red; */
+}
+
+.FilterPrice_span {
+    color: blue;
+    margin: 20px 0;
+}
+.FilterPrice_span span {
+    padding: 5px 0.5px;
+}
+
+.FilterPrice_div_span_head,
+.FilterPrice_div_span_from_before {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.FilterPrice_div_span_head button {
+    border-radius: 10px;
+    padding: 0 5px;
+    background-color: rgb(17, 112, 255);
+    color: var(--main-white-color);
+    border: 1px solid black;
+}
+
+.FilterPrice_div_span_head button:hover {
+    background-color: var(--main-silver-color);
+    color: black;
+}

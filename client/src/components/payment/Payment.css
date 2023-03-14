@@ -1,0 +1,22 @@
+.Payment {
+    width: 100%;
+    height: 100%;
+    /* background-color: blueviolet; */
+    display:flex; 
+    align-items: center; 
+    justify-content: center;
+    flex-direction: column;
+}
+
+#boxForButtonAlfaBank {
+    width: 235px;
+    height: 62px;
+}
+
+#alfa-payment-button {
+    /* color: yellowgreen; */
+}
+
+.Payment Button {
+    margin: 10px;
+}

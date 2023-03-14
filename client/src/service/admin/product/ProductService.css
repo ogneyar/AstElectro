@@ -1,0 +1,37 @@
+
+.fileBox {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fileBoxImages {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fileBoxImagesReader {
+    margin: 5px;
+}
+
+.fileBoxImagesReader_Image {
+    width: 100px;
+}
+
+
+@media(max-width: 992px) {
+    .fileBox {
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 520px) {
+    .fileBoxImages {
+        flex-direction: column;
+        align-items: center;
+    }    
+    .fileBoxImagesReader_Image {
+        width: 200px;
+    }
+}

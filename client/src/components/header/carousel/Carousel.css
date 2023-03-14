@@ -1,0 +1,27 @@
+
+:root {
+    --height-carousel: 200px;
+}
+
+.Carousel {
+    /* background-color: var(--main-silver-color); */
+    height: var(--height-carousel);
+}
+
+.CarouselContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.CarouselImg {
+    width: var(--height-carousel);
+    height: var(--height-carousel);
+    object-fit: contain;
+}
+
+.CarouselCaption {
+    width: var(--height-carousel);
+}
+

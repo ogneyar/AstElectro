@@ -1,0 +1,33 @@
+.Container {
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+}
+.Contain {
+    width: 1140px;
+}
+
+@media(max-width:1199px) {
+    .Contain {
+        width: 960px;
+    }
+}
+
+@media(max-width:991px) {
+    .Contain {
+        width: 720px;
+    }
+}
+
+@media(max-width:767px) {
+    .Contain {
+        width: 540px;
+    }
+}
+
+
+@media(max-width:575px) {
+    .Contain {
+        width: 100vw;
+    }
+}

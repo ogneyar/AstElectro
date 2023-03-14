@@ -1,0 +1,17 @@
+.ConfirmModalBody {
+    text-align: center;
+}
+
+.ConfirmModalBody_Message {
+    padding: 10px;
+}
+
+.ConfirmModalBodyDivButtons {
+    margin-top:10px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ConfirmModalBodyDivButtons Button {
+    width: 100px;
+}

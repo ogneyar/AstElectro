@@ -1,0 +1,101 @@
+.CreateOrderPage {
+    display:flex; 
+    flex-direction: column;
+    
+    align-items: center; 
+    justify-content: center;
+}
+
+.CreateOrderPageTitle {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.CreateOrderPageBody {
+}
+
+.CreateOrderPageBodyMessage {
+    color: red;
+    text-align: center;
+    width: 100%;
+}
+
+.CreateOrderPageChoiseDelivery {
+    display:flex; 
+    align-items: center; 
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+@media(max-width: 450px) {
+    .CreateOrderPageChoiseDelivery {
+        flex-direction: column;
+    }
+    .CreateOrderPageTitle {
+        font-size: 26px;
+    }
+}
+
+.CreateOrderPageChoiseDelivery div {
+    position: relative;
+}
+
+.CreateOrderPageChoiseDelivery p {
+    position: absolute;
+    bottom: -37px;
+    left: 10px;
+    font-size: 16px;
+}
+
+.CreateOrderPagePayment {
+    padding: 0 20px;
+    display:flex; 
+    align-items: flex-start; 
+    justify-content: center;
+    flex-direction: column;
+    font-size: 18px;
+}
+
+.CreateOrderPageChoiseDelivery,
+.CreateOrderPagePayment,
+.CreateOrderPageInputEmail {
+    width: 100%;
+    min-height: 150px;
+}
+
+.CreateOrderPageDeliverySdek,
+.CreateOrderPageInputEmail {
+    display:flex; 
+    align-items: center; 
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.CreateOrderPageInputEmail {
+    flex-direction: column;
+    text-align: center;
+}
+
+.CreateOrderPageInputEmail label {
+    font-size: 20px;
+}
+
+.CreateOrderPageInputEmail Input {
+    width: 250px;
+}
+
+.CreateOrderPageInputEmail Button {
+    margin-top: 20px;
+}
+
+.CreateOrderPageInputEmail span {
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.CreateOrderPageInputEmail div {
+    font-size: 20px;
+    padding: 20px;
+}

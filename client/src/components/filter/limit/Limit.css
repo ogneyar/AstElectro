@@ -1,0 +1,11 @@
+
+.Limit {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    user-select: none;
+}
+
+.Limit_select {
+    cursor: pointer;
+}

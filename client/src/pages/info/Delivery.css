@@ -1,0 +1,29 @@
+.DeliveryPages {
+    margin-bottom: 10px;
+}
+
+.DeliveryPages header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+.DeliveryPages label {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.DeliveryPages p,
+.DeliveryPages strong,
+.DeliveryPages span,
+.DeliveryPages li {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.DeliveryPages li {
+    list-style-type: circle;
+    padding-left: 10px;
+    margin-left: 10px;
+}

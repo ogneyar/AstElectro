@@ -1,0 +1,95 @@
+
+.BrandPage {
+    padding: 10px 10px;
+    background-color: var(--main-white-color);
+}
+
+.BrandPage h2 {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.BrandPageHeader {
+    text-align: center;
+    color: #fff;
+    font-size: 2rem;
+    /* margin-bottom: 20px; */
+    width: 100%;
+    height: auto; 
+}
+
+.BrandPage_image {
+    padding-bottom: 10px;
+}
+.BrandPage_image img {
+    width: 100%;
+}
+
+.BrandPageBody {
+    display: flex;
+    flex-direction: row;
+}
+.BrandColCategory {
+    width:30%; 
+}
+.BrandColContent {
+    width:70%;
+}
+
+
+
+@media(max-width: 991px) {
+    .BrandPage {
+        margin-bottom: 10px;
+    }
+    
+    .BrandColCategory {
+        width:100%;
+    }
+    .BrandColContent {
+        width:100%;
+    }
+    .BrandPageBody {
+        flex-direction: column;
+    }
+}
+
+@media(min-width: 1200px) {
+    .BrandPage_image {
+        min-height: 158px; /* 188 - padding */
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1199px) {
+    .BrandPage_image {
+        min-height: 132px; /* 152 - padding */
+    }
+}
+
+@media(min-width: 768px) and (max-width: 991px) {
+    .BrandPage_image {
+        min-height: 99px; /* 119 - padding */
+    }
+}
+
+@media(min-width: 576px) and (max-width: 767px) {
+    .BrandPage_image {
+        min-height: 73px; /* 93 - padding */
+    }
+}
+
+
+@media (max-width: 575px) {
+    .BrandProductList {
+        border: 1px dashed rgb(0, 0, 0);
+        padding: 10px 0 0 0;
+    }
+}
+
+@media (max-width: 555px) {
+    .BrandProductList {
+        border: none;
+        padding: 0;
+    }
+}

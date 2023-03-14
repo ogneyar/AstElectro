@@ -1,0 +1,142 @@
+.NavBar {}
+
+.NavBar_Container {}
+
+.NavBar_Row {
+    width: 100%;
+    margin: 20px 0;
+    padding: 0;
+    display:flex;
+    align-items: center;
+    justify-content:space-between;
+}
+.NavBar_Col_Buttons {
+    display: flex;
+}
+.NavBar_Col_Contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    color: var(--main-white-color);
+}
+.NavBar_Col_Contacts label {
+    padding: 0;
+    margin: 0;
+}
+.NavBar_Col_Contacts label a {
+    color: var(--main-orange-color);
+}
+.NavBar_Col_Contacts label a:hover {
+    color: var(--main-white-color);
+}
+.NavBar_Col_Contacts_City {
+    display: none;
+}
+@media(max-width: 991px) {
+    .NavBar_Col_Contacts {
+        font-size: 14px;
+    }
+    .NavBar_Col_Contacts_Name,
+    .NavBar_Col_Contacts_Mail {
+        display: none;
+    }
+}
+@media(max-width: 767px) {
+    /* .NavBar_Col_Contacts_Address,
+    .NavBar_Col_Contacts_City {
+        display: none;
+    } */
+    .NavBar_Col_Contacts {
+        display: none;
+    }
+}
+/* @media(max-width: 540px) {
+    .NavBar_Col_Contacts_Phone {
+        display: none;
+    }
+} */
+
+.NavBar_Cart,
+.NavBar_Spinner {
+    display:flex;
+    align-items: center;
+}
+.NavBar_Cart_Box {
+    position: relative;
+}
+.NavBar_Cart_Image {
+    margin: 0 20px;
+    border-radius: 50%;
+    background-color: var(--main-white-color); 
+    width: 50px;
+    height: 50px;
+}
+.NavBar_Cart_Image:hover {
+    background-color: var(--main-orange-color);
+}
+.NavBar_Cart_Box span {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    color: black;
+    font-size: 10px;
+    font-weight: 700;
+    background-color: var(--main-orange-color);
+    padding: 2px 8px;
+    border-radius: 50%;
+    border: 1px solid white;
+}
+
+
+.NavBar_NavLink {
+    color: var(--main-white-color); 
+}
+
+.NavLink {
+    cursor: pointer;
+}
+
+.NavBar_Logo {
+    background-color: var(--main-white-color);
+    padding: 10px;
+    width: 150px;
+}
+
+@media(max-width:991px) {
+    .NavBar_Row {
+        margin: 0;
+    }
+    .NavBar_Cart_Image {
+        margin: 0 10px;
+    }
+    .NavBar_Cart_Box span {
+        right: 5px;
+    }
+    .NavBar_Logo {
+        padding: 5px;
+        width: 125px;
+    }
+}
+
+@media(max-width:410px) {
+    .NavBar_Col_Buttons {
+        align-items: center;
+        flex-direction: column;
+    }
+    .NavBar_Cart{
+        margin-bottom: 10px;
+    }
+    .NavBar_Col_Logo {
+        margin-right: 5px;
+    }
+    .NavBar_Logo {
+        padding: 2px;
+        width: 115px;
+    }
+}
+
+@media(max-width:340px) {
+    .NavBar_Col_Buttons Button{
+        padding: 5px;
+    }
+}

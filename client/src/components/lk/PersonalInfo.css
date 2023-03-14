@@ -1,0 +1,35 @@
+.PersonalInfo {
+    text-align: left;
+}
+
+.PersonalInfo_header {
+    text-align: center;
+}
+
+.PersonalInfo_box {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.PersonalInfo_box_button {
+    width: 55%;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 10px;
+    font-size: 1rem;
+    padding: 3px, 10px, 3px, 10px;
+}
+.PersonalInfo_box_button:hover {
+    opacity: 0.5;
+}
+
+.PersonalInfo_red {
+    color: #f00;
+}
+
+.PersonalInfo_box span{
+    font-size: 1rem;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}

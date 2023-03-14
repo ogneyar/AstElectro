@@ -1,0 +1,17 @@
+.ErrorPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ErrorPage header {
+    font-size: 24px;
+    margin: 20px;
+}
+
+.ErrorPage label {
+    font-size: 20px;
+    margin: 20px;
+    text-align: center;
+}

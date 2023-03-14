@@ -1,0 +1,29 @@
+.PrivacyPolicy {
+    margin-bottom: 10px;
+}
+
+.PrivacyPolicy header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.PrivacyPolicy label {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.PrivacyPolicy p,
+.PrivacyPolicy strong,
+.PrivacyPolicy li {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.PrivacyPolicy li {
+    list-style-type: circle;
+    padding-left: 10px;
+    margin-left: 10px;
+}

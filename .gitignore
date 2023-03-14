@@ -1,0 +1,78 @@
+
+# dependencies
+node_modules
+*/node_modules
+
+# production
+build
+*/build
+
+# environment
+.env
+*/.env
+
+# databases
+ast.sql
+*/ast.sql
+
+# lock
+package-lock.json
+*/package-lock.json
+
+# temp
+temp
+*/temp
+
+# build file
+b
+*/b
+
+# bat files
+*.bat
+*/*.bat
+
+# repair files (repair run and repair stop)
+rr
+*/rr
+rs
+*/rs
+
+# very big file
+static/deliveries/dl/streets.csv
+*/static/deliveries/dl/streets.csv
+
+# how to generate a payment link
+link.txt
+*/link.txt
+
+# command files
+*.bat
+*/*.bat
+
+dump
+*/dump
+ldump
+*/ldump
+m
+*/m
+res
+*/res
+
+# Apach file settings
+.htaccess
+*/.htaccess
+
+*/robots.txt
+
+# secrets, individual info and superfluous
+prices
+*/prices
+static/info
+*/static/info
+static/temp
+*/static/temp
+db.js
+*/db.js
+static/feed
+*/static/feed
+

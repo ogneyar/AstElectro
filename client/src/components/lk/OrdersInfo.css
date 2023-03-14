@@ -1,0 +1,13 @@
+.OrdersInfo {
+    padding: 20px 0;
+}
+
+.OrdersInfo_Title {
+    margin-bottom: 20px;
+}
+
+.OrdersInfo_Body {
+    text-align: left;
+    margin: 10px 0;
+    font-size: 16px;
+}

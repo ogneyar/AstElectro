@@ -1,0 +1,57 @@
+.GedoreParserPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.GedoreParserPage_inputBox {
+    padding: 10px;
+    width: 500px;
+    border: 1px solid lightgray;
+    font-size: 16px;
+}
+
+.GedoreParserPage_box {
+    border: 1px dashed lightgray;
+    display: flex;
+    flex-direction: column;
+}
+
+.GedoreParserPage_box_file {
+    margin: 15px;
+}
+
+.GedoreParserPage_box_input {
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.GedoreParserPage_box button {
+    padding: 10px;
+    margin: 5px;
+}
+
+.GedoreParserPage_box_div {
+    margin: 0 15px;
+    font-size: small;
+    cursor: pointer;
+}
+
+.GedoreParserPage label,
+.GedoreParserPage_box label {
+    text-align: center;
+    width: 100%;
+}
+
+.GedoreParserPage_box span {
+    text-align: center;
+    font-size: small;
+    margin: 0 15px;
+}
+
+.GedoreParserPage_button {
+    padding: 10px;
+    width: 100%;
+}

@@ -1,0 +1,33 @@
+.SupportPage {
+    margin-bottom: 20px;
+}
+
+.SupportPage header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.SupportPage div {
+    text-align: center;
+}
+
+.SupportPageBody p {
+    font-size: 20px;
+}
+
+.SupportPageBody textarea {
+    padding: 0 5px;
+}
+
+@media(max-width: 600px) {
+    .SupportPageBody textarea {
+        width: 300px;
+    }
+}
+
+@media(max-width: 400px) {
+    .SupportPageBody textarea {
+        width: 250px;
+    }
+}

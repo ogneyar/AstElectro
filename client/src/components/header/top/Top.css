@@ -1,0 +1,126 @@
+.Top {
+    background-color: var(--main-silver-color);
+    /* background-color: yellow; */
+    margin: 0;
+    padding: 0;
+}
+
+.TopContainer {}
+
+.TopRow {
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center;
+    
+}
+.TopCol {
+    padding: 5px 0; 
+}
+
+.TopColLink {
+    width:100%;
+    margin-right: 10px;
+}
+
+.TopDivLink {
+    width:100%;
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center;
+}
+
+.TopLinkStrong {}
+
+.NavLink_Top,
+.NavLink_Top_Specials,
+.NavLink_Top_Support,
+.NavLink_Top_Shop,
+.NavLink_Top_Dealer {
+    padding: 7px 5px;
+    border-radius: 5px;
+}
+
+.NavLink_Top {
+    color: var(--main-grey-color);
+    border: 1px solid var(--main-grey-color);
+}
+.NavLink_Top_Specials {
+    color: var(--main-red-color);
+    border: 1px solid var(--main-red-color);
+}
+.NavLink_Top_Support {
+    color: blue;
+    border: 1px solid blue;
+}
+.NavLink_Top_Shop {
+    color: rgb(114, 0, 143);
+    border: 1px solid rgb(114, 0, 143);
+}
+.NavLink_Top_Dealer {
+    color: rgb(216, 122, 0);
+    border: 1px solid rgb(216, 122, 0);
+}
+
+.NavLink_Top:hover,
+.NavLink_Top_Specials:hover,
+.NavLink_Top_Support:hover,
+.NavLink_Top_Shop:hover,
+.NavLink_Top_Dealer:hover {
+    color: var(--main-white-color);
+    border: 1px solid var(--main-white-color); 
+    background-color: none;
+}
+
+
+@media(max-width: 991px) {
+    .TopRow {
+        flex-direction: column;
+    }
+    .TopColLink {
+        margin-top: 5px;
+        margin-right: 0;
+    }
+}
+@media(max-width: 767px) {
+    .NavLink_Top {
+        margin-right: 3px;
+    }  
+    .NavLink_Top,
+    .NavLink_Top_Specials,
+    .NavLink_Top_Support,
+    .NavLink_Top_Shop,
+    .NavLink_Top_Dealer {
+        padding: 7px 1px;
+    }
+}
+@media(max-width: 575px) {
+    .TopRow {
+        padding: 0 5px;
+    }
+    .TopCol {
+        padding: 5px 10px; 
+    }
+    .TopColLink {
+        font-size: 14px;
+    }
+}
+@media(max-width: 500px) {
+    .TopColLink {
+        font-size: 13px;
+    }
+}
+@media(max-width: 460px) {
+    .TopColLink {
+        font-size: 12px;
+    }
+}
+@media(max-width: 420px) {
+    .TopColLink {
+        font-size: 10px;
+    }
+}
+@media(max-width: 365px) {
+    .TopColLink {
+        display: none;
+    }
+}

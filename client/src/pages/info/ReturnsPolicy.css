@@ -1,0 +1,18 @@
+
+.ReturnsPolicy header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.ReturnsPolicy label {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.ReturnsPolicy p {
+    margin-bottom: 10px;
+    font-size: 20px;
+}

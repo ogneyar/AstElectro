@@ -1,0 +1,29 @@
+.AdminCategoryService {
+
+}
+
+.AdminCategoryServiceCheckboxIsProduct {
+    margin-top: 15px;
+}
+
+@media(max-width: 500px) {
+    .AdminCategoryService {
+        font-size: 12px;
+    }
+    .AdminCategoryServiceCheckboxIsProduct {
+        margin-top: 10px;
+    }
+}
+
+
+@media(max-width: 410px) {
+    .AdminCategoryService {
+        font-size: 10px;
+    }
+}
+
+@media(max-width: 350px) {
+    .AdminCategoryService {
+        font-size: 8px;
+    }
+}

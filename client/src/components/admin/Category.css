@@ -1,0 +1,21 @@
+.AdminCategoryTitle {
+
+}
+
+@media(max-width: 500px) {
+    .AdminCategoryTitle {
+        font-size: 12px;
+    }
+}
+
+@media(max-width: 410px) {
+    .AdminCategoryTitle {
+        font-size: 10px;
+    }
+}
+
+@media(max-width: 350px) {
+    .AdminCategoryTitle {
+        font-size: 8px;
+    }
+}

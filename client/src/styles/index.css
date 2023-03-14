@@ -1,0 +1,115 @@
+
+:root {
+  --main-grey-color: #6d6f71; /* 109 111 113 */
+  --main-orange-color: #ff9900; /* 255 153 0 */
+  /* --main-silver-color: #c0c0c0;  */  /* 192 192 192 */
+  --main-silver-color: #d1d1d1;
+  --main-white-color: #f3f3f3; /* 243 243 243 */
+  --main-black-color: #0e0e0e; /* 14 14 14 */
+  --main-red-color: #b31111; /* 179 17 17 */
+}
+
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  /* width: 100vw; */
+  /* background-color:blue; */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* width: 100vw; */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--main-orange-color);
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  /* width: 100vw; */
+  /* background-color:green; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+li {
+  list-style-type: none;
+}
+
+ul {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+th {
+  /* margin: 0;
+  padding: 0; */
+}
+
+.NavLink, 
+.NavLink:hover, 
+a, 
+a:hover {
+  text-decoration: none;
+}
+
+.Row {
+  width:100%;
+  padding:0;
+  margin:0;
+}
+
+.Content {
+  background-color: var(--main-white-color);
+  padding: 10px 10px;
+}
+
+.Card_title {
+  padding: 20px 5px;
+}
+
+.Card_body {
+  padding: 20px 5px;
+}
+
+.inputBox {
+  border: 1px dashed rgb(175, 175, 175);
+  margin-top: 10px;
+  padding: 5px;
+}
+
+.divArticle {
+  border: 1px solid lightgrey;
+  padding: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.Mobile {}
+
+@media(max-width:991px) {
+  .hidden-mobile {
+    display:none;
+    visibility: hidden;
+    opacity: 0;
+  }
+}

@@ -1,0 +1,28 @@
+.TermsOfUse {
+    margin-bottom: 10px;
+}
+.TermsOfUse header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.TermsOfUse label {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.TermsOfUse p,
+.TermsOfUse strong,
+.TermsOfUse li {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.TermsOfUse li {
+    list-style-type: circle;
+    padding-left: 10px;
+    margin-left: 10px;
+}

@@ -1,0 +1,67 @@
+
+#YMaps {
+    min-height: 400px;
+    /* width: 100%; */
+}
+
+.DeliveryComponent {
+    margin: 5px 0;
+}
+
+.DeliveryHeader {
+    margin: 5px 0;
+    text-align: center;
+}
+
+.DeliveryCalculation {
+    border: 1px dashed lightgray;
+    margin: 5px 0;
+    padding: 0 10px;
+}
+
+.DeliveryButton {
+    background-color: white;
+    color:orange;
+    padding: 10px;
+    border: 1px dotted lightgray;
+}
+
+.DeliveryActionButton {
+    background-color: orange;
+    color:white;
+    padding: 10px;
+}
+
+.DeliverySdekTariff {
+    border: 1px solid lightgray;
+    padding: 7px 10px;
+    border-radius: 5px;
+}
+
+@media(max-width: 510px) {
+    .DeliveryHeader {
+        font-size: 20px;
+    }
+    .DeliveryButton,
+    .DeliveryActionButton {
+        padding: 5px;
+        font-size: 20px;
+    }
+}
+
+@media(max-width: 370px) {
+    .DeliveryHeader {
+        font-size: 18px;
+    }
+    .DeliveryButton,
+    .DeliveryActionButton {
+        padding: 2px;
+        font-size: 18px;
+    }
+    .DeliveryChoise {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+

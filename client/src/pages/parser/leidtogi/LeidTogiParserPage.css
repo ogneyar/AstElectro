@@ -1,0 +1,67 @@
+
+.LeidTogiParserPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.LeidTogiParserPage_inputBox {
+    padding: 10px;
+    width: 500px;
+    border: 1px solid lightgray;
+    font-size: 16px;
+}
+
+.LeidTogiParserPage_box {
+    border: 1px dashed lightgray;
+    display: flex;
+    flex-direction: column;
+}
+
+.LeidTogiParserPage_box_file {
+    margin: 15px;
+}
+
+.LeidTogiParserPage_box_input {
+    margin: 15px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.LeidTogiParserPage_box button {
+    padding: 10px;
+    margin: 5px;
+}
+
+.LeidTogiParserPage_box_div {
+    margin: 0 15px;
+    font-size: small;
+    cursor: pointer;
+}
+
+.LeidTogiParserPage label,
+.LeidTogiParserPage_box label {
+    text-align: center;
+    width: 100%;
+}
+
+.LeidTogiParserPage_box span {
+    text-align: center;
+    font-size: small;
+    margin: 0 15px;
+}
+
+.LeidTogiParserPage_button {
+    padding: 10px;
+    width: 100%;
+}
+
+.LeidTogiParserPage_box_radio,
+.LeidTogiParserPage_box_radio input {
+    cursor: pointer;
+}
+
+.LeidTogiParserPage_box_div_numbersheet {
+    padding-top: 10px;
+}

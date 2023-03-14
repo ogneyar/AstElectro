@@ -1,0 +1,158 @@
+
+.SearchComponent {
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+    background-color: white;
+    /* margin: 0;
+    padding: 0;
+    width: 100%; */
+}
+
+
+.SearchWrapper {
+    display:flex; 
+    flex-direction: column;
+    
+    z-index: 1000;
+    
+    /* background-color:blue;
+    margin: 0;
+    padding: 0;
+    width: 100%; */
+}
+
+.SearchDiv {
+    /* background-color: var(--main-white-color); */
+    background-color: #fff;
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+    width: 510px;
+}
+
+.SearchInput {
+    /* background-color: var(--main-white-color); */
+    background-color: #fff;
+    border: none;
+    width: 90%;
+    padding: 0 10px;
+}
+.SearchInput:hover {
+    background-color: rgb(247, 247, 247);
+}
+
+.SearchListBox {
+    display:flex;
+    justify-content:flex-end; 
+}
+
+.SearchList {
+    background-color: #fff;
+    position:absolute;
+    z-index:1000;
+    margin-top: 5px;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 2px;
+}
+
+.SearchListItem {
+    display:flex; 
+    align-items: center;
+    border-bottom: 1px solid rgb(211, 211, 211);
+}
+.SearchListBottom {
+    display:flex; 
+    justify-content: center;
+    padding: 10px;
+    font-weight: bold;
+}
+.SearchListItem:hover,
+.SearchListBottom:hover {
+    cursor: pointer;
+    background-color: var(--main-silver-color);
+}
+
+.SearchListItemImg {
+    padding: 5px 10px 5px 5px;
+    width: 80px;
+    /* height: 80px; */
+}
+
+.SearchListItemBody {
+    display:flex; 
+    flex-direction: column;
+    width:100%;
+    padding-right: 5px;
+}
+
+.SearchListItemBodyBoxTitle {
+}
+
+.SearchListItemBodyArticle {
+    font-size: 13px;
+}
+
+.SearchListItemBodyPrice {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 24px;
+    color: var(--main-orange-color);
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
+.fon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    /* pointer-events:none; */
+    background-color: lightgrey;
+    opacity: 0.6;
+}
+
+@media(max-width:1199px) {
+    .SearchDiv {
+        width: 330px;
+    }
+}
+
+@media(max-width:991px) {
+    .SearchDiv {
+        width: 720px;
+    }
+    .SearchInput {
+        width: 100%;
+    }
+}
+
+@media(max-width:767px) {
+    .SearchDiv {
+        width: 540px;
+    }
+}
+
+@media(max-width:575px) {
+    .SearchBox {
+        /* width: 91vw; */
+        width: calc(100vw - 50px);
+        /* width: calc(100vw - var(--scrollbar-width)); */
+        /* width: 100vw; */
+    }
+    .SearchDiv {
+        width: 100%;
+    }
+    
+    .SearchInput {
+        padding: 0 15px;
+    }
+}
+
+@media (hover: none) and (max-width: 575px) { /* hover: none - это для мобильных устройств (означает что нельзя навестись, так как экран сенсорный) */
+    .SearchBox {
+        width: calc(100vw - 30px);
+    }
+}

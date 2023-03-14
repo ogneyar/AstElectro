@@ -1,0 +1,19 @@
+.InfoPage,
+.InfoPageCardBody,
+.InfoPageCardFooter {
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+}
+.InfoPageCard {
+    width: 600px;
+    /* margin: 25px; */
+    padding: 25px;
+}
+.InfoPageCardBody {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.InfoPageCardFooter {
+    border: 1px dotted lightgrey;
+}

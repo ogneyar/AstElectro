@@ -1,0 +1,8 @@
+/* inputBox описан в Admin.css */
+
+
+.DivButtonBack {
+    display:flex; 
+    justify-content:flex-end; 
+    margin: 30px 0;
+}
