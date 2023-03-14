@@ -12,8 +12,8 @@ build
 */.env
 
 # databases
-ast.sql
-*/ast.sql
+astel.sql
+*/astel.sql
 
 # lock
 package-lock.json
