@@ -42,19 +42,11 @@
     }
 }
 @media(max-width: 767px) {
-    /* .NavBar_Col_Contacts_Address,
-    .NavBar_Col_Contacts_City {
-        display: none;
-    } */
     .NavBar_Col_Contacts {
-        display: none;
+        /* display: none; */
+        padding-left: 20px;
     }
 }
-/* @media(max-width: 540px) {
-    .NavBar_Col_Contacts_Phone {
-        display: none;
-    }
-} */
 
 .NavBar_Cart,
 .NavBar_Spinner {

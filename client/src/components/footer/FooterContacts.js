@@ -1,8 +1,10 @@
-import React from 'react'
+
 import HtmlReactParser from 'html-react-parser'
 
 import { MAIL, ADDRESS_FULL, PHONE_ONE, PHONE_TWO, TIME_TO_WORK } from '../../utils/consts'
+
 import './FooterContacts.css'
+
 
 const FooterContacts = () => {
     return (

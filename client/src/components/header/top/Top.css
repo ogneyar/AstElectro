@@ -1,6 +1,5 @@
 .Top {
     background-color: var(--main-silver-color);
-    /* background-color: yellow; */
     margin: 0;
     padding: 0;
 }
@@ -9,7 +8,7 @@
 
 .TopRow {
     display:flex; 
-    justify-content:space-between; 
+    justify-content:space-around; 
     align-items:center;
     
 }
@@ -25,7 +24,7 @@
 .TopDivLink {
     width:100%;
     display:flex; 
-    justify-content:space-between; 
+    justify-content:space-around; 
     align-items:center;
 }
 
@@ -73,16 +72,19 @@
 
 
 @media(max-width: 991px) {
-    .TopRow {
+    /* .TopRow {
         flex-direction: column;
     }
     .TopColLink {
         margin-top: 5px;
         margin-right: 0;
+    } */    
+    .TopColLink {
+        display: none;
     }
 }
 @media(max-width: 767px) {
-    .NavLink_Top {
+    /* .NavLink_Top {
         margin-right: 3px;
     }  
     .NavLink_Top,
@@ -91,33 +93,33 @@
     .NavLink_Top_Shop,
     .NavLink_Top_Dealer {
         padding: 7px 1px;
-    }
+    } */
 }
 @media(max-width: 575px) {
-    .TopRow {
+    /* .TopRow {
         padding: 0 5px;
-    }
+    } */
     .TopCol {
         padding: 5px 10px; 
     }
-    .TopColLink {
+    /* .TopColLink {
         font-size: 14px;
-    }
+    } */
 }
 @media(max-width: 500px) {
-    .TopColLink {
+    /* .TopColLink {
         font-size: 13px;
-    }
+    } */
 }
 @media(max-width: 460px) {
-    .TopColLink {
+    /* .TopColLink {
         font-size: 12px;
-    }
+    } */
 }
 @media(max-width: 420px) {
-    .TopColLink {
+    /* .TopColLink {
         font-size: 10px;
-    }
+    } */
 }
 @media(max-width: 365px) {
     .TopColLink {

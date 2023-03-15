@@ -1,3 +1,4 @@
+
 .ShopPage {
     background-color: var(--main-white-color);
     padding: 10px 10px;
@@ -38,9 +39,6 @@
     .ShopProductList {
         border: 1px dashed rgb(0, 0, 0);
         padding: 10px 0 0 0;
-        /* padding-top: 20px; */
-        /* margin-bottom: 20px; */
-        /* border: 1px dotted blue; */
     }
 }
 

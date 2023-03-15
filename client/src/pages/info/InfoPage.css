@@ -1,3 +1,9 @@
+
+.InfoPage {
+    background-color: var(--main-white-color);
+    padding: 25px 0;
+}
+
 .InfoPage,
 .InfoPageCardBody,
 .InfoPageCardFooter {
@@ -7,7 +13,6 @@
 }
 .InfoPageCard {
     width: 600px;
-    /* margin: 25px; */
     padding: 25px;
 }
 .InfoPageCardBody {

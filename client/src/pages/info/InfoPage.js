@@ -1,8 +1,10 @@
-import React from 'react'
+
 import { Container, Card } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
+
 import { SCROLL_TOP, SCROLL_TOP_MOBILE, SHOP_ROUTE } from '../../utils/consts'
 import scrollUp from '../../utils/scrollUp'
+
 import './InfoPage.css'
 
 

@@ -1,11 +1,9 @@
-import React from 'react'
+
 import { Container, Navbar } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
 
 import FooterLogo from './FooterLogo'
 import FooterInformation from './FooterInformation'
-// eslint-disable-next-line
-import FooterSocialNetwork from './FooterSocialNetwork'
 import FooterContacts from './FooterContacts'
 import End from './End'
 
@@ -31,10 +29,7 @@ const Footer = observer(() => {
                         </div>    
                         <div className="FooterCol" md={3}>
                             <FooterInformation />
-                        </div>
-                        <div className="FooterCol" md={3}>
-                            <FooterSocialNetwork />
-                        </div>
+                        </div> <div className="FooterCol" md={3}></div>
                         <div className="FooterCol" md={3}>
                             <FooterContacts />
                         </div>

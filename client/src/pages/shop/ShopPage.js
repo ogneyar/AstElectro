@@ -111,10 +111,12 @@ const ShopPage = observer(() => {
                     {loadingCategory || categoryStore.loading ? <Loading variant="warning" /> : <CategoryBar />}
                 </div>
                 <div className="ShopColContent">
-                    {loadingBrand ? <Loading variant="warning" /> : <BrandBar />}
+                    {/* {loadingBrand ? <Loading variant="warning" /> : <BrandBar />} */}
                     <Filter />
                     <div className="ShopProductList">
+                        
                         <ProductList loading={loadingProduct} setLoading={setLoadingProduct} categoryUrl={false} /> 
+
                     </div>                    
                 </div>
             </div>

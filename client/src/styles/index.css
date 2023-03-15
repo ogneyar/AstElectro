@@ -1,12 +1,21 @@
 
 :root {
-  --main-grey-color: #6d6f71; /* 109 111 113 */
-  --main-orange-color: #ff9900; /* 255 153 0 */
-  /* --main-silver-color: #c0c0c0;  */  /* 192 192 192 */
-  --main-silver-color: #d1d1d1;
-  --main-white-color: #f3f3f3; /* 243 243 243 */
-  --main-black-color: #0e0e0e; /* 14 14 14 */
-  --main-red-color: #b31111; /* 179 17 17 */
+  /* --main-grey-color: #6d6f71; */
+  --main-grey-color: #f3f3f3;
+  /* --main-orange-color: #ff9900; */
+  --main-orange-color: #88ff00;
+  /* --main-silver-color: #d1d1d1; */
+  --main-silver-color: #f0f0f0;
+  /* --main-white-color: #f3f3f3; */
+  --main-white-color: #ececec;
+  /* --main-black-color: #0e0e0e; */
+  --main-black-color: #303030;
+  /* --main-red-color: #b31111; */
+  --main-red-color: #4cb311;
+
+  --main-body-color: #ffffff;
+  --main-price-color: #ff9900;
+  --main-red-price-color: #b31111;
 }
 
 :active, :hover, :focus {
@@ -23,27 +32,22 @@
 html {
   margin: 0;
   padding: 0;
-  /* width: 100vw; */
-  /* background-color:blue; */
 }
 
 body {
   margin: 0;
   padding: 0;
-  /* width: 100vw; */
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--main-orange-color);
+  background-color: var(--main-body-color);
 }
 
 #root {
   margin: 0;
   padding: 0;
-  /* width: 100vw; */
-  /* background-color:green; */
 }
 
 code {
@@ -58,11 +62,6 @@ li {
 ul {
   margin-left: 0;
   padding-left: 0;
-}
-
-th {
-  /* margin: 0;
-  padding: 0; */
 }
 
 .NavLink, 
@@ -103,8 +102,6 @@ a:hover {
   margin-top: 20px;
   cursor: pointer;
 }
-
-.Mobile {}
 
 @media(max-width:991px) {
   .hidden-mobile {

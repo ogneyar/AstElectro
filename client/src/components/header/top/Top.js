@@ -4,9 +4,7 @@ import { useHistory } from 'react-router-dom'
 
 import { Container } from '../../myBootstrap'
 import { 
-    SHOP_ROUTE, DELIVERY_ROUTE, PAYMENT_ROUTE, DEALER_ROUTE,
-    // eslint-disable-next-line
-    CONTACTS_ROUTE, SPECIALS_ROUTE, SUPPORT_ROUTE, SCROLL_TOP, SCROLL_TOP_MOBILE 
+    SHOP_ROUTE, DELIVERY_ROUTE, SCROLL_TOP, SCROLL_TOP_MOBILE 
 } from '../../../utils/consts'
 import scrollUp from '../../../utils/scrollUp'
 import Search from '../../search/Search'
@@ -32,7 +30,7 @@ const Top = () => {
         <div id="top" className="Top">
             <Container className="TopContainer">
                 <div className="TopRow">
-                    <div 
+                    {/* <div 
                         className="TopCol TopColLink _hidden-mobile" 
                     >
                         <div className="TopDivLink">
@@ -41,60 +39,19 @@ const Top = () => {
                                     className="NavLink NavLink_Top_Shop"
                                     onClick={()=>onClickBox(SHOP_ROUTE)}
                                 >
-                                    Продукция
+                                    О компании
                                 </div>
-                            </strong>
-                            <strong className="TopLinkStrong">
-                                <div
-                                    className="NavLink NavLink_Top_Dealer"
-                                    onClick={()=>onClickBox(DEALER_ROUTE)}
-                                >
-                                    Дилерам
-                                </div>
-                            </strong>
-                            <strong className="TopLinkStrong">
-                                <div
-                                    className="NavLink NavLink_Top"
-                                    onClick={()=>onClickBox(PAYMENT_ROUTE)}
-                                >
-                                    Оплата
-                                </div>
-                            </strong>
-                            <strong className="TopLinkStrong">
-                                <div
-                                    className="NavLink NavLink_Top_Specials"
-                                    onClick={()=>onClickBox(SPECIALS_ROUTE)}
-                                >
-                                    Акции
-                                </div>
-                            </strong>
-                            <strong className="TopLinkStrong">
-                                <div
-                                    className="NavLink NavLink_Top"
-                                    // to={DELIVERY_ROUTE}
-                                    onClick={()=>onClickBox(DELIVERY_ROUTE)}
-                                >
-                                    Доставка
-                                </div>
-                            </strong>
-                            {/* <strong className="TopLinkStrong">
-                                <div
-                                    className="NavLink NavLink_Top"
-                                    onClick={()=>onClickBox(CONTACTS_ROUTE)}
-                                >
-                                    Контакты
-                                </div>
-                            </strong> */}
+                            </strong>                           
                             <strong className="TopLinkStrong">
                                 <div
                                     className="NavLink NavLink_Top_Support"
-                                    onClick={()=>onClickBox(SUPPORT_ROUTE)}
+                                    onClick={()=>onClickBox(DELIVERY_ROUTE)}
                                 >
-                                    Тех. поддержка
+                                    О доставке
                                 </div>
                             </strong>
                         </div>
-                    </div>
+                    </div> */}
 
                     <div 
                         className="TopCol TopColSearch" 

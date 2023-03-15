@@ -60,24 +60,24 @@ export const TOR_ROUTE = '/tor' // Tor бренд
 // странный юмор программиста
 export const DELETE_ROUTE = '/delete' // удаление сайта
 
-const URL_PRODUCTION  = process.env.REACT_APP_URL_PRODUCTION || "https://leidtogi.ru/"
-const URL_TEST  = process.env.REACT_APP_URL_TEST || "https://hutor.site/" 
+const URL_PRODUCTION  = process.env.REACT_APP_URL_PRODUCTION || "https://astelectro.ru/"
+const URL_TEST  = process.env.REACT_APP_URL_TEST || "https://localhost:3000/" 
 const URL_DEVELOPMENT  = process.env.REACT_APP_URL_DEVELOPMENT || "http://localhost:3000/"
 
-const API_URL_PRODUCTION = process.env.REACT_APP_API_URL_PRODUCTION || "https://server.leidtogi.ru/"
-const API_URL_TEST = process.env.REACT_APP_API_URL_TEST || "https://server.hutor.site/"
+const API_URL_PRODUCTION = process.env.REACT_APP_API_URL_PRODUCTION || "https://server.astelectro.ru/"
+const API_URL_TEST = process.env.REACT_APP_API_URL_TEST || "https://localhost:5000/"
 const API_URL_DEVELOPMENT = process.env.REACT_APP_API_URL_DEVELOPMENT || "http://localhost:5000/"
 
 export const URL = 
     process.env.REACT_APP_ENV === 'production' 
-    ? window.location.hostname === "leidtogi.ru" || window.location.hostname === "www.leidtogi.ru"
+    ? window.location.hostname === "astelectro.ru" || window.location.hostname === "www.astelectro.ru"
         ? URL_PRODUCTION 
         : URL_TEST
     : URL_DEVELOPMENT
 
 export const API_URL = 
     process.env.REACT_APP_ENV === 'production' 
-    ? window.location.hostname === "leidtogi.ru" || window.location.hostname === "www.leidtogi.ru"
+    ? window.location.hostname === "astelectro.ru" || window.location.hostname === "www.astelectro.ru"
         ? API_URL_PRODUCTION
         : API_URL_TEST
     : API_URL_DEVELOPMENT
@@ -88,13 +88,13 @@ export const SCROLL_TOP = 200 // до aside
 export const SCROLL_TOP_MOBILE = 180 // для мобильной версии сайта
 
 
-export const NAME = `ООО "ЛЕИДТОГИ"` // название фирмы
-export const CITY = "г. Курск" // город нахождения офиса
-export const ADDRESS = "г.Курск, ул.Соловьиная, д.51, оф.25" // адресс нахождения офиса
-export const ADDRESS_FULL = "305044, г.Курск, ул.Соловьиная, д.51, оф.25" // адресс нахождения офиса
-export const PHONE_ONE = `<a href="tel:+74993021713">+7 (499) 302-17-13</a>` // городской телефон
-export const PHONE_TWO = `<a href="tel:+79312607792">+7 (931) 260-77-92</a>` // Санин телефон
-export const MAIL = `<a href="mailto:info@leidtogi.ru">info@leidtogi.ru</a>` // основной почтовый ящик
+export const NAME = `ООО «АСТ»` // название фирмы
+export const CITY = "г. Санкт-Петербург" // город нахождения офиса
+export const ADDRESS = "г. Санкт-Петербург, Кондратьевский пр-кт, дом 14/10" // адресс нахождения офиса
+export const ADDRESS_FULL = "195009, Санкт-Петербург г, Кондратьевский пр-кт, дом 14/10 литера Б помещение N 08" // адресс нахождения офиса
+export const PHONE_ONE = `<a href="tel:+78122092331">+7 (812) 209-23-31</a>` // городской телефон
+export const PHONE_TWO = `<a href="tel:+79681803613">+7 (968) 180-36-13</a>` // Санин телефон
+export const MAIL = `<a href="mailto:astoffice.spb@yandex.ru">astoffice.spb@yandex.ru</a>` // основной почтовый ящик
 export const TIME_TO_WORK = `<div><p>пн - пт: 09:00 - 18:00</p><p>сб - вс: выходной</p></div>` // время работы
 
 

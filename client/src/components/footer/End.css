@@ -1,7 +1,6 @@
 .End {
     height:100px;
-    /* padding: 20px; */
-    background-color: var(--main-orange-color);
+    background-color: var(--main-body-color);
     display:flex;
     justify-content: space-between;
     align-items:center;
@@ -10,6 +9,7 @@
 .FooterEnd_NavLink {
     color: white; /* #ff9900; */
     padding: 20px;
+    color: var(--main-black-color);
 }
 .FooterEnd_NavLink:hover {
     color: var(--main-red-color);
