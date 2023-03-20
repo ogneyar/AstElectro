@@ -17,7 +17,6 @@ async function parseXlsx(file, arraySearch, numberSheet = 1) {
     }else {
         return { error: `Файл ${file} отсутствует или пуст!` }
     }
-
     let first_sheet_name = workbook.SheetNames[numberSheet - 1] // наименование первой вкладки (по умолчанию 0 вкладка)
     worksheet = workbook.Sheets[first_sheet_name] // рабочая вкладка
 
@@ -29,6 +28,7 @@ async function parseXlsx(file, arraySearch, numberSheet = 1) {
         "BA", "BB", "BC", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BK", "BL", "BM", "BN", "BO", "BP", "BQ", "BR", "BS", "BT", "BU", "BV", "BW", "BX", "BY", "BZ", // 26 шт
         "CA", "CB", "CC", "CD", "CE", "CF", "CG", "CH", "CI", "CJ", "CK", "CL", "CM", "CN", "CO", "CP", "CQ", "CR", "CS", "CT", "CU", "CV", "CW", "CX", "CY", "CZ"  // 26 шт
     ]
+
     // цикл строк
     for (let number = 1; number <= 20; number++) {
         // остановка цикла если найдена строка наименований
@@ -65,6 +65,7 @@ async function parseXlsx(file, arraySearch, numberSheet = 1) {
 
         }
     }
+
     let yes = true // да, не найден конец строки
     let one = false // найдена ли одна пустая строка?
     let i = 1
@@ -78,7 +79,7 @@ async function parseXlsx(file, arraySearch, numberSheet = 1) {
                 object[arraySearch[numberObject]] = []
                 for (let j = 0; j < symbol[numberObject].length; j++) {
                     text = worksheet[ symbol[numberObject][j] + ( start + Number(i) - 1 ) ]
-                    if (text) object[arraySearch[numberObject]].push(text.v.toString().trim())
+                    if (text && text.v) object[arraySearch[numberObject]].push(text.v.toString().trim())
                     else {
                         object[arraySearch[numberObject]].push("")
                         end_two++
@@ -87,7 +88,7 @@ async function parseXlsx(file, arraySearch, numberSheet = 1) {
                 if (end_two === symbol[numberObject].length) end++
             }else {
                 text = worksheet[ symbol[numberObject] + ( start + Number(i) - 1 ) ]
-                if (text) object[arraySearch[numberObject]] = text.v.toString().trim()
+                if (text && text.v) object[arraySearch[numberObject]] = text.v.toString().trim()
                 else {
                     object[arraySearch[numberObject]] = ""
                     end++
@@ -95,9 +96,11 @@ async function parseXlsx(file, arraySearch, numberSheet = 1) {
             }
             if (end === arraySearch.length) yes = false 
         }
-
+        
         if (yes) {
-            response.push(object)
+            if (end !== (arraySearch.length-1)) {
+                response.push(object)
+            }
             one = false // не найдена пустая строка
         }else {
             if ( ! one ) { // если до этого небыло найдено ни одной пустой строки

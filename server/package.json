@@ -34,7 +34,8 @@
     "sharp": "^0.30.7",
     "uuid": "^8.3.2",
     "xlsx": "^0.17.1",
-    "xml-js": "^1.6.11"
+    "xml-js": "^1.6.11",
+    "zip-lib": "^0.7.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
