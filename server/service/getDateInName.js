@@ -1,6 +1,6 @@
 //
 
-module.exports = function (extension = "txt", prefix = "") {
+module.exports = function (extension = "", prefix = "") {
 
     let now = new Date()
     let year = now.getFullYear()
@@ -15,6 +15,8 @@ module.exports = function (extension = "txt", prefix = "") {
     if (min < 10) min = `0${min}`
     if (sec < 10) sec = `0${sec}`
 
-    return `${prefix}${year}.${month}.${day}_${hour}.${min}.${sec}.${extension}`
+    if (extension && !extension.includes(".")) extension = "." + extension
+
+    return `${prefix}${year}.${month}.${day}_${hour}.${min}.${sec}${extension}`
 
 }
