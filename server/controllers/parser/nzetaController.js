@@ -42,25 +42,29 @@ class nzetaController {
         }
     }
 
+    /*
+    req.query = { method, limit, z_id }
     
+    Methods:
+        structure
+        structure_description
+        items
+        items_description
+        purpose_name
+        items_picture
+        items_docs = []
+        mask
+        properties_group
+        properties_purpose
+        properties = []
+        properties_values
+        properties_items
+        items_info = 404 PageNotFound
+    */
     async nzetaAPI(req, res, next) {
         try {
-            let { method } = req.query
-
             let api = new NzetaAPI()
-
-            return res.json(await api[`${method}`]())
-
-            // switch(method) {
-            //     case "structure": 
-            //         return res.json(api.structure())
-            //     break
-
-            //     default:
-            //         return res.send("Нет такого метода API!")
-            //     break
-            // }
-
+            return res.json(await api.post(req.query))
         }catch(e) {
             return next(res.json({error: 'Ошибка метода nzetaAPI! ' + e}))
         }
