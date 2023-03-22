@@ -49,15 +49,17 @@ class nzetaController {
 
             let api = new NzetaAPI()
 
-            switch(method) {
-                case "structure": 
-                    return res.json(api.structure())
-                break
+            return res.json(await api[`${method}`]())
 
-                default:
-                    return res.send("Нет такого метода API!")
-                break
-            }
+            // switch(method) {
+            //     case "structure": 
+            //         return res.json(api.structure())
+            //     break
+
+            //     default:
+            //         return res.send("Нет такого метода API!")
+            //     break
+            // }
 
         }catch(e) {
             return next(res.json({error: 'Ошибка метода nzetaAPI! ' + e}))
