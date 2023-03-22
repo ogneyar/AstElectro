@@ -29,16 +29,19 @@ module.exports = class NzetaAPI {
         const config = { 
             headers: { 
                 'User-Agent': 'AstElectro',
-                // 'Content-Type': 'multipart/form-data'
-            },
-            // strictSSL: false,
-            // rejectUnauthorized: false 
+                'Content-Type': 'multipart/form-data'
+            }
         }
-         
-        process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+        
+        try {
+            let { data } = await axios.post(this.url + "structure.php", body, config)
 
-        let { data } = await axios.post(this.url + "structure.php", body, config)
+            if (data.error) return data.error
 
-        return data
+            return data
+        }catch(e) {
+            return e
+        }
+
     }
 }
