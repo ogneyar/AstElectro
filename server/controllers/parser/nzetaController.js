@@ -1,5 +1,6 @@
 
 const Nzeta = require('../../service/parser/nzeta/Nzeta')
+const NzetaAPI = require('../../service/parser/nzeta/NzetaAPI')
 
 
 class nzetaController {
@@ -38,6 +39,28 @@ class nzetaController {
 
         }catch(e) {
             return next(res.json({error: 'Ошибка метода nzeta! ' + e}))
+        }
+    }
+
+    
+    async nzetaAPI(req, res, next) {
+        try {
+            let { method } = req.query
+
+            let api = new NzetaAPI()
+
+            switch(method) {
+                case "structure": 
+                    return res.json(api.structure())
+                break
+
+                default:
+                    return res.send("Нет такого метода API!")
+                break
+            }
+
+        }catch(e) {
+            return next(res.json({error: 'Ошибка метода nzetaAPI! ' + e}))
         }
     }
 

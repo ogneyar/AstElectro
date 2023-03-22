@@ -26,7 +26,7 @@ module.exports = class Nzeta {
     async run(args = {}) { 
         let { feed } = args
 
-        let fullPath = path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'feed.xlsx')
+        let fullPath = path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'price.xlsx')
 
         if (feed && feed.name !== undefined) {
             if (!fs.existsSync(path.resolve(__dirname, '..', '..', '..', 'static', 'temp'))) 
@@ -38,57 +38,17 @@ module.exports = class Nzeta {
         }
         else
         {   
-            let dateInNameFile = getDateInName("zip", "feed_")
-            if (fs.existsSync(fullPath)) getZipFile(fullPath, path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'oldFeeds', dateInNameFile))
-            // fs.rename(fullPath, path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'oldFeeds', dateInNameFile), (err) => {
-            //     if (err) console.error(`Переместить файл feed.xlsx не удалось.`)
-            // })
-            
-            // Tor
-            let url = "https://www.zkabel.ru/upload/%D0%9F%D1%80%D0%B0%D0%B9%D1%81%20%D0%9E%D0%9E%D0%9E%20%D0%9A%D0%B0%D0%B1%D0%B5%D0%BB%D1%8C%D0%BD%D0%B0%D1%8F%20%D0%B0%D1%80%D0%BC%D0%B0%D1%82%D1%83%D1%80%D0%B0.xlsx"
-            let { data } = await axios.get(url, { headers: { 'User-Agent': 'AstElectro' }  })
-            
-            try {
-                // fs.writeFileSync(path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'feed1.xlsx'), data)
-                // getZipFile(path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'feed1.xlsx'), path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'feed1.zip'))
-                // fs.writeFileSync(fullPath, data)
-                // let workbook = XLSX.readFile(data)
-
-                let raw_data = {
-                    "id": 1,
-                    "name": {
-                      "first": "John",
-                      "last": "Adams"
-                    },
-                    "bio": {
-                      "birthday": "1735-10-19",
-                      "gender": "M"
-                    }
-                }
-
-                let rows = {
-                    "name": "John Adams",
-                    "birthday": "1735-10-19",
-                }
-
-                // let prez = raw_data.filter(row => row.terms.some(term => term.type === "prez"));
-
-                // const rows = raw_data.map(row => ({
-                //     name: row.name.first + " " + row.name.last,
-                //     birthday: row.bio.birthday
-                //   }));
-
-                // const worksheet = XLSX.utils.json_to_sheet(rows);
-                // const workbook = XLSX.utils.book_new();
-                // XLSX.utils.book_append_sheet(workbook, worksheet, "Dates");
-                // XLSX.writeFile(workbook, fullPath, { compression: true });
-
-                // XLSX.writeFileAsync(fullPath, workbook, () => {})
-            } catch (err) {
-                let responseError = `Записать данные в файл feed.xlsx не удалось.`
-                console.error(responseError)
-                throw responseError
-            }
+            // let dateInNameFile = getDateInName("zip", "price_")
+            // if (fs.existsSync(fullPath)) getZipFile(fullPath, path.resolve(__dirname, '..', '..', '..', 'prices', 'nzeta', 'oldFeeds', dateInNameFile))
+            // let url = process.env.ZKABEL_URL_PRICE_XLSX
+            // let { data } = await axios.get(url, { headers: { 'User-Agent': 'AstElectro' }  })
+            // try {
+            //     fs.writeFileSync(fullPath, data)
+            // } catch (err) {
+            //     let responseError = `Записать данные в файл price.xlsx не удалось.`
+            //     console.error(responseError)
+            //     throw responseError
+            // }
         }
             
         if (fs.existsSync(fullPath)) { 
