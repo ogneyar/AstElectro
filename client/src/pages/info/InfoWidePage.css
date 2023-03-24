@@ -1,0 +1,26 @@
+
+.InfoWidePage {
+    background-color: var(--main-white-color);
+    padding: 25px 0;
+    width: 100%;
+}
+
+.InfoWidePage,
+.InfoWidePage_CardBody,
+.InfoWidePage_CardFooter {
+    display:flex; 
+    flex-direction: column;
+    /* justify-content:center;  */
+    align-items: center;
+}
+.InfoWidePage_Card {
+    /* width: 600px; */
+    padding: 25px;
+}
+.InfoWidePage_CardBody {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+.InfoWidePage_CardFooter {
+    border: 1px dotted lightgrey;
+}

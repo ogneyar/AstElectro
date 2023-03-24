@@ -1,6 +1,8 @@
+
 import React, { useState, useEffect, useContext } from 'react'
 import { Button } from 'react-bootstrap'
 import HtmlReactParser from 'html-react-parser'
+import { useHistory } from 'react-router-dom'
 
 import { fetchAllProducts, updateProduct } from '../../http/productAPI'
 import { 
@@ -13,15 +15,19 @@ import { getAllProductInfos } from '../../http/productInfoAPI'
 import { Alert } from '../../components/myBootstrap'
 import Loading from '../../components/Loading'
 import translit from '../../utils/translite'
-import { API_URL } from '../../utils/consts'
+import { API_URL, LOGIN_ROUTE, TESTER_ROUTE } from '../../utils/consts'
 import InfoPage from '../info/InfoPage'
-import { Context } from '../..'
 import { setSortProduct } from '../../http/sortProductAPI'
+import scrollUp from '../../utils/scrollUp'
+
+import { Context } from '../..'
 
 
 const TesterPage = () => {
     
-    const { productStore } = useContext(Context) 
+    const { productStore, userStore } = useContext(Context) 
+
+    const history = useHistory()
 
     const [ showAlert, setShowAlert ] = useState(false)
     const [ message, setMessage ] = useState("")
@@ -266,6 +272,12 @@ const TesterPage = () => {
 
 
     if (loading) return <Loading />
+
+    
+    if (!userStore.isAuth) {
+        history.push(LOGIN_ROUTE + "?returnUrl=" + TESTER_ROUTE)
+        scrollUp(scroll) 
+    }
 
     return (
         <InfoPage>

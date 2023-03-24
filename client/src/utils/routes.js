@@ -16,13 +16,16 @@ import ReturnsPolicy from '../pages/info/ReturnsPolicy'
 import TermsOfUse from '../pages/info/TermsOfUse'
 import Warranty from '../pages/info/Warranty'
 
+import UpdateProductsPage from '../pages/updates/UpdateProductsPage'
+import UpdatePricesPage from '../pages/updates/UpdatePricesPage'
+
 import DeletePage from '../pages/site/DeletePage'
 
 import {
     MAIN_ROUTE, ADMIN_ROUTE, PARSER_ROUTE, TESTER_ROUTE, SHOP_ROUTE, LOGIN_ROUTE,
     PRODUCT_ROUTE, SEARCH_ROUTE, ERROR_ROUTE, ABOUT_US_ROUTE, 
     DELIVERY_ROUTE, PRIVACY_POLICY_ROUTE, RETURNS_POLICY_ROUTE,
-    TERMS_OF_USE_ROUTE, WARRANTY_ROUTE, DELETE_ROUTE
+    TERMS_OF_USE_ROUTE, WARRANTY_ROUTE, DELETE_ROUTE, UPDATE_PRODUCTS_ROUTE, UPDATE_PRICES_ROUTE
 } from './consts'
 
 // brandRoutes находится в src/components/AppRouter.js
@@ -94,6 +97,16 @@ export const publicRoutes = [
     {
         path: WARRANTY_ROUTE, // о гарантии
         component: Warranty
+    },
+    
+    // обновление данных
+    {
+        path: UPDATE_PRODUCTS_ROUTE,
+        component: UpdateProductsPage
+    },
+    {
+        path: UPDATE_PRICES_ROUTE,
+        component: UpdatePricesPage
     },
 
      // юмор It отдела

@@ -4,7 +4,72 @@ const NzetaAPI = require('../../service/parser/nzeta/NzetaAPI')
 
 
 class nzetaController {
+    /*
+    req.query = { method, limit, z_id }
+    
+    Methods:
+        structure
+        structure_description
+        items
+        items_description
+        purpose_name
+        items_picture
+        items_docs = []
+        mask
+        properties_group
+        properties_purpose
+        properties = []
+        properties_values
+        properties_items
+        items_info = 404 PageNotFound
+        product/getProduct // api_2_url
+    */
+    async nzetaAPI(req, res, next) {
+        try {
+            let api = new NzetaAPI()
+            
+            let { 
+                method, site, limit, id, z_id, d_id, guid, parentguid, artikul, 
+                TNVED, type, g_id, p_type, code, p_id, item_id, article 
+            } = req.query
+            
+            if ( ! method ) method = req.body.method
+            if ( ! site ) site = req.body.site
+            if ( ! limit ) limit = req.body.limit
+            if ( ! id ) id = req.body.id
+            if ( ! z_id ) z_id = req.body.z_id
+            if ( ! d_id ) d_id = req.body.d_id
+            if ( ! guid ) guid = req.body.guid
+            if ( ! parentguid ) parentguid = req.body.parentguid
+            if ( ! artikul ) artikul = req.body.artikul
+            if ( ! TNVED ) TNVED = req.body.TNVED
+            if ( ! type ) type = req.body.type
+            if ( ! g_id ) g_id = req.body.g_id
+            if ( ! p_type ) p_type = req.body.p_type
+            if ( ! code ) code = req.body.code
+            if ( ! p_id ) p_id = req.body.p_id
+            if ( ! item_id ) item_id = req.body.item_id
+            if ( ! article ) article = req.body.article
 
+            let options = {
+                method, site, limit, id, z_id, d_id, guid, parentguid, artikul, 
+                TNVED, type, g_id, p_type, code, p_id, item_id, article
+            }
+            
+            if (method === "product/getProduct") 
+            {
+                return res.json(await api.get(options))
+            }else 
+            {
+                return res.json(await api.post(options))
+            }
+        }catch(e) {
+            return next(res.json({error: 'Ошибка метода nzetaAPI! ' + e}))
+        }
+    }
+    
+
+    // old method
     async nzeta(req, res, next) {
         try {
             let { number, add, change } = req.query
@@ -42,33 +107,6 @@ class nzetaController {
         }
     }
 
-    /*
-    req.query = { method, limit, z_id }
-    
-    Methods:
-        structure
-        structure_description
-        items
-        items_description
-        purpose_name
-        items_picture
-        items_docs = []
-        mask
-        properties_group
-        properties_purpose
-        properties = []
-        properties_values
-        properties_items
-        items_info = 404 PageNotFound
-    */
-    async nzetaAPI(req, res, next) {
-        try {
-            let api = new NzetaAPI()
-            return res.json(await api.post(req.query))
-        }catch(e) {
-            return next(res.json({error: 'Ошибка метода nzetaAPI! ' + e}))
-        }
-    }
 
 }
 

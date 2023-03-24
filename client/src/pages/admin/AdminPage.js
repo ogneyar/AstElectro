@@ -1,3 +1,4 @@
+
 import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Container, Button } from 'react-bootstrap'
@@ -11,10 +12,11 @@ import Category from '../../components/admin/Category'
 import Brand from '../../components/admin/Brand'
 import Product from '../../components/admin/Product'
 import DeleteSite from '../../components/admin/DeleteSite'
-import { Context } from '../..'
-
-import './AdminPage.css';
 import scrollUp from '../../utils/scrollUp'
+import { ADMIN_ROUTE, LOGIN_ROUTE, PARSER_ROUTE, SCROLL_TOP, SCROLL_TOP_MOBILE, TESTER_ROUTE } from '../../utils/consts'
+
+import { Context } from '../..'
+import './AdminPage.css';
 
 
 const Admin = observer(() => {
@@ -75,6 +77,10 @@ const Admin = observer(() => {
     
     if (alertVisible) return <Alert show={alertVisible} onHide={() => setAlertVisible(false)} message={messageAlert} />
 
+    if (!userStore.isAuth) {
+        history.push(LOGIN_ROUTE + "?returnUrl=" + ADMIN_ROUTE)
+        scrollUp(scroll) 
+    }
 
     return (
         <Container className="Content d-flex flex-column Admin Mobile">
@@ -143,8 +149,8 @@ const Admin = observer(() => {
                     variant={"outline-dark"} 
                     className="m-3 p-2 Admin_button"
                     onClick={() => {
-                        scrollUp()
-                        history.push("/parser")
+                        scrollUp(window.innerWidth > 575 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+                        history.push(PARSER_ROUTE)
                     }} 
                 >
                     Парсер
@@ -159,8 +165,8 @@ const Admin = observer(() => {
                     variant={"outline-dark"} 
                     className="m-3 p-2 Admin_button"
                     onClick={() => {
-                        scrollUp()
-                        history.push("/tester")
+                        scrollUp(window.innerWidth > 575 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+                        history.push(TESTER_ROUTE)
                     }}
                 >
                     Тестер

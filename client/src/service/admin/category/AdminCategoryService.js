@@ -11,7 +11,7 @@ import './AdminCategoryService.css'
 
 const AdminCategoryService = observer(({information, idName, offset, sub_id}) => {
     
-    const { productStore, category } = useContext(Context)
+    const { productStore, categoryStore } = useContext(Context)
     const [info, setInfo] = useState(information)
 
     const [showAlert, setShowAlert] = useState(false)
@@ -38,9 +38,9 @@ const AdminCategoryService = observer(({information, idName, offset, sub_id}) =>
             }
         }else if (inform === "context") {
             if (sub === 0)  {
-                category.setCategories([...category.categories, ...data])
+                categoryStore.setCategories([...categoryStore.categories, ...data])
             }else {
-                category.setCategories(category.categories.map(i => {
+                categoryStore.setCategories(categoryStore.categories.map(i => {
                     return reMap(i, sub, data)
                 }))
             }
@@ -65,7 +65,7 @@ const AdminCategoryService = observer(({information, idName, offset, sub_id}) =>
     const delCategory = async (id, name) => {
         function reSearch(itemId) {
             let arrayCategory = []
-            category.allCategories.forEach(i => {
+            categoryStore.allCategories.forEach(i => {
                 if (i.sub_category_id === itemId) 
                     if (i.is_product) arrayCategory = [...arrayCategory,i.id]
                     else arrayCategory = [...arrayCategory, ...reSearch(i.id)]
@@ -88,9 +88,9 @@ const AdminCategoryService = observer(({information, idName, offset, sub_id}) =>
                 
                 reDelete(id)
                 
-                category.setCategories(reFilter(category.categories, id))
+                categoryStore.setCategories(reFilter(categoryStore.categories, id))
                 setInfo(reFilter(info, id))
-                fetchAllCategories().then(data => category.setAllCategories(data))
+                fetchAllCategories().then(data => categoryStore.setAllCategories(data))
             }
         }
         
@@ -138,7 +138,7 @@ const AdminCategoryService = observer(({information, idName, offset, sub_id}) =>
             )
         )
         // fetchAllCategories().then(data => {
-        let data = category.allCategories
+        let data = categoryStore.allCategories
 
             let url = translite(name)
             let yes = false
@@ -158,14 +158,14 @@ const AdminCategoryService = observer(({information, idName, offset, sub_id}) =>
             }
             updateCategory(id, {name,url})
 
-        fetchAllCategories().then(data => category.setAllCategories(data))
+        fetchAllCategories().then(data => categoryStore.setAllCategories(data))
         // })
     }
 
     const openSubCategory = (id) => {
         fetchCategories(id).then(data => {
             if (data.length > 0) {
-                category.setCategories(category.categories.map(i => i.id === id ? {...i, sub:data} : i))
+                categoryStore.setCategories(categoryStore.categories.map(i => i.id === id ? {...i, sub:data} : i))
                 setInfo(info.map(i => i.id === id ? {...i, sub:data} : i))
             }
         })
@@ -188,13 +188,13 @@ const AdminCategoryService = observer(({information, idName, offset, sub_id}) =>
     const toggleIsProduct = async (id, checked) => {     
         setInfo(info.map(i => i.id === id ? {...i, is_product:checked} : i))
         await updateCategory(id, {is_product:checked})
-        fetchAllCategories().then(data => category.setAllCategories(data))
+        fetchAllCategories().then(data => categoryStore.setAllCategories(data))
     }
     
     const onChangeIsProduct = (id, checked) => {
         let yes = false
         if (checked) {
-            category.allCategories.forEach(i => {
+            categoryStore.allCategories.forEach(i => {
                 if (i.sub_category_id === id) yes = true
             })
             if (yes) {

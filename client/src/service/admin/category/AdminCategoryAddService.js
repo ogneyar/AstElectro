@@ -13,14 +13,14 @@ const CategoryAddService = observer(({
         updateInfo  // передаваемая функция для применения изменений
     }) => {
     
-    const { category } = useContext(Context)
+    const { categoryStore } = useContext(Context)
 
     const [name, setName] = useState('')
     const [data, setData] = useState([])
 
     useEffect(() => {
-        if(category.allCategories.length) setData(category.allCategories)
-    },[category.allCategories])
+        if(categoryStore.allCategories.length) setData(categoryStore.allCategories)
+    },[categoryStore.allCategories])
 
     const addCategory = () => {
         if (name && data[0]?.id !== undefined) {

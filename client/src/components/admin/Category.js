@@ -20,10 +20,10 @@ const Category = observer(({show, onHide}) => {
     },[])
    
     useEffect(() => {
-        if (categoryStore.allCategories.length) {
-            setInfo(categoryStore.allCategories.filter(i => i.sub_category_id === 0)) 
+        if (categoryStore.categories.length) {
+            setInfo(categoryStore.categories.filter(i => i.sub_category_id === 0)) 
         }
-    },[categoryStore.allCategories])
+    },[categoryStore.categories])
 
 
     return (

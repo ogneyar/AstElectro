@@ -7,7 +7,7 @@ const Loading = (props) => {
         <div
             className="d-flex justify-content-center align-items-center" 
         >
-            <div style={props?.width ? {width: props.width} : {width: 300}} className="p-5 m-5">
+            <div style={props?.width ? {width: props.width} : {width: 50}} className="p-1 m-1">
                 <div>
                     <div
                         className="d-flex justify-content-center align-items-center"

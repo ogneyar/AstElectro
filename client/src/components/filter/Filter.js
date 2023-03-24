@@ -27,9 +27,9 @@ const Filter = () => {
                 className="Filter_Menu"
             >
                 {/* для админа */}
-                <NoImages />
+                {/* <NoImages />
                 <MixAll />
-                <MixPromo />                
+                <MixPromo />                 */}
                 {/* для пользователя */}
                 {/* <FilterPrice /> */}
                 {/* <Sort /> */}

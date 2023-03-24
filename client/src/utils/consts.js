@@ -7,6 +7,9 @@ export const ADMIN_ROUTE = '/admin' // администрация
 export const LOGIN_ROUTE = '/login' // вход
 export const REGISTRATION_ROUTE = '/registration' // регистрация
 
+export const UPDATE_PRODUCTS_ROUTE = '/update_products' // обновление товаров
+export const UPDATE_PRICES_ROUTE = '/update_prices' // обновление цен
+
 export const SHOP_ROUTE = '/shop' // магазин
 
 export const CART_ROUTE = '/cart' // корзина
