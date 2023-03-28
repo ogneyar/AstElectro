@@ -29,8 +29,11 @@ class nzetaController {
             let api = new NzetaAPI()
             
             let { 
+                // основные параметры API nzeta
                 method, site, limit, id, z_id, d_id, guid, parentguid, artikul, 
-                TNVED, type, g_id, p_type, code, p_id, item_id, article 
+                TNVED, type, g_id, p_type, code, p_id, item_id, article,
+                // мои параметры
+                name, s_id, descr, cat_id
             } = req.query
             
             if ( ! method ) method = req.body.method
@@ -51,9 +54,15 @@ class nzetaController {
             if ( ! item_id ) item_id = req.body.item_id
             if ( ! article ) article = req.body.article
 
+            if ( ! name ) name = req.body.name
+            if ( ! s_id ) s_id = req.body.s_id
+            if ( ! descr ) descr = req.body.descr
+            if ( ! cat_id ) cat_id = req.body.cat_id
+
             let options = {
                 method, site, limit, id, z_id, d_id, guid, parentguid, artikul, 
-                TNVED, type, g_id, p_type, code, p_id, item_id, article
+                TNVED, type, g_id, p_type, code, p_id, item_id, article, 
+                name, s_id, descr, cat_id
             }
             
             if (method === "product/getProduct") 

@@ -24,7 +24,7 @@ module.exports = class NzetaAPI {
             id, limit - НЕобязательные
                 -= возвращает =-
                 id - идентификатор категории
-                s_id - внутренний идентификатор категории
+                s_id - внутренний идентификатор категории 
                 p_id - идентификатор родительской категории
                 name - название категории
                 site - идентификатор сайта, к которому относится категория
@@ -84,7 +84,12 @@ module.exports = class NzetaAPI {
         `items_info` = 404 PageNotFound
             token, article - обязательные параметры
     */
-    async post({ method, site, limit, id, z_id, d_id, guid, parentguid, artikul, TNVED, type, g_id, p_type, code, p_id, item_id, article }) {
+    async post({ 
+        // основные параметры API nzeta
+        method, site, limit, id, z_id, d_id, guid, parentguid, artikul, TNVED, type, g_id, p_type, code, p_id, item_id, article,
+        // мои параметры
+        name, s_id, descr, cat_id
+    }) {
  
         let body = { 
             token: this.token
@@ -127,27 +132,99 @@ module.exports = class NzetaAPI {
 
             if (data.error) return data.error
 
-            if (method === "items" && ! artikul) 
-            {
+            if (method === "items") // guid => s_id - structure
+            {                
+                if ( ! artikul ) {
+                    
+                    let prices = await this.get({method:"product/getProduct"})
 
-                let prices = await this.get({method:"product/getProduct"})
+                    data = data.filter(item => {
+                        // if (item.artikul.includes("zeta")) return true
+                        for(let i = 0; i < prices.length; i++) {
+                            if (prices[i].PROPERTY_CML2_ARTICLE_VALUE === item.artikul) return true
+                        }
+                        return false
+                    })
+                }else {
+                    data = data.filter(item => item.artikul === artikul)
+                }
 
-                data = data.filter(item => {
-                    // if (item.artikul.includes("zeta")) return true
-                    for(let i = 0; i < prices.length; i++) {
-                        if (prices[i].PROPERTY_CML2_ARTICLE_VALUE === item.artikul) return true
-                    }
-                    return false
-                })
             }
 
-            if (method === "structure" && id) 
+            //            
+            if (method === "items_description")
             {
-                data = data.filter(item => {
-                    if (item.id === id) return true
-                    return false
-                })
-                if (!data) data = [{}]
+                // descr - описание
+                if (descr) {
+                    data = data.filter(item => item.descr.includes(descr)) 
+                }
+
+                // if (d_id) {
+                //     data = data.filter(item => item.d_id === d_id) 
+                // }
+            }
+
+            //
+            if (method === "structure") 
+            {
+                if (id) {
+                    data = data.filter(item => {
+                        if (item.id === id) return true
+                        return false
+                    })
+                    if (!data) data = [{}]
+                }
+                
+                // name - наименование категории
+                if (name) {
+                    data = data.filter(item => item.name.includes(name))
+                }
+                // p_id - родительская категория
+                if (p_id) {
+                    data = data.filter(item => item.p_id === p_id)
+                }
+                // s_id - ХЗ
+                if (s_id) {
+                    data = data.filter(item => item.s_id === s_id) 
+                }
+
+            }
+
+            //            
+            if (method === "structure_description") 
+            {
+                // descr - описание
+                if (descr) {
+                    data = data.filter(item => item.descr.includes(descr)) 
+                }
+
+                // if (d_id) {
+                //     data = data.filter(item => item.d_id === d_id) 
+                // }
+            }
+
+            //
+            if (method === "items_picture") 
+            {
+                // z_id = guid из метода "items"
+                if (z_id) {
+                    data = data.filter(item => item.z_id === z_id) 
+                }
+
+            }
+
+            //
+            if (method === "properties_group") 
+            {
+                // cat_id = parentguid из метода "items"
+                if (cat_id) {
+                    data = data.filter(item => {
+                        let cat = JSON.parse(item.cat_id)
+                        cat = cat.filter(cat => cat === cat_id)
+                        if (cat[0] !== undefined) return true
+                        return false
+                    }) 
+                }
             }
 
             return data//.length //= 6420
