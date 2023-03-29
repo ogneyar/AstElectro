@@ -1,7 +1,7 @@
 
 ### Сайт - https://astelectro.ru
 
-## Стек - M.E.R.N.
+## Стек - M. E. R. N.
 
 ### MySQL Express React NodeJS
 
