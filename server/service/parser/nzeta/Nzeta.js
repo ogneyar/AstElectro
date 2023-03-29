@@ -9,14 +9,14 @@ const { Op } = require('sequelize')
 const createProduct = require('../../product/createProduct.js')
 const parseXlsx = require('../../xlsx/parseXlsx')
 const ProductDto = require('../../../dtos/productDto')
-const printOne = require('./printOne')
+// const printOne = require('./printOne')
 const saveInfoInFile = require('../../saveInfoInFile')
 const getDateInName = require('../../getDateInName')
 const getZipFile = require('../../getZipFile')
 
 
 
-module.exports = class Nzeta {
+module.exports = class Nzeta { 
     
     static categories = []
     static product = []

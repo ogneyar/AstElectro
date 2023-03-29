@@ -3,6 +3,7 @@ const User = require('./User')
 const Cart = require('./Cart')
 const Product = require('./Product')
 const Category = require('./Category')
+const CategoryInfo = require('./CategoryInfo')
 const Brand = require('./Brand')
 const Rating = require('./Rating')
 const ProductInfo = require('./ProductInfo')
@@ -22,6 +23,9 @@ Rating.belongsTo(User)
 
 Category.hasMany(Product)
 Product.belongsTo(Category)
+
+CategoryInfo.hasOne(Category)
+Category.belongsTo(CategoryInfo)
 
 Brand.hasMany(Product)
 Product.belongsTo(Brand)
@@ -53,6 +57,7 @@ module.exports = {
     Cart,
     Product,
     Category,
+    CategoryInfo,
     Brand,
     Rating,
     ProductInfo,

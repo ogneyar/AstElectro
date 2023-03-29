@@ -216,7 +216,7 @@ module.exports = class NzetaAPI {
             //
             if (method === "properties_group") 
             {
-                // cat_id = parentguid из метода "items"
+                // cat_id = parentguid из метода "items" 
                 if (cat_id) {
                     data = data.filter(item => {
                         let cat = JSON.parse(item.cat_id)
@@ -224,6 +224,15 @@ module.exports = class NzetaAPI {
                         if (cat[0] !== undefined) return true
                         return false
                     }) 
+                }
+            }
+
+            //
+            if (method === "properties_items") 
+            {                
+                // p_id
+                if (p_id) {
+                    data = data.filter(item => item.p_id === p_id)
                 }
             }
 

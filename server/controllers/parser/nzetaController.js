@@ -1,6 +1,7 @@
 
 const Nzeta = require('../../service/parser/nzeta/Nzeta')
 const NzetaAPI = require('../../service/parser/nzeta/NzetaAPI')
+const ParseNzetaRu = require('../../service/parser/nzeta/parseNzetaRu')
 
 
 class nzetaController {
@@ -74,6 +75,30 @@ class nzetaController {
             }
         }catch(e) {
             return next(res.json({error: 'Ошибка метода nzetaAPI! ' + e}))
+        }
+    }
+
+    async parseNzetaRu(req, res, next) {
+        try {            
+            
+            let { article, get_categories } = req.query
+
+            // создание экземпляра класса ParseNzetaRu
+            let parse = new ParseNzetaRu()
+
+            let response = await parse.run()
+            if (! response) return res.json({error: 'Ошибка! Метод run() не вернул данные!'})
+
+            if (get_categories) { // article - обязательный параметр
+                if (! article) return res.json({error: 'Ошибка! Отсутствует необходимый параметр "article"!'})
+                return res.json(await parse.getCategories(article))
+            }
+            
+            // по умолчанию (если не задан ни один параметр)
+            return res.json(await parse.getEcho()) 
+
+        }catch(e) {
+            return next(res.json({error: 'Ошибка метода parseNzetaRu! ' + e}))
         }
     }
     

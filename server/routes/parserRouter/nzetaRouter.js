@@ -8,9 +8,11 @@ const checkTokenUpdates = require('../../middleware/checkTokenUpdates')
 if (process.env.URL === "http://localhost:5000") {
     router.get('/', nzetaController.nzetaAPI) // 
     // router.get('/', nzetaController.nzeta) //
+    router.get('/parse', nzetaController.parseNzetaRu) //
 }
 router.post('/', checkTokenUpdates(), nzetaController.nzetaAPI) // 
 // router.post('/', checkTokenUpdates(), nzetaController.nzeta) // 
+router.post('/parse', checkTokenUpdates(), nzetaController.parseNzetaRu) // 
 
 
 
