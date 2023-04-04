@@ -63,7 +63,8 @@ function parseHtml(string, args) {
         if (returnString) rest = string.substring(number, string.length)
         string = string.substring(0, number)
     }
-    if (!string) throw `Не сработал substring после найденого '${endSearch}'! (parseHtml)`
+    // оказывается бывает пустая строка
+    // if (!string) throw `Не сработал substring после найденого '${endSearch}'! (parseHtml)`
 
     string = string
         .replace(/\r|\n|\t/g,"")

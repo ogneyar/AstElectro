@@ -21,9 +21,9 @@ url = "https://nzeta.ru/catalog/?q=" + article
 url = "/catalog/nakonechniki-gilzy-i-soediniteli/mednye-tm-l-jg-gm-l-/tm-mednyy-/nakonechnik-mednyy-t-2-5-4-2-6-zetarus/"
 
 // потом переход по ссылке
-url = "https://nzeta.ru " + url
+url = "https://nzeta.ru" + url
 
-// работа с категориями 
+// работа с категориями
 
 /*
 <ul class="breadcrumb" id="navigation" itemscope="" itemtype="http://schema.org/BreadcrumbList">

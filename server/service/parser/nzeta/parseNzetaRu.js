@@ -1,71 +1,145 @@
 
 const axios = require('axios')
 const parseHtml = require('../../html/parseHtml')
+const Category = require('../../../models/Category')
+const translit = require('../../translit')
 
 
 module.exports = class ParseNzetaRu {
     
-    static catalog = []
     static products = []
+    static categories = []
     static prices = []
     
     constructor() {
     }
 
     async run() {
-        let { data } = await axios.get("https://nzeta.ru/catalog/?q=")
-
         
+        // сначала получим список товаров
+        let url = process.env.URL + "/api/parser/nzeta?method=items"
+        // let response = await axios.get(url)
+        // this.products = response.data        
+        // let article = this.products[0].artikul // "zeta21923"
 
-        // data = parseHtml(data, {
-        //     start: `<div class="widget widget-collapsible">`,
-        //     end: `</div>`
-        // })
-
-        // let array = []
-        // try {
-        //     while(true) {
-        //         let { rest, search } = parseHtml(data, {
-        //             entry: `<li class="with-ul ">`,
-        //             start: `<ul>`,
-        //             end: `</ul>`,
-        //             return: true
-        //         })
-                
-        //         try {
-        //             while(true) {
-        //                 let response = parseHtml(search, {
-        //                     start: `<a href="`,
-        //                     end: `">`,
-        //                     return: true
-        //                 })
-        //                 search = response.rest
-
-        //                 array.push("https://kvt.su" + response.search)
-        //             }
-        //         }catch(e) {}
-
-        //         data = rest
-        //     }
-        // }catch(e) {
-        //     if (array[0] === undefined) throw `Не смог найти данные каталога, это печально.©` // ${e}`
-        // }
-
-        // this.catalog = array
+        this.products = [{artikul: "zeta21923"}]
 
         return true
     }
 
     // поиск и добавление всех категорий заданного артикула
-    async getCategories(article) {
-        // if (number) return this.catalog[number - 1]
+    async getCategories(number) {
+        let article = this.products[number-1].artikul // "zeta21923"
+        
+        // страница поиска
+        let url = "https://nzeta.ru/catalog/?q=" + article
 
-        // return this.catalog
-        return { article }
+        let { data } = await axios.get(url)
+
+        data = parseHtml(data, {
+            entry: `<tr itemprop="itemListElement"`,
+            start: `<a href="`,
+            end: `" target="_blank"`
+        })
+
+        // страица товара
+        url = "https://nzeta.ru" + data
+
+        let response = await axios.get(url)
+
+        data = response.data
+                
+        data = parseHtml(data, {
+            start: `<ul class="breadcrumb"`,
+            end: `</ul>`
+        })
+        
+        // массив категорий
+        let array = []
+        let title
+        data = { rest: data }
+        try {
+            while(1) {
+                data = parseHtml(data.rest, {
+                    start: `<a href="`,
+                    end: `"`,
+                    return: true
+                })                
+                title = parseHtml(data.rest, {
+                    start: `title="`,
+                    end: `"`
+                })
+                array.push({url: "https://nzeta.ru" + data.search, title})
+            }
+        }catch(e){
+            console.log("exception: ", e)
+            console.log("catch data: ", data)
+        }
+        
+        // родительская категория
+        let parent_category = 0
+        
+        let categoryInfoId = null
+
+        // перебираем массив категорий
+        for (let item = 0; item < array.length; item++) {
+            title = array[item].title
+            url = array[item].url
+
+            if ( ! title ) continue
+            if (title === "Каталог") continue
+
+            const categories = await Category.findOne({
+                where: {
+                    name: title
+                }
+            })
+
+            if ( ! categories ) {  // если нет категории, тогда создаём
+                // return {title,url}
+                return categories
+                
+                response = await axios.get(url)
+
+                data = response.data
+
+                response = null
+                
+                try {
+                    response = parseHtml(data, {
+                        entry: `<div class="h4 hidden-xs">`,
+                        start: `Технические`,
+                        end: `характеристики`
+                    })
+                }catch(e) {}
+
+                if (response !== null) {
+                    // categoryInfo create
+                    console.log("\n\nТехнические характеристики\n\n");
+                }
+                console.log("\n\nНЕЕЕЕТ Технические характеристики\n\n");
+
+                // await Category.create({
+                //     name: title,
+                //     url: translit(title),
+                //     is_product: 0,
+                //     sub_category_id: parent_category,
+                //     categoryInfoId
+                // })
+
+            }
+        }
+    
+
+        // return categories
+
+        // return await Category.findAll()
+
+        return this.categories || null
     }
 
     // эхо
-    async getEcho() {
+    async getEcho() {        
         return { echo: "ok" }
     }    
 

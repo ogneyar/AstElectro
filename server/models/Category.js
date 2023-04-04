@@ -8,6 +8,7 @@ const Category = sequelize.define('category', {
     url: {type: DataTypes.STRING, defaultValue: null},
     is_product: {type: DataTypes.TINYINT, defaultValue: 0},
     sub_category_id: {type: DataTypes.INTEGER, defaultValue: 0}, // parent category
+    // categoryInfoId
 })
 
 module.exports = Category
