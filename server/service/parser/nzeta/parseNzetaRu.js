@@ -1,8 +1,12 @@
 
 const axios = require('axios')
+const fs = require('fs')
+const path = require('path')
+const https = require('https')
 const parseHtml = require('../../html/parseHtml')
 const Category = require('../../../models/Category')
 const translit = require('../../translit')
+const CategoryInfo = require('../../../models/CategoryInfo')
 
 
 module.exports = class ParseNzetaRu {
@@ -47,17 +51,21 @@ module.exports = class ParseNzetaRu {
 
         let response = await axios.get(url)
 
-        data = response.data
+
+        // сохраняем данные товара в переменную productData
+        let productData = response.data
+
                 
-        data = parseHtml(data, {
+        data = parseHtml(productData, {
             start: `<ul class="breadcrumb"`,
             end: `</ul>`
         })
+        data = { rest: data }
         
         // массив категорий
         let array = []
         let title
-        data = { rest: data }
+
         try {
             while(1) {
                 data = parseHtml(data.rest, {
@@ -89,15 +97,21 @@ module.exports = class ParseNzetaRu {
             if ( ! title ) continue
             if (title === "Каталог") continue
 
-            const categories = await Category.findOne({
+            let category = await Category.findOne({
                 where: {
                     name: title
+                    // name: "Акции"
                 }
             })
+            // return category
 
-            if ( ! categories ) {  // если нет категории, тогда создаём
-                // return {title,url}
-                return categories
+            if ( category ) {
+                // сохраняем эту категорию как родительскую
+                parent_category = category.id
+                continue
+            }
+
+            if ( ! category ) {  // если нет категории, тогда создаём
                 
                 response = await axios.get(url)
 
@@ -114,33 +128,172 @@ module.exports = class ParseNzetaRu {
                 }catch(e) {}
 
                 if (response !== null) {
+                    
+                    let characteristics = []
+                    try {
+                        // характеристики
+                        response = parseHtml(data, {
+                            entry: `id="tech"`,
+                            start: `<table class="table">`,
+                            end: `</table>`
+                        })
+                        
+                        response = { rest: response }
+                        let search, name, value
+
+                        /* 
+                        В table есть много tr, в каждой tr есть пара td
+                        достаём из td название (name) и значение (value)
+                        */
+                        while(1) {                 
+                            response = parseHtml(response.rest, {
+                                start: `<tr`,
+                                end: `</tr>`,
+                                return: true
+                            })
+                            search = response.search
+                            // из первых td убираем иконки
+                            search = parseHtml(search, {
+                                entry: `<td>`,
+                                start: `">`,
+                                end: `</td>`,
+                                return: true
+                            })
+
+                            name = search.search.trim()
+                            name = name.replace("&nbsp;","").replace("&nbsp","")
+
+                            search = parseHtml(search.rest, {
+                                start: `<td>`,
+                                end: `</td>`
+                            })
+
+                            value = search.trim()
+
+                            characteristics.push({name,value})
+                        }
+
+                    }catch(e) {}           
+                    
+                    if (characteristics !== []) {
+                        characteristics = JSON.stringify(characteristics)
+                    }else {
+                        characteristics = null
+                    }
+                    // return characteristics
+
+                    let image
+                    try {
+                        // изображение
+                        response = parseHtml(data, {
+                            entry: `id="main-product-slider"`,
+                            start: `class="fancybox" href="`,
+                            end: `"`
+                        })
+                        url = "https://nzeta.ru" + response
+
+                        image = await this.getImageCategory(url, title)
+
+                        // return image
+                    }catch(e) {}
+
+                    let description
+                    try {
+                        // описание
+                        response = parseHtml(data, {
+                            start: `<div class="description">`,
+                            end: `</div>`,
+                            inclusive: true
+                        })
+                        description = response.trim()
+
+                        if (description.length > 4095) {
+                            description = null
+                            console.error(`У категории '${title}' description.length > 4095`)
+                            // throw `У категории '${title}' description.length > 4095`
+                        }
+
+                        // return description.length
+                    }catch(e) {}
+
                     // categoryInfo create
-                    console.log("\n\nТехнические характеристики\n\n");
+                    let categoryInfo = await CategoryInfo.create({
+                        title,
+                        description,
+                        characteristics,
+                        documents: null,
+                        image
+                    })
+                    categoryInfoId = categoryInfo.id
                 }
-                console.log("\n\nНЕЕЕЕТ Технические характеристики\n\n");
 
-                // await Category.create({
-                //     name: title,
-                //     url: translit(title),
-                //     is_product: 0,
-                //     sub_category_id: parent_category,
-                //     categoryInfoId
-                // })
+                category = await Category.create({
+                    name: title,
+                    url: translit(title),
+                    is_product: 0,
+                    sub_category_id: parent_category,
+                    categoryInfoId
+                })
 
+                parent_category = category.id
+                
+                categoryInfoId = null
             }
         }
+
+        // записываем в базу то, что категория содежит товары
+        await Category.update({ is_product: 1 }, {
+            where: { id: parent_category }
+        })
     
-
-        // return categories
-
-        // return await Category.findAll()
-
-        return this.categories || null
+        // возвращаем номер последней категории в которой лежит товар
+        return parent_category
     }
 
     // эхо
     async getEcho() {        
         return { echo: "ok" }
+    }    
+
+    // 
+    async getImageCategory(url, title) {
+
+        let folder = translit(title)
+        let brand = 'nzeta'
+
+        if (!fs.existsSync(path.resolve(__dirname, '..', '..', '..', 'static', brand))){
+            try {
+                fs.mkdirSync(path.resolve(__dirname, '..', '..', '..', 'static', brand))
+            }catch(e) {
+                console.log(`Создать папку '${brand}' не удалось.`)
+            }
+        }
+        if (!fs.existsSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category'))){
+            try {
+                fs.mkdirSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category'))
+            }catch(e) {
+                console.log(`Создать папку 'category' не удалось.`)
+            }
+        }
+        if (!fs.existsSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category', folder))){
+            try {
+                fs.mkdirSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category', folder))
+            }catch(e) {
+                console.log(`Создать папку '${folder}' не удалось.`)
+            }
+        }
+                
+        let fileName = '1.jpg'
+        
+        let filePath = '/' + brand + '/category/' + folder + '/' + fileName
+        
+        let image = fs.createWriteStream(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category', folder, fileName))
+        
+        https.get(url, (res) => {
+            res.pipe(image)
+        })
+    
+        return filePath
     }    
 
 }
