@@ -81,7 +81,7 @@ class nzetaController {
     async parseNzetaRu(req, res, next) {
         try {            
             
-            let { number, get_categories } = req.query
+            let { run, number, article, get_categories, get_product } = req.query
 
             // создание экземпляра класса ParseNzetaRu
             let parse = new ParseNzetaRu()
@@ -89,9 +89,20 @@ class nzetaController {
             let response = await parse.run()
             if (! response) return res.json({error: 'Ошибка! Метод run() не вернул данные!'})
 
-            if (get_categories) { // article - обязательный параметр
-                if (! number) return res.json({error: 'Ошибка! Отсутствует необходимый параметр "number"!'})
+            if (run) { // получаем список всех товаров
+                return res.json(response)
+            }
+
+            if (get_categories) { // number - обязательный параметр
+                if (! number && ! article) return res.json({error: 'Ошибка! Отсутствует необходимый параметр "number" или "article"!'})
+                if (article) return res.json(await parse.getCategories(article, true)) // true - number is article
                 return res.json(await parse.getCategories(number))
+            }
+
+            if (get_product) { // number - обязательный параметр
+                if (! number && ! article) return res.json({error: 'Ошибка! Отсутствует необходимый параметр "number" или "article"!!'})
+                if (article) return res.json(await parse.getProduct(article, true)) // true - number is article
+                return res.json(await parse.getProduct(number))
             }
             
             // по умолчанию (если не задан ни один параметр)

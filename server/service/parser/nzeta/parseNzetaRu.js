@@ -1,71 +1,61 @@
 
 const axios = require('axios')
-const fs = require('fs')
-const path = require('path')
-const https = require('https')
 const parseHtml = require('../../html/parseHtml')
 const Category = require('../../../models/Category')
 const translit = require('../../translit')
 const CategoryInfo = require('../../../models/CategoryInfo')
+const saveImageCategory = require('./parseNzetaRu/saveImageCategory')
+const Product = require('../../../models/Product')
+const getProductPage = require('./parseNzetaRu/getProductPage')
+const ProductInfo = require('../../../models/ProductInfo')
+const getPrice = require('./parseNzetaRu/getPrice')
 
 
 module.exports = class ParseNzetaRu {
     
     static products = []
-    static categories = []
-    static prices = []
+    // static categories = []
+    // static prices = []
     
     constructor() {
     }
 
+    // *****************************************************
+    // стартовый метод
     async run() {
-        
         // сначала получим список товаров
         let url = process.env.URL + "/api/parser/nzeta?method=items"
-        // let response = await axios.get(url)
-        // this.products = response.data        
-        // let article = this.products[0].artikul // "zeta21923"
-
-        this.products = [{artikul: "zeta21923"}]
-
-        return true
+        let response = await axios.get(url)
+        this.products = response.data        
+        // let article = this.products[0].artikul // "zeta21923", "zeta41810"
+        // this.products = [{artikul: "zeta21923"},{artikul: "zeta41810"}] // тестовая запись
+        return this.products
     }
 
-    // поиск и добавление всех категорий заданного артикула
-    async getCategories(number) {
-        let article = this.products[number-1].artikul // "zeta21923"
-        
-        // страница поиска
-        let url = "https://nzeta.ru/catalog/?q=" + article
+    // *****************************************************
+    // поиск и добавление всех категорий заданного номера (из списка товаров), 
+    // либо можно передать артикул вместо number и пометить => numberIsArticle = true
+    async getCategories(number, numberIsArticle = false) {
+        let article
 
-        let { data } = await axios.get(url)
-
-        data = parseHtml(data, {
-            entry: `<tr itemprop="itemListElement"`,
-            start: `<a href="`,
-            end: `" target="_blank"`
-        })
+        if (numberIsArticle) article = number
+        else article = this.products[number-1].artikul
 
         // страица товара
-        url = "https://nzeta.ru" + data
+        let url = await getProductPage(article)
 
-        let response = await axios.get(url)
-
-
-        // сохраняем данные товара в переменную productData
-        let productData = response.data
-
+        let { data } = await axios.get(url)
                 
-        data = parseHtml(productData, {
+        let response = parseHtml(data, {
             start: `<ul class="breadcrumb"`,
             end: `</ul>`
         })
-        data = { rest: data }
+
+        data = { rest: response }
         
-        // массив категорий
+        // создаём массив категорий
         let array = []
         let title
-
         try {
             while(1) {
                 data = parseHtml(data.rest, {
@@ -80,13 +70,12 @@ module.exports = class ParseNzetaRu {
                 array.push({url: "https://nzeta.ru" + data.search, title})
             }
         }catch(e){
-            console.log("exception: ", e)
-            console.log("catch data: ", data)
+            // console.log("exception: ", e)
+            // console.log("catch data: ", data)
         }
         
-        // родительская категория
-        let parent_category = 0
-        
+        // родительская категория изначально равна 0
+        let parent_category = 0        
         let categoryInfoId = null
 
         // перебираем массив категорий
@@ -103,15 +92,16 @@ module.exports = class ParseNzetaRu {
                     // name: "Акции"
                 }
             })
-            // return category
 
+            // если такая категория существует
             if ( category ) {
                 // сохраняем эту категорию как родительскую
                 parent_category = category.id
                 continue
             }
 
-            if ( ! category ) {  // если нет категории, тогда создаём
+            // если нет категории, тогда создаём
+            if ( ! category ) {  
                 
                 response = await axios.get(url)
 
@@ -127,20 +117,19 @@ module.exports = class ParseNzetaRu {
                     })
                 }catch(e) {}
 
-                if (response !== null) {
-                    
+                // если на странице есть 'Технические характеристики'
+                if (response !== null) { 
+                    //--------------------------------------------------------------
+                    // получаем характеристики
                     let characteristics = []
                     try {
-                        // характеристики
                         response = parseHtml(data, {
                             entry: `id="tech"`,
                             start: `<table class="table">`,
                             end: `</table>`
                         })
-                        
                         response = { rest: response }
                         let search, name, value
-
                         /* 
                         В table есть много tr, в каждой tr есть пара td
                         достаём из td название (name) и значение (value)
@@ -159,64 +148,78 @@ module.exports = class ParseNzetaRu {
                                 end: `</td>`,
                                 return: true
                             })
-
                             name = search.search.trim()
                             name = name.replace("&nbsp;","").replace("&nbsp","")
-
                             search = parseHtml(search.rest, {
                                 start: `<td>`,
                                 end: `</td>`
                             })
-
                             value = search.trim()
-
                             characteristics.push({name,value})
                         }
-
-                    }catch(e) {}           
-                    
+                    }catch(e) {}
                     if (characteristics !== []) {
                         characteristics = JSON.stringify(characteristics)
                     }else {
                         characteristics = null
                     }
-                    // return characteristics
-
-                    let image
+                    //--------------------------------------------------------------
+                    // получаем изображения
+                    let image = null // { path: "", files: ["1.jpg", "2.jpg"] }
+                    let files = []
+                    let item = 1
+                    let stringImage = null // строка содержащая путь до папки с изображениями
+                    response = parseHtml(data, {
+                        start: `id="nav-product-slider"`,
+                        end: `Подбор по параметрам`
+                    })
+                    response = { rest: response }
                     try {
-                        // изображение
-                        response = parseHtml(data, {
-                            entry: `id="main-product-slider"`,
-                            start: `class="fancybox" href="`,
-                            end: `"`
-                        })
-                        url = "https://nzeta.ru" + response
+                        while(1) {
+                            response = parseHtml(response.rest, {
+                                start: `<img src="`,
+                                end: `"`,
+                                return:  true
+                            })
+                            // удаляем из ссылки лишнее (получается вместо маленького изображения - большое)
+                            response.search = response.search
+                                .replace("/resize_cache", "")
+                                .replace("/492_300_1", "")
+                                .replace("/120_120_1", "")
+                                .replace("/608_608_1", "")
 
-                        image = await this.getImageCategory(url, title)
-
-                        // return image
-                    }catch(e) {}
-
+                            url = "https://nzeta.ru" + response.search
+                            // return data
+                            stringImage = await saveImageCategory(url, title, item) // item = 1 - file name
+                            files.push(`${item}.jpg`)
+                            item++
+                        }
+                    }catch(e) {                        
+                        // console.log("exception: ", e)
+                        // console.log("catch response: ", response)
+                    }                    
+                    if (files !== [] && stringImage) {
+                        image = { path: stringImage, files }
+                        image = JSON.stringify(image)
+                    }
+                    // return image
+                    //--------------------------------------------------------------
+                    // получаем описание
                     let description
                     try {
-                        // описание
                         response = parseHtml(data, {
                             start: `<div class="description">`,
                             end: `</div>`,
                             inclusive: true
                         })
                         description = response.trim()
-
                         if (description.length > 4095) {
                             description = null
                             console.error(`У категории '${title}' description.length > 4095`)
-                            // throw `У категории '${title}' description.length > 4095`
                         }
-
-                        // return description.length
                     }catch(e) {}
 
-                    // categoryInfo create
+                    // сохраняем в базу характеристики, описания и изображение
                     let categoryInfo = await CategoryInfo.create({
                         title,
                         description,
@@ -227,6 +230,7 @@ module.exports = class ParseNzetaRu {
                     categoryInfoId = categoryInfo.id
                 }
 
+                // сохраняем в базу новую категорию
                 category = await Category.create({
                     name: title,
                     url: translit(title),
@@ -235,8 +239,8 @@ module.exports = class ParseNzetaRu {
                     categoryInfoId
                 })
 
+                // делаем текущую категорию родительской
                 parent_category = category.id
-                
                 categoryInfoId = null
             }
         }
@@ -250,89 +254,144 @@ module.exports = class ParseNzetaRu {
         return parent_category
     }
 
+
+    // *****************************************************
+    // добавление товара заданного номера (из списка товаров)
+    async getProduct(number, numberIsArticle = false) {
+        let article
+
+        if (numberIsArticle) article = number
+        else article = this.products[number-1].artikul
+        
+        let productId
+        
+        let product = await Product.findOne({
+            where: {
+                article
+            }
+        })
+
+        if ( product ) {
+            productId = product.id
+        }
+        
+        // если нет такого товара, тогда создаём
+        if ( ! product ) {
+
+            let url = await getProductPage(article)
+
+            let { data } = await axios.get(url)
+
+            let title = parseHtml(data, {
+                start: `<h1 id="pagetitle">`,
+                end: `</h1>`
+            })
+            // return title
+
+            let response = null
+            
+            try {
+                response = parseHtml(data, {
+                    entry: `<div class="h4 hidden-xs">`,
+                    start: `Технические`,
+                    end: `характеристики`
+                })
+            }catch(e) {}
+
+            // если на странице есть 'Технические характеристики'
+            if (response !== null) { 
+                //--------------------------------------------------------------
+                // получаем характеристики
+                let characteristics = []
+                try {
+                    response = parseHtml(data, {
+                        entry: `id="tech"`,
+                        start: `<table class="table">`,
+                        end: `</table>`
+                    })
+                    response = { rest: response }
+                    let search, name, value
+                    /* 
+                    В table есть много tr, в каждой tr есть пара td
+                    достаём из td название (name) и значение (value)
+                    */
+                    while(1) {                 
+                        response = parseHtml(response.rest, {
+                            start: `<tr`,
+                            end: `</tr>`,
+                            return: true
+                        })
+                        search = response.search
+                        // из первых td убираем иконки
+                        search = parseHtml(search, {
+                            entry: `<td>`,
+                            start: `">`,
+                            end: `</td>`,
+                            return: true
+                        })
+                        name = search.search.trim()
+                        name = name.replace("&nbsp;","").replace("&nbsp","")
+                        search = parseHtml(search.rest, {
+                            start: `<td>`,
+                            end: `</td>`
+                        })
+                        value = search.trim()
+                        characteristics.push({name,value})
+                    }
+                }catch(e) {}
+                if (characteristics !== []) {
+                    characteristics = JSON.stringify(characteristics)
+                }else {
+                    characteristics = null
+                }
+
+                // return  characteristics
+
+                let categoryId = await this.getCategories(number, numberIsArticle)
+
+                let object = await getPrice(article)
+
+                let price = object.price
+
+                let have = false
+                if (object.остаткиМосква + object.остаткиНовосиб) have = true
+
+                // сохраняем в базу новый товар
+                product = await Product.create({
+                    name: title,
+                    url: translit(title),
+                    price,
+                    rating: 0,
+                    img: "in category",
+                    have,
+                    article,
+                    promo: null,
+                    country: null,
+                    request: false,
+                    categoryId,
+                    brandId: 1 // nzeta
+                })
+
+                productId = product.id
+                
+                await ProductInfo.create({
+                    title: "Характеристики",
+                    body: characteristics,
+                    productId
+                })
+
+            }
+            
+        }
+      
+        return productId
+    }
+
+
+    // *****************************************************
     // эхо
     async getEcho() {        
         return { echo: "ok" }
     }    
 
-    // 
-    async getImageCategory(url, title) {
-
-        let folder = translit(title)
-        let brand = 'nzeta'
-
-        if (!fs.existsSync(path.resolve(__dirname, '..', '..', '..', 'static', brand))){
-            try {
-                fs.mkdirSync(path.resolve(__dirname, '..', '..', '..', 'static', brand))
-            }catch(e) {
-                console.log(`Создать папку '${brand}' не удалось.`)
-            }
-        }
-        if (!fs.existsSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category'))){
-            try {
-                fs.mkdirSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category'))
-            }catch(e) {
-                console.log(`Создать папку 'category' не удалось.`)
-            }
-        }
-        if (!fs.existsSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category', folder))){
-            try {
-                fs.mkdirSync(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category', folder))
-            }catch(e) {
-                console.log(`Создать папку '${folder}' не удалось.`)
-            }
-        }
-                
-        let fileName = '1.jpg'
-        
-        let filePath = '/' + brand + '/category/' + folder + '/' + fileName
-        
-        let image = fs.createWriteStream(path.resolve(__dirname, '..', '..', '..', 'static', brand, 'category', folder, fileName))
-        
-        https.get(url, (res) => {
-            res.pipe(image)
-        })
-    
-        return filePath
-    }    
-
 }
-
-EXAMPLE = `
-<ul class="breadcrumb" id="navigation" itemscope="" itemtype="http://schema.org/BreadcrumbList">
-    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" id="bx_breadcrumb_0">
-        <a href="/" title="" itemprop="item">
-            <span itemprop="name"><i class="fa fa-home"></i></span>
-        </a>
-        <meta itemprop="position" content="1">
-    </li>
-    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" id="bx_breadcrumb_1">
-        <a href="/catalog/" title="Каталог" itemprop="item">
-            <span itemprop="name">Каталог</span>
-        </a>
-        <meta itemprop="position" content="2">
-    </li>
-    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" id="bx_breadcrumb_2">
-        <a href="/catalog/nakonechniki-gilzy-i-soediniteli/" title="Наконечники, гильзы и соединители" itemprop="item">
-            <span itemprop="name">Наконечники, гильзы и соединители</span>
-        </a>
-        <meta itemprop="position" content="3">
-    </li>
-    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" id="bx_breadcrumb_3">
-        <a href="/catalog/nakonechniki-gilzy-i-soediniteli/mednye-tm-l-jg-gm-l-/" title="Медные наконечники и гильзы" itemprop="item">
-            <span itemprop="name">Медные наконечники и гильзы</span>
-        </a>
-        <meta itemprop="position" content="4">
-    </li>
-    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" id="bx_breadcrumb_4">
-        <a href="/catalog/nakonechniki-gilzy-i-soediniteli/mednye-tm-l-jg-gm-l-/tm-mednyy-/" title="Т (медные)" itemprop="item">
-            <span itemprop="name">Т (медные)</span>
-        </a>
-        <meta itemprop="position" content="5">
-    </li>
-    <li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" id="bx_breadcrumb_5" class="active">
-        <span itemprop="item"><span itemprop="name">Наконечник медный Т   2,5-4-2,6 ЗЭТАРУС под опрессовку</span></span>
-        <meta itemprop="position" content="6">
-    </li>
-</ul>`
-
