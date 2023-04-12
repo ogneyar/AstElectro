@@ -24,7 +24,7 @@ module.exports = class ParseNzetaRu {
     // стартовый метод
     async run() {
         // сначала получим список товаров
-        let url = process.env.URL + "/api/parser/nzeta?method=items"
+        let url = process.env.URL + "/api/parser/nzeta?method=items" 
         let response = await axios.get(url)
         this.products = response.data        
         // let article = this.products[0].artikul // "zeta21923", "zeta41810"
@@ -190,9 +190,15 @@ module.exports = class ParseNzetaRu {
 
                             url = "https://nzeta.ru" + response.search
                             // return data
-                            stringImage = await saveImageCategory(url, title, item) // item = 1 - file name
-                            files.push(`${item}.jpg`)
-                            item++
+                            
+                            try {
+                                stringImage = await saveImageCategory(url, title, item) // item = 1 - file name
+                                files.push(`${item}.jpg`)
+                                item++
+                            }catch(e) {
+                                // console.log("exception: ", e)
+                                // console.log("catch response: ", response)
+                            }             
                         }
                     }catch(e) {                        
                         // console.log("exception: ", e)
@@ -367,12 +373,12 @@ module.exports = class ParseNzetaRu {
                     article,
                     promo: null,
                     country: null,
-                    request: false,
+                    request: false, 
                     categoryId,
                     brandId: 1 // nzeta
                 })
 
-                productId = product.id
+                productId = product.id 
                 
                 await ProductInfo.create({
                     title: "Характеристики",
@@ -383,8 +389,16 @@ module.exports = class ParseNzetaRu {
             }
             
         }
+
+        let message = `Артикул '${article}' добавлен! Его id: ${productId}.`
+
+        let response = {
+            id: productId,
+            article,
+            message
+        }
       
-        return productId
+        return message // response
     }
 
 

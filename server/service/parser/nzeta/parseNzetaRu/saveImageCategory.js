@@ -1,6 +1,7 @@
 
 const fs = require('fs')
 const path = require('path')
+const http = require('http')
 const https = require('https')
 const translit = require('../../../translit')
 
@@ -39,9 +40,20 @@ const saveImageCategory = async (url, title, name) => {
     
     let image = fs.createWriteStream(path.resolve(__dirname, '..', '..', '..', '..', 'static', brand, 'category', folder, fileName))
     
-    https.get(url, (res) => {
+    let httpHost
+
+    if (url.includes("https://")) {
+        httpHost = https
+    }else {
+        httpHost = http
+    }
+
+    httpHost.get(url, (res) => {
         res.pipe(image)
-    })
+    }).on('error', function(err) {
+        console.error(err)
+        // throw err
+    }) 
 
     return filePath
 

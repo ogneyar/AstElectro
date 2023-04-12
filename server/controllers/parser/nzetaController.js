@@ -82,12 +82,22 @@ class nzetaController {
         try {            
             
             let { run, number, article, get_categories, get_product } = req.query
+            
+            if ( ! run ) run = req.body.run
+            if ( ! number ) number = req.body.number
+            if ( ! article ) article = req.body.article
+            if ( ! get_categories ) get_categories = req.body.get_categories
+            if ( ! get_product ) get_product = req.body.get_product
 
             // создание экземпляра класса ParseNzetaRu
             let parse = new ParseNzetaRu()
 
-            let response = await parse.run()
-            if (! response) return res.json({error: 'Ошибка! Метод run() не вернул данные!'})
+            let response
+
+            if ( ! article || run ) {
+                response = await parse.run()
+                if (! response) return res.json({error: 'Ошибка! Метод run() не вернул данные!'})  
+            }
 
             if (run) { // получаем список всех товаров
                 return res.json(response)
