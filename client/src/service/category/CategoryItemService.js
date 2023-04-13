@@ -36,7 +36,7 @@ const CategoryItemService = observer(({ item, funcOnClick}) => {
     
     return (
         <div
-            className="CategoryItemService"
+            className={item?.sub_category_id === 0 ? "" : "CategoryItemService"}
         >
             <ListGroup.Item 
                 active={item?.id === categoryStore.selectedCategory.id}

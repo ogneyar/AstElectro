@@ -46,7 +46,7 @@ const CategoryService = observer((props) => {
         >
             {/* {(props?.page === "brandPage" || props?.page === "categoryPage") &&  */}
             <div title={(props?.page === "brandPage" || props?.page === "categoryPage") ? "Возврат на страницу товаров!" : ""} >
-                <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true }} funcOnClick={() => history.push("shop")}  />
+                <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true, sub_category_id: 0 }} funcOnClick={() => history.push("shop")}  />
             </div>
             {/* } */}
             {categoryStore.categories && Array.isArray(categoryStore.categories) && categoryStore.categories.map(item => { 

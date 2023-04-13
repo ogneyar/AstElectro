@@ -6,7 +6,7 @@
     background-color: var(--main-orange-color);
 }
 .CategoryItemService {
-    border-left: 1px solid var(--main-white-color);
+    border-left: 7px solid var(--main-orange-color);
 }
 
 .CategoryNavLink,

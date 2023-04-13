@@ -20,7 +20,7 @@ const UpdateProductsPage = () => {
     const [ items, setItems] = useState("")
     const [ loadingItems, setLoadingItems ] = useState(true)
     const [ message, setMessage] = useState("")
-    const [ number, setNumber] = useState(num || 1365)
+    const [ number, setNumber] = useState(num || 3110)
 
 
     useEffect(() => {            
