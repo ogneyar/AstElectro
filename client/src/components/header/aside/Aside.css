@@ -1,9 +1,11 @@
 .Aside {
-    background-color: var(--main-orange-color);
+    /* background-color: var(--main-orange-color); */
+    /* background-color: var(--main-white-color);     */
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: white;
+    /* color: white; */ 
+    color: black;
 }
 
 .AsideDiv {
@@ -13,11 +15,13 @@
 }
 
 .AsideDivNavLink {
-    border: 1px solid white;
+    /* border: 1px solid white; */
+    border: 1px solid black;
     padding: 0 5px;
     border-radius: 10px;
     margin: 5px 3px 5px 0;
 }
+
 
 /* более 991 */
 @media(min-width: 992px) {

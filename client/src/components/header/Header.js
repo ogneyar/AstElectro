@@ -11,8 +11,8 @@ const Header = () => {
         <header
             className="Header"
         >
-            <Top />
             <NavBar />
+            <Top /> {/* // перенёс поиск вниз заголовка */}
             <Aside />
         </header>
     )

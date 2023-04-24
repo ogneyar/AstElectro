@@ -153,7 +153,7 @@ const Aside = observer(() => {
                 breadCrumbsState.map(i => {
                     return (
                         <div key={i.url+i.name} className="AsideDivNavLink">
-                            <NavLink to={"/" + i.url} style={{color:"white"}}>
+                            <NavLink to={"/" + i.url} style={{color:"#4cb311"}}>
                                 {i.name}
                             </NavLink>
                         </div>

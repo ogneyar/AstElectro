@@ -143,7 +143,7 @@ const CategoryPage = observer((props) => {
         <Container
             className="CategoryPage Mobile"
         >
-            <h2>Страница категории</h2>
+            {/* <h2>Страница категории</h2> */}
             <div className="CategoryPage_Row">
                 <div className="CategoryPage_ColCategory">
                     {loadingCategory || categoryStore.loading ? <Loading variant="warning" /> : <CategoryBar page="categoryPage" />}
