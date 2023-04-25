@@ -12,7 +12,7 @@ import CategoryList from '../../components/category/CategoryList'
 import Loading from '../../components/Loading'
 import { Alert } from '../../components/myBootstrap'
 import { fetchAllCategories } from '../../http/categoryAPI'
-import { fetchProducts } from '../../http/productAPI'
+// import { fetchProducts } from '../../http/productAPI'
 import CategoryPage from '../category/CategoryPage'
 
 import { Context } from '../..'
@@ -103,9 +103,9 @@ const ShopPage = observer(() => {
 
     if (alertVisible) return <Alert show={alertVisible} onHide={() => setAlertVisible(false)} message={messageAlert} />
 
-    if (name && name !== "shop") return <CategoryPage name={name} />
+    /*if (name && name !== "shop")*/ return <CategoryPage name={name} /> 
 
-    if (loadingCategory || categoryStore.loading) return <Loading variant="warning" />
+    if (loadingCategory || categoryStore.loading) return <Loading variant="warning" text="shopPage" />
 
     return (
         <Container
@@ -126,7 +126,7 @@ const ShopPage = observer(() => {
 
                         <div className="ShopProductList_header">Выбирайте категорию</div>
 
-                        <CategoryList /> 
+                        <CategoryList id={0} /> 
 
                     </div>                    
                 </div>

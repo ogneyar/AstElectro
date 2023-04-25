@@ -34,7 +34,7 @@ const Aside = observer(() => {
         }else if (categories?.length > 0) {
             categories.forEach(i => {
                 if (i?.url === path) {
-                    breadCrumbs = [ {name: i?.name, url: i.url}, ...breadCrumbs ]
+                    breadCrumbs = [ {name: i?.name, url: i.url, category: i}, ...breadCrumbs ]
                     setBreadCrumbsState([...breadCrumbs])
                     breadStore.setCrumbs([...breadCrumbs])
                     if (i?.sub_category_id !== 0) {
@@ -133,6 +133,8 @@ const Aside = observer(() => {
     
    
     const onClickAsideDiv = () => {
+         
+
         let path = history.location.pathname.replace("/","") 
         if (path === "") {
             setBreadCrumbsState([])
@@ -141,7 +143,15 @@ const Aside = observer(() => {
             breadCrumbs = []
             recursiveFunction(path)
         }
-        productStore.setPage(1)
+        // productStore.setPage(1)
+    }
+
+    const onClickAsideDivNavLink = (category) => {
+        categoryStore.setSelectedCategory(category)             
+        categoryStore.setCategories(categoryStore.categories.map(i => {
+            if (i.id === category.id) return { ...i, open: true }
+            return { ...i, open: false }
+        }))
     }
 
 
@@ -152,7 +162,7 @@ const Aside = observer(() => {
                 Array.isArray(breadCrumbsState) && 
                 breadCrumbsState.map(i => {
                     return (
-                        <div key={i.url+i.name} className="AsideDivNavLink">
+                        <div key={i.url+i.name} className="AsideDivNavLink" onClick={()=>onClickAsideDivNavLink(i.category)}>
                             <NavLink to={"/" + i.url} style={{color:"#4cb311"}}>
                                 {i.name}
                             </NavLink>

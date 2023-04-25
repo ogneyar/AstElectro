@@ -69,7 +69,8 @@ class nzetaController {
             if (method === "product/getProduct") 
             {
                 return res.json(await api.get(options))
-            }else 
+            }
+            else 
             {
                 return res.json(await api.post(options))
             }

@@ -1,14 +1,18 @@
 
-import React, { useState, useContext, useEffect } from 'react'
-import {  Image } from 'react-bootstrap'
+import React, { useState, useContext, 
+    useEffect 
+} from 'react'
+// import {  Image } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
-import star from '../../assets/star.png'
+// import star from '../../assets/star.png'
 import { Card } from '../myBootstrap'
-import { URL, API_URL, ERROR_ROUTE } from '../../utils/consts'
-import ButtonBuy from '../cart/ButtonBuy'
-import RequestPrice from '../cart/RequestPrice'
-import priceFormater from '../../utils/priceFormater'
+import { 
+    // URL, API_URL, ERROR_ROUTE, 
+    SCROLL_TOP_MOBILE, SCROLL_TOP } from '../../utils/consts'
+// import ButtonBuy from '../cart/ButtonBuy'
+// import RequestPrice from '../cart/RequestPrice'
+// import priceFormater from '../../utils/priceFormater'
 import scrollUp from '../../utils/scrollUp'
 
 import { Context } from '../..'
@@ -21,18 +25,24 @@ const CategoryItem = (props) => {
     
     const history = useHistory()
 
+    const { categoryStore } = useContext(Context)
+
     // const { brandStore } = useContext(Context)
 
-    const [ price, setPrice ] = useState(null)
-    const [ oldPrice, setOldPrice ] = useState(null)
+    // const [ price, setPrice ] = useState(null)
+    // const [ oldPrice, setOldPrice ] = useState(null)
 
     
-    useEffect(() => { 
-        if (category.img) {
-            // на всякий случай, если вдруг забыл разпарсить строку
-            if (typeof(category.img) === "string") setCategory({...category, img: JSON.parse(category.img)})
-        }
-    },[ category ])
+    // useEffect(() => { 
+    //     setCategory(props?.category)
+    // },[ props?.category ])
+
+    // useEffect(() => { 
+    //     if (category.img) {
+    //         // на всякий случай, если вдруг забыл разпарсить строку
+    //         if (typeof(category.img) === "string") setCategory({...category, img: JSON.parse(category.img)})
+    //     }
+    // },[ category ])
     
     // useEffect(() => {
     //     if (product.promo && JSON.parse(product.promo)?.old_price !== undefined) {
@@ -42,27 +52,21 @@ const CategoryItem = (props) => {
     // },[product.price, product.promo])
 
 
-    // const onClickProductItem = () => {
-    //     // history.push(PRODUCT_ROUTE + '/' + product.id)
-    //     let url = ERROR_ROUTE
-    //     let brandName = "milwaukee" // дефолтное состояние
-    //     brandStore.brands.forEach(i => {
-    //         if (product.brandId === i.id) {
-    //             brandStore.setSelectedBrand(i)
-    //             brandName = i.name
-    //         }
-    //     })
-    //     if (brandName) url = brandName.toLowerCase() + '/' + product?.url
-        
-    //     history.push(url)
-    //     scrollUp()
-    // }
+    const onClickCategoryItem = () => {        
+        categoryStore.setSelectedCategory(category)             
+        categoryStore.setCategories(categoryStore.categories.map(i => {
+            if (i.id === category.id) return { ...i, open: true }
+            return { ...i, open: false }
+        }))
+        history.push(category.url)
+        scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+    }
 
 
     return (
         <div
             className="CategoryItem"
-            // onClick={() => onClickProductItem()}
+            onClick={() => onClickCategoryItem()}
             // onContextMenu={e => onClickContextMenu(e)}
         >
             <Card 
@@ -86,7 +90,7 @@ const CategoryItem = (props) => {
                         ?
                             <div title={category?.name}>{category?.name.slice(0, 80) + "..."}</div>
                         :
-                        category.name
+                            category.name 
                         }
 
                         {/* <p>артикул: {category?.article}</p> */}

@@ -12,7 +12,9 @@ const Loading = (props) => {
                     <div
                         className="d-flex justify-content-center align-items-center"
                     >
-                        <Spinner size={props?.size} animation="border" variant={props?.variant || "secondary"} />
+                        {process.env.REACT_APP_ENV === "develop" && props.text ? props.text + "_Loader" :
+                            <Spinner size={props?.size} animation="border" variant={props?.variant || "secondary"} />
+                        }
                     </div>
                 </div>
             </div>

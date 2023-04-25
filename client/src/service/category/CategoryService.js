@@ -17,7 +17,11 @@ import './CategoryService.css'
 
 const CategoryService = observer((props) => {
 
-    const { categoryStore, productStore } = useContext(Context)
+    const { 
+        categoryStore, 
+        // productStore 
+    } = useContext(Context)
+
     const history = useHistory()
 
     // useEffect(() => {
@@ -36,7 +40,7 @@ const CategoryService = observer((props) => {
             props?.onHide()// if (category.is_product) props?.onHide()
             scrollUp(SCROLL_TOP_MOBILE)
         }
-        productStore.setPage(1)
+        // productStore.setPage(1)
     }
 
 
@@ -46,7 +50,7 @@ const CategoryService = observer((props) => {
         >
             {/* {(props?.page === "brandPage" || props?.page === "categoryPage") &&  */}
             <div title={(props?.page === "brandPage" || props?.page === "categoryPage") ? "Возврат на страницу товаров!" : ""} >
-                <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true, sub_category_id: 0 }} funcOnClick={() => history.push("shop")}  />
+                <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true, sub_category_id: 0 }} funcOnClick={() => history.push("/")}  />
             </div>
             {/* } */}
             {categoryStore.categories && Array.isArray(categoryStore.categories) && categoryStore.categories.map(item => { 

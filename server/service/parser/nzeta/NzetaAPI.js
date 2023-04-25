@@ -253,23 +253,21 @@ module.exports = class NzetaAPI {
             STORE_AMOUNT_4      - остатки на складе в Москве
             STORE_AMOUNT_10     - остатки на складе в Новосибирске.
             CATALOG_PRICE_OPT   - оптовая цена
+            IMAGES              - массив изображений
         --------------------------
     */
-        async get({ method, article }) {
+    async get({ method, article }) {
  
-            const query = article ? `?article=${article}` : ""
-            
-            try {
-                // console.log(this.url_2 + method + query)
-                let { data } = await axios.get(this.url_2 + method + query)
-    
+        const query = article ? `?article=${article}` : ""
+        
+        try {
+            // console.log(this.url_2 + method + query)
+            let { data } = await axios.get(this.url_2 + method + query)
                 if (data.error) return data.error
-    
                 return data.result//.length //= 4090
-            }catch(e) {
-                return e
-            }
-    
+        }catch(e) {
+            return e
         }
+    }
 
 }
