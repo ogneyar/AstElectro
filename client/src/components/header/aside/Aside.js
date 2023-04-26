@@ -150,7 +150,9 @@ const Aside = observer(() => {
         categoryStore.setSelectedCategory(category)             
         categoryStore.setCategories(categoryStore.categories.map(i => {
             if (i.id === category.id) return { ...i, open: true }
-            return { ...i, open: false }
+            if (i.sub_category_id === category.sub_category_id) return { ...i, open: false }
+            if (i.sub_category_id === category.id) return { ...i, open: false }
+            return i
         }))
     }
 

@@ -7,6 +7,8 @@ const checkRole = require('../middleware/checkRoleMiddleware')
 if (process.env.URL === "http://localhost:5000") {
     router.get('/set_feed', testerController.setFeed)
     router.get('/set_sitemap', testerController.setSitemap)
+    // роут для замены пустых изобрражений
+    router.get('/edit_images', testerController.editImages)
 }
 router.post('/set_feed', checkRole("ADMIN"), testerController.setFeed)
 router.post('/set_sitemap', checkRole("ADMIN"), testerController.setSitemap)

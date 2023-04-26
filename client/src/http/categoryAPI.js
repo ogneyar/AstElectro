@@ -1,4 +1,5 @@
-import {$host,$authHost} from './index'
+
+import { $host, $authHost } from './index'
 
 
 export const createCategory = async (name, url, sub_category_id = 0) => {

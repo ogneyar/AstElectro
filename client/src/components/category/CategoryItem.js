@@ -1,7 +1,8 @@
-
+//
 import React, { useState, useContext, 
-    useEffect 
+    // useEffect 
 } from 'react'
+import { observer } from 'mobx-react-lite'
 // import {  Image } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
@@ -19,9 +20,9 @@ import { Context } from '../..'
 import './Category.css'
 
 
-const CategoryItem = (props) => {
+const CategoryItem = observer((props) => {
 
-    const [ category, setCategory ] = useState(props?.category)
+    const [ category, setCategory ] = useState(props?.category) 
     
     const history = useHistory()
 
@@ -56,7 +57,9 @@ const CategoryItem = (props) => {
         categoryStore.setSelectedCategory(category)             
         categoryStore.setCategories(categoryStore.categories.map(i => {
             if (i.id === category.id) return { ...i, open: true }
-            return { ...i, open: false }
+            if (i.sub_category_id === category.sub_category_id) return { ...i, open: false }
+            if (i.sub_category_id === category.id) return { ...i, open: false }
+            return i
         }))
         history.push(category.url)
         scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
@@ -139,6 +142,6 @@ const CategoryItem = (props) => {
 
         </div>
     )
-}
+})
 
 export default CategoryItem 

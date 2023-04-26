@@ -14,6 +14,46 @@
     flex-wrap: wrap;
 }
 
+.CategoryList_main_table {
+    /* display: block; */
+    margin-bottom: 20px;
+}
+
+.CategoryList_main_table h4 {
+    /* border-bottom: 1px solid grey; */
+    padding: 15px, 10px;
+    color: var(--main-blue-color);
+}
+
+.CategoryList_main_table_body_name {
+    color: var(--main-blue-color);
+    padding-right: 10px;
+}
+
+.CategoryList_main_images {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.CategoryList_main_images_small {
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+}
+
+.CategoryList_main_images_small_item {
+    padding: 5px;
+    cursor: pointer;
+    margin: 5px;
+    border: 1px solid lightgrey;
+}
+
+.CategoryList_main_images_big {    
+    cursor: zoom-in;
+    border: 1px dashed grey;
+}
+
 .CategoryList_noProducts {
     margin: 20px;
     padding: 20px;

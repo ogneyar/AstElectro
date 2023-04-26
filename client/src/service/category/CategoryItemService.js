@@ -30,6 +30,8 @@ const CategoryItemService = observer(({ item, funcOnClick}) => {
                     return { ...i, open: true }
                 }
             }
+            if (i.sub_category_id === item?.sub_category_id && action === "only_open") return { ...i, open: false }
+            if (i.sub_category_id === item?.id && action === "only_open") return { ...i, open: false }
             return i
         }))
     }

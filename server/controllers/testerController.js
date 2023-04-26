@@ -1,8 +1,9 @@
 
 const path = require('path')
 const fs = require('fs')
+const axios = require('axios')
 
-const { Product, Brand, Category, ProductSize, ProductInfo } = require('../models/models')
+const { Product, Brand, Category, ProductSize, ProductInfo, CategoryInfo } = require('../models/models')
 const siteMap = require('../service/tester/siteMap')
 
 
@@ -216,10 +217,159 @@ class TesterController {
             return res.json("temp")
 
         }catch(e) {
-            return  res.json({error:'Ошибка метода temp!'})
+            return res.json({error:'Ошибка метода temp!'})
         }
     }
 	
+
+    //
+    async editImages(req, res, next) {
+        try {
+
+            let info = await CategoryInfo.findAll()
+
+            info = info.filter(i => i.image)
+
+            // - убираю из image.path первый символ '/'
+            info.map(async item => {
+                let image = JSON.parse(item.image)
+                if (image.path[0] === "/") {
+                    image = {
+                        ...image,
+                        path: image.path.replace("/","")
+                    }
+                    image = JSON.stringify(image)
+                    await CategoryInfo.update({ image }, {
+                        where: { id: item.id }
+                    })
+                }
+            })
+            // return res.json("update path")
+            
+           
+            // удаляю ничейные CategoryInfo
+            info.forEach(async item => {
+                let response = await Category.findOne({
+                    where: {
+                        categoryInfoId: item.id
+                    }
+                })
+                if ( ! response ) {
+                    await CategoryInfo.destroy({
+                        where: { id: item.id }
+                    })
+                }
+            })            
+            // return res.json("delete null info")
+            
+
+
+            // return res.json(info.filter(i => !i.image))
+
+
+            let array = []
+            // return res.json(info.length)
+
+            info = info.filter(item => {
+                let response = JSON.parse(item.image)
+
+                let yes = false
+                let quantity = 0
+                let deleteFilePath = ""
+                let deleteFileName = ""
+                if (response.files) response.files.forEach(file => {
+                    
+                    let url = process.env.URL + "/" + response.path + file
+
+                    let image = path.resolve(__dirname, '..', 'static', response.path, file)
+
+                    let stats = fs.statSync(image)
+
+                    if (stats.size === 0) {
+                        array.push(url)
+                        yes = true
+                        quantity++
+                        deleteFilePath = image
+                        deleteFileName = file
+                    }                    
+                })
+                // удаляю лишние, пустые файлы
+                if (quantity === 1 && quantity < response.files.length) {
+                    fs.unlinkSync(deleteFilePath)
+                    let files = response.files.filter(i => i !== deleteFileName)
+                    let image = {...response, files}
+                    image = JSON.stringify(image)
+                    CategoryInfo.update({ image }, {
+                        where: { id: item.id }
+                    })
+                    yes = false
+                }
+
+                return yes
+            })
+
+
+            // return res.json(array)
+            // return res.json(array.length)
+
+            // return res.json(info)
+            return res.json(info.length)
+
+            let category = await Category.findOne({
+                where: {
+                    categoryInfoId: info[0].id
+                }
+            })
+            let product = await Product.findOne({
+                where: {
+                    categoryId: category.id
+                }
+            })
+
+            // return res.json({
+            //     categoryInfoId: info[0].id,
+            //     categoryId: category.id,
+            //     productId: product.id,
+            // })
+
+            // return res.json(product)
+            // return res.json(product.article)
+            
+
+            // info.forEach(async item => {
+            //     let category = await Category.findOne({
+            //         where: {
+            //             categoryInfoId: item.id
+            //         }
+            //     })
+            //     let product = await Product.findOne({
+            //         where: {
+            //             categoryId: category.id
+            //         }
+            //     })
+            // })
+
+
+            let article = product.article
+            let method = "product/getProduct"
+
+            const query = article ? `?article=${article}` : ""
+        
+            let { data } = await axios.get(process.env.NZETA_API_2_URL + method + query)
+            if (data.error) return res.json(data.error)
+
+            // return res.json(data.result) 
+
+            let images = data.result[0].IMAGES
+
+            return res.json(images) // array
+
+            return res.json("editImages")
+
+        }catch(e) {
+            return res.json({error:'Ошибка метода editImages! ' + e})
+        }
+    }
 
 }
 
