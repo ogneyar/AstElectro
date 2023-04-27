@@ -58,14 +58,14 @@ const CategoryList = observer((props) => {
                 .then(data => {
                     let img = data.image ? JSON.parse(data.image) : null
                     // console.log("categoryInfo.image.path: ", data)
-                    if (img) img = {
-                        ...img, 
-                        path: img.path[0] === "/" 
-                        ? 
-                            img.path.replace("/", "") // убираем первый символ '/'
-                        :
-                            img.path
-                    }
+                    // if (img) img = {
+                    //     ...img, 
+                    //     path: img.path[img.path.length - 1] !== "/" 
+                    //     ? 
+                    //         img.path = img.path + "/" 
+                    //     :
+                    //         img.path
+                    // }
                     let response = {
                         ...data, 
                         characteristics: JSON.parse(data.characteristics),

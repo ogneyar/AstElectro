@@ -7,6 +7,7 @@ const https = require('https')
 
 const { Product, Brand, Category, ProductSize, ProductInfo, CategoryInfo } = require('../models/models')
 const siteMap = require('../service/tester/siteMap')
+const parseHtml = require('../service/html/parseHtml')
 
 
 class TesterController {
@@ -233,20 +234,50 @@ class TesterController {
             // info = info.filter(i => i.image)
             info = info.filter(i => i.id !== 1)
 
-            // - убираю из image.path первый символ '/'
+            // - убираю картинки из description
+            info.map(async item => {
+                if (item.description) {
+                    let description = item.description
+                    let response, yes = false
+                    try {
+                        while(1) {
+                            response = parseHtml(description, {
+                                start: "<img",
+                                end: ">",
+                                inclusive: true
+                            })
+                            description = description.replace(response, "")
+                            // console.log("response: ", response)
+                            yes = true
+                        }
+                    }catch(e) {}
+
+                    if (yes) await CategoryInfo.update({ description }, {
+                        where: { id: item.id }
+                    })
+                }
+            })
+            return res.json("removing images from the description")
+
+            // - убираю из image.path первый символ '/' и добавляю последний
             info.map(async item => {
                 if (item.image) {
                     let image = JSON.parse(item.image)
-                    if (image.path[0] === "/") {
-                        image = {
-                            ...image,
-                            path: image.path.replace("/","")
-                        }
-                        image = JSON.stringify(image)
-                        await CategoryInfo.update({ image }, {
-                            where: { id: item.id }
-                        })
+                    let imagePath = image.path
+                    if (imagePath[0] === "/") {
+                        imagePath = imagePath.replace("/","")
                     }
+                    if (imagePath[imagePath.length - 1] !== "/") {
+                        imagePath = imagePath + "/"
+                    }
+                    image = {
+                        ...image,
+                        path: imagePath
+                    }
+                    image = JSON.stringify(image)
+                    await CategoryInfo.update({ image }, {
+                        where: { id: item.id }
+                    })
                 }
             })
             // return res.json("update path")
@@ -266,10 +297,37 @@ class TesterController {
                 }
             })            
             // return res.json("delete null info")
+
+            /* // вывод в консоль содержимого в папке
+            fs.readdirSync(path.resolve(__dirname, '..', 'static', "nzeta/category/kabelnye-vvody-dlya-metallorukava-vk-m-mr")).forEach(file => {
+                console.log(file);
+            })
+            return res.json("hell o")
+            */
+
+            // обновляю CategoryInfo, добавляю список файлов 
+            info.forEach(async item => {
+                if (item.image) {
+                    let image = JSON.parse(item.image)
+                    if (image.files[0] === undefined) {
+                        let files = []
+                        fs.readdirSync(path.resolve(__dirname, '..', 'static', image.path)).forEach(file => {
+                            console.log(file)
+                            files.push(file)
+                        })
+                        image = {
+                            ...image,
+                            files
+                        }
+                        image = JSON.stringify(image)
+                        await CategoryInfo.update({ image }, {
+                            where: { id: item.id }
+                        })
+                    }
+                }
+            })            
+            // return res.json("added files in base")
             
-
-
-            // return res.json(info.filter(i => !i.image))
 
 
             let array = []
@@ -315,76 +373,79 @@ class TesterController {
             // return res.json(array)
             // return res.json(array.length)
 
-            return res.json(info)
+            // return res.json(info)
             // return res.json(info.length)
 
 
             
             if (info) info.forEach(async item => {
-
-                if (item.image) {}
-                let response = JSON.parse(item.image)
-                if (response.files) response.files.forEach(file => {
-                    let image = path.resolve(__dirname, '..', 'static', response.path, file)
-                    if (fs.existsSync(image)) fs.unlinkSync(image)
-                })
-                
-                let category = await Category.findOne({
-                    where: {
-                        categoryInfoId: item.id
-                    }
-                })
-                let product = await Product.findOne({
-                    where: {
-                        categoryId: category.id
-                    }
-                })
-                
-                let article = product.article
-                let method = "product/getProduct"
-
-                let query = article ? `?article=${article}` : ""
-            
-                let { data } = await axios.get(process.env.NZETA_API_2_URL + method + query)
-                if ( ! data.error) {
-
-                    let files = []
-                    let images = data.result[0].IMAGES
-
-                    images.forEach((url, idx) => {
-                        
-                        let name = idx + 1
-                        let fileName = `${name}.jpg` // '1.jpg'
-    
-                        let image = fs.createWriteStream(path.resolve(__dirname, '..', 'static', response.path, fileName))
-    
-                        let httpHost
-
-                        if (url.includes("https://")) {
-                            httpHost = https
-                        }else {
-                            httpHost = http
-                        }
-
-                        httpHost.get(url, (res) => {
-                            res.pipe(image)
-                            files.push(`${name}.jpg`)
-                        }).on('error', function(err) {
-                            console.error(err)
-                            // throw err
-                        }) 
+                let _path
+                if ( item.id === 56 ) {
+                    _path = "nzeta/category/kabelnye-vvody-dlya-metallorukava-vk-m-mr/"
+                }else if (item.image) {
+                    let response = JSON.parse(item.image)
+                    _path = response.path
+                    if (response.files) response.files.forEach(file => {
+                        let image = path.resolve(__dirname, '..', 'static', _path, file)
+                        if (fs.existsSync(image)) fs.unlinkSync(image)
                     })
                     
-                    response = {
-                        ...response,
-                        files
-                    }
-
-                    await CategoryInfo.update({ image: JSON.stringify(response) }, {
-                        where: { id: item.id }
-                    })
-
                 }
+                    
+                    let category = await Category.findOne({
+                        where: {
+                            categoryInfoId: item.id
+                        }
+                    })
+                    let product = await Product.findOne({
+                        where: {
+                            categoryId: category.id
+                        }
+                    })
+                    
+                    let article = product.article
+                    let method = "product/getProduct"
+
+                    let query = article ? `?article=${article}` : ""
+                
+                    let { data } = await axios.get(process.env.NZETA_API_2_URL + method + query)
+                    if ( ! data.error) {
+
+                        let files = []
+                        let images = data.result[0].IMAGES
+
+                        images.forEach((url, idx) => {
+                            
+                            let name = idx + 1
+                            let fileName = `${name}.jpg` // '1.jpg'
+        
+                            let image = fs.createWriteStream(path.resolve(__dirname, '..', 'static', _path, fileName))
+        
+                            let httpHost
+
+                            if (url.includes("https://")) {
+                                httpHost = https
+                            }else {
+                                httpHost = http
+                            }
+
+                            httpHost.get(url, (res) => {
+                                res.pipe(image)
+                            }).on('error', function(err) {
+                                console.error(err)
+                                // throw err
+                            }) 
+                            files.push(`${name}.jpg`)
+                        })
+                        
+                        let image = { path: _path, files }
+                        image =  JSON.stringify(image)
+                        await CategoryInfo.update({ image }, {
+                            where: { id: item.id }
+                        })
+
+                    }
+                
 
             })
             
