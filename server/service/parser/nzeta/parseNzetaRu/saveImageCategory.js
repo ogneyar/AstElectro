@@ -36,7 +36,7 @@ const saveImageCategory = async (url, title, name) => {
             
     let fileName = `${name}.jpg` // '1.jpg'
     
-    let filePath = '/' + brand + '/category/' + folder + '/' //+ fileName
+    let filePath = brand + '/category/' + folder + '/' //+ fileName
     
     let image = fs.createWriteStream(path.resolve(__dirname, '..', '..', '..', '..', 'static', brand, 'category', folder, fileName))
     

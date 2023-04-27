@@ -2,6 +2,8 @@
 const path = require('path')
 const fs = require('fs')
 const axios = require('axios')
+const http = require('http')
+const https = require('https')
 
 const { Product, Brand, Category, ProductSize, ProductInfo, CategoryInfo } = require('../models/models')
 const siteMap = require('../service/tester/siteMap')
@@ -228,20 +230,23 @@ class TesterController {
 
             let info = await CategoryInfo.findAll()
 
-            info = info.filter(i => i.image)
+            // info = info.filter(i => i.image)
+            info = info.filter(i => i.id !== 1)
 
             // - убираю из image.path первый символ '/'
             info.map(async item => {
-                let image = JSON.parse(item.image)
-                if (image.path[0] === "/") {
-                    image = {
-                        ...image,
-                        path: image.path.replace("/","")
+                if (item.image) {
+                    let image = JSON.parse(item.image)
+                    if (image.path[0] === "/") {
+                        image = {
+                            ...image,
+                            path: image.path.replace("/","")
+                        }
+                        image = JSON.stringify(image)
+                        await CategoryInfo.update({ image }, {
+                            where: { id: item.id }
+                        })
                     }
-                    image = JSON.stringify(image)
-                    await CategoryInfo.update({ image }, {
-                        where: { id: item.id }
-                    })
                 }
             })
             // return res.json("update path")
@@ -271,6 +276,7 @@ class TesterController {
             // return res.json(info.length)
 
             info = info.filter(item => {
+                if ( ! item.image ) return true
                 let response = JSON.parse(item.image)
 
                 let yes = false
@@ -282,10 +288,8 @@ class TesterController {
                     let url = process.env.URL + "/" + response.path + file
 
                     let image = path.resolve(__dirname, '..', 'static', response.path, file)
-
-                    let stats = fs.statSync(image)
-
-                    if (stats.size === 0) {
+                    
+                    if ( ! fs.existsSync(image) || fs.statSync(image).size === 0) {
                         array.push(url)
                         yes = true
                         quantity++
@@ -308,61 +312,84 @@ class TesterController {
                 return yes
             })
 
-
             // return res.json(array)
             // return res.json(array.length)
 
-            // return res.json(info)
-            return res.json(info.length)
+            return res.json(info)
+            // return res.json(info.length)
 
-            let category = await Category.findOne({
-                where: {
-                    categoryInfoId: info[0].id
+
+            
+            if (info) info.forEach(async item => {
+
+                if (item.image) {}
+                let response = JSON.parse(item.image)
+                if (response.files) response.files.forEach(file => {
+                    let image = path.resolve(__dirname, '..', 'static', response.path, file)
+                    if (fs.existsSync(image)) fs.unlinkSync(image)
+                })
+                
+                let category = await Category.findOne({
+                    where: {
+                        categoryInfoId: item.id
+                    }
+                })
+                let product = await Product.findOne({
+                    where: {
+                        categoryId: category.id
+                    }
+                })
+                
+                let article = product.article
+                let method = "product/getProduct"
+
+                let query = article ? `?article=${article}` : ""
+            
+                let { data } = await axios.get(process.env.NZETA_API_2_URL + method + query)
+                if ( ! data.error) {
+
+                    let files = []
+                    let images = data.result[0].IMAGES
+
+                    images.forEach((url, idx) => {
+                        
+                        let name = idx + 1
+                        let fileName = `${name}.jpg` // '1.jpg'
+    
+                        let image = fs.createWriteStream(path.resolve(__dirname, '..', 'static', response.path, fileName))
+    
+                        let httpHost
+
+                        if (url.includes("https://")) {
+                            httpHost = https
+                        }else {
+                            httpHost = http
+                        }
+
+                        httpHost.get(url, (res) => {
+                            res.pipe(image)
+                            files.push(`${name}.jpg`)
+                        }).on('error', function(err) {
+                            console.error(err)
+                            // throw err
+                        }) 
+                    })
+                    
+                    response = {
+                        ...response,
+                        files
+                    }
+
+                    await CategoryInfo.update({ image: JSON.stringify(response) }, {
+                        where: { id: item.id }
+                    })
+
                 }
-            })
-            let product = await Product.findOne({
-                where: {
-                    categoryId: category.id
-                }
-            })
 
-            // return res.json({
-            //     categoryInfoId: info[0].id,
-            //     categoryId: category.id,
-            //     productId: product.id,
-            // })
-
-            // return res.json(product)
-            // return res.json(product.article)
+            })
             
 
-            // info.forEach(async item => {
-            //     let category = await Category.findOne({
-            //         where: {
-            //             categoryInfoId: item.id
-            //         }
-            //     })
-            //     let product = await Product.findOne({
-            //         where: {
-            //             categoryId: category.id
-            //         }
-            //     })
-            // })
 
-
-            let article = product.article
-            let method = "product/getProduct"
-
-            const query = article ? `?article=${article}` : ""
-        
-            let { data } = await axios.get(process.env.NZETA_API_2_URL + method + query)
-            if (data.error) return res.json(data.error)
-
-            // return res.json(data.result) 
-
-            let images = data.result[0].IMAGES
-
-            return res.json(images) // array
 
             return res.json("editImages")
 
