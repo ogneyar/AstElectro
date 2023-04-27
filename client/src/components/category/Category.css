@@ -50,7 +50,7 @@
 }
 
 .CategoryList_main_images_big {    
-    cursor: zoom-in;
+    /* cursor: zoom-in; */
     border: 1px dashed grey;
 }
 

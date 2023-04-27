@@ -14,6 +14,7 @@ import { Context } from '../..'
 import './Category.css'
 import { getCategoryInfoById } from '../../http/categoryInfoAPI'
 import { API_URL } from '../../utils/consts'
+import { getProducts } from '../../http/productAPI'
 
 
 const CategoryList = observer((props) => {
@@ -54,26 +55,39 @@ const CategoryList = observer((props) => {
     
     useEffect(() => {
         if ( isProducts ) {
+            // получение информации о категории
             getCategoryInfoById(isProducts.categoryInfoId)
-                .then(data => {
-                    let img = data.image ? JSON.parse(data.image) : null
-                    // console.log("categoryInfo.image.path: ", data)
-                    // if (img) img = {
-                    //     ...img, 
-                    //     path: img.path[img.path.length - 1] !== "/" 
-                    //     ? 
-                    //         img.path = img.path + "/" 
-                    //     :
-                    //         img.path
-                    // }
-                    let response = {
-                        ...data, 
-                        characteristics: JSON.parse(data.characteristics),
-                        image: img
-                    }
-                    setCategoryInfo(response)
-                    if (img) setImage(API_URL + img.path + img.files[0])
-                })
+            .then(data => {
+                let img = data.image ? JSON.parse(data.image) : null
+                // console.log("categoryInfo.image.path: ", data)
+                // if (img) img = {
+                //     ...img, 
+                //     path: img.path[img.path.length - 1] !== "/" 
+                //     ? 
+                //         img.path = img.path + "/" 
+                //     :
+                //         img.path
+                // }
+                let response = {
+                    ...data, 
+                    characteristics: JSON.parse(data.characteristics),
+                    image: img
+                }
+                setCategoryInfo(response)
+                if (img) setImage(API_URL + img.path + img.files[0])
+            })
+            // получение информации о товаах в этой категории
+            getProducts({categoryId: props.id})
+            .then(data => {
+                setProducts(data.rows)
+            })
+        }
+    }, [ isProducts ])
+
+     
+    useEffect(() => {
+        if (isProducts) {
+            
         }
     }, [ isProducts ])
 
@@ -126,27 +140,29 @@ const CategoryList = observer((props) => {
                     <div className="CategoryList_main">
                         <div className="CategoryList_main_table">
                             <h4>Технические характеристики</h4>
-                            <div className="CategoryList_main_table_body">
+                            <table>
+                            <tbody className="CategoryList_main_table_body">
                                 {categoryInfo.characteristics.map((item,idx) => {
                                     return (
-                                        <tbody key={idx + "blablabla"}>
+                                        <tr key={idx + "blablabla"}>
                                             <td className="CategoryList_main_table_body_name">
                                                 {item.name}
                                             </td>
                                             <td>
                                                 {item.value}
                                             </td>
-                                        </tbody>
+                                        </tr>
                                     )
                                 })}
-                            </div>
+                            </tbody>
+                            </table>
                         </div>
 
                         <div className="CategoryList_main_images">
                             
                             {image && <div 
                                 className="CategoryList_main_images_big"
-                                style={{background:`url(${image}) 50% 50% / ${widthHeight} auto no-repeat`,width:widthHeight,height:widthHeight}}
+                                style={{background:`url(${image}) 50% 50% / ${widthHeight} auto no-repeat`,width:widthHeight,height:widthHeight}} 
                                 // onMouseOver={(e) => {
                                 //     if (propotionX > 0 && propotionY > 0) e.target.style.cursor = "zoom-in"
                                 //     else e.target.style.cursor = "default"
@@ -180,6 +196,15 @@ const CategoryList = observer((props) => {
                             </div>
 
                         </div>
+
+                        {products && 
+                        products.map(product => {
+                            return (
+                                <div>
+                                    {product.article}&nbsp;{console.log(product)}
+                                </div>
+                            )
+                        })}
 
                         {parseHTML(categoryInfo.description)}
                         <br />
