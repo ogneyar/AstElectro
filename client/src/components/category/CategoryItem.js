@@ -63,6 +63,7 @@ const CategoryItem = observer((props) => {
         }))
         history.push(category.url)
         scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+        // console.log("category: ",category)
     }
 
 

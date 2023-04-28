@@ -15,6 +15,7 @@ import './Category.css'
 import { getCategoryInfoById } from '../../http/categoryInfoAPI'
 import { API_URL } from '../../utils/consts'
 import { getProducts } from '../../http/productAPI'
+import scrollUp from '../../utils/scrollUp'
 
 
 const CategoryList = observer((props) => {
@@ -79,18 +80,13 @@ const CategoryList = observer((props) => {
             // получение информации о товаах в этой категории
             getProducts({categoryId: props.id})
             .then(data => {
-                setProducts(data.rows)
+                setProducts(data)
+                // console.log(data);
             })
         }
     }, [ isProducts ])
 
      
-    useEffect(() => {
-        if (isProducts) {
-            
-        }
-    }, [ isProducts ])
-
 
     // const [ visibleContextMenu, setVisibleContextMenu ] = useState(null)
     
@@ -198,13 +194,172 @@ const CategoryList = observer((props) => {
                         </div>
 
                         {products && 
-                        products.map(product => {
-                            return (
-                                <div>
-                                    {product.article}&nbsp;{console.log(product)}
-                                </div>
-                            )
-                        })}
+                        <table className="CategoryList_products">
+                            <thead>                                
+                                <tr className="CategoryList_products_infoName">
+                                    {JSON.parse(products[0].info[0].body).map((inf,indx) => {
+                                        let del = 1
+                                         if (
+                                            del &&
+                                            (inf.name !== "Артикул") &&
+                                            (inf.name !== "Тип изделия") &&
+                                            (inf.name !== "Толщина стенки после усадки Т,мм") &&
+                                            (inf.name !== "I, после усадки, мм") &&
+
+                                            (inf.name !== "Комплект заземления") &&
+                                            (inf.name !== "Наличие защитного слоя в кабеле") &&
+                                            // (inf.name !== "Длина разделки") &&
+
+                                            // (inf.name !== "Диапазон наружного диаметра D1, мм") &&
+                                            (inf.name !== "Общая длина L, мм") &&
+
+                                            // (inf.name !== "Количество наконечников") &&
+                                            
+                                            ( ! inf.name.includes("Количество") ) &&
+                                            
+                                            ( ! inf.name.includes("Размер") ) &&
+                                            ( ! inf.name.includes("Диаметр") ) &&
+                                            ( ! inf.name.includes("диаметр") ) &&
+                                            ( ! inf.name.includes("Сечение") ) &&
+
+                                            (inf.name !== "Назначение") &&
+
+                                            (inf.name !== "Габариты, мм") &&
+
+                                            ( ! inf.name.includes("Условный проход") ) &&
+                                            ( ! inf.name.includes("Наружный диаметр") ) &&
+                                            // ( ! inf.name.includes("Вн. диаметр") ) &&
+                                            
+                                            (inf.name !== "Условный размер трубы мм") &&
+                                            // (inf.name !== "Диапазон наружного диаметра трубы, D мм") &&
+                                            (inf.name !== "Совместимый вводной патрубок") &&
+                                            
+                                            // ( ! inf.name.includes("Диапазон внешнего диаметра") ) &&
+                                            ( ! inf.name.includes("Диапазон") ) &&
+                                            ( ! inf.name.includes("Минимальный внутренний диаметр") ) &&
+                                            ( ! inf.name.includes("Установочная длина") ) &&
+                                            ( ! inf.name.includes("Длина") ) &&
+
+                                            ( ! inf.name.includes("Максимальный внутренний диаметр") ) &&
+                                            ( ! inf.name.includes("Тип и размер установочной резьбы") ) &&
+
+                                            ( ! inf.name.includes("Номинальное сечение") ) &&
+
+                                            // ( ! inf.name.includes("Мин. радиус изгиба") ) &&
+                                            ( ! inf.name.includes("Муфта") ) &&
+                                            ( ! inf.name.includes("Шланг электромонтажный") ) &&
+
+                                            ( ! inf.name.includes("Тип вводов") ) &&
+                                            ( ! inf.name.includes("Ввод") ) &&
+                                            ( ! inf.name.includes("Заглушка") ) &&
+
+                                            ( ! inf.name.includes("Трубная резьба") ) &&
+                                            ( ! inf.name.includes("Тип и размер резьбы") ) &&
+                                            ( ! inf.name.includes("Высота") ) &&
+
+                                            (inf.name)
+                                         ) return null
+                                        return (
+                                            <th key={indx + "bloblobla"} className="CategoryList_products_infoName_item">
+                                                {                                                    
+                                                inf.name.includes("Размер") && (inf.name.length === 8 || inf.name.length === 9)
+                                                    ? 
+                                                        inf.name.replace("Размер ",'')
+                                                    :
+                                                        inf.name
+                                                }
+                                            </th>
+                                        )
+                                    })}
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {products.map((product,idx) => {
+                                return (
+                                    <tr className="CategoryList_products_infoValue" key={idx + "bloblabla"}>
+                                    {JSON.parse(product.info[0].body).map((inf,indx) => {
+                                        let del = 1
+                                        if (
+                                            del &&
+                                            (inf.name !== "Артикул") &&
+                                            (inf.name !== "Тип изделия") &&
+                                            (inf.name !== "Толщина стенки после усадки Т,мм") &&
+                                            (inf.name !== "I, после усадки, мм") &&
+                                            
+                                            (inf.name !== "Комплект заземления") &&
+                                            (inf.name !== "Наличие защитного слоя в кабеле") &&
+                                            // (inf.name !== "Длина разделки") &&
+                                            
+                                            // (inf.name !== "Диапазон наружного диаметра D1, мм") &&
+                                            (inf.name !== "Общая длина L, мм") &&
+
+                                            // (inf.name !== "Количество наконечников") &&
+
+                                            ( ! inf.name.includes("Количество") ) &&
+
+                                            ( ! inf.name.includes("Размер") ) &&
+                                            ( ! inf.name.includes("Диаметр") ) &&
+                                            ( ! inf.name.includes("диаметр") ) &&
+                                            ( ! inf.name.includes("Сечение") ) &&
+
+                                            (inf.name !== "Назначение") &&
+
+                                            (inf.name !== "Габариты, мм") &&
+                                            
+                                            ( ! inf.name.includes("Условный проход") ) &&
+                                            ( ! inf.name.includes("Наружный диаметр") ) &&
+                                            // ( ! inf.name.includes("Вн. диаметр") ) &&
+
+                                            (inf.name !== "Условный размер трубы мм") &&
+                                            // (inf.name !== "Диапазон наружного диаметра трубы, D мм") &&
+                                            (inf.name !== "Совместимый вводной патрубок") &&
+
+                                            // ( ! inf.name.includes("Диапазон внешнего диаметра") ) &&
+                                            ( ! inf.name.includes("Диапазон") ) &&
+                                            ( ! inf.name.includes("Минимальный внутренний диаметр") ) &&
+                                            ( ! inf.name.includes("Установочная длина") ) &&
+                                            ( ! inf.name.includes("Длина") ) &&
+
+                                            ( ! inf.name.includes("Максимальный внутренний диаметр") ) &&
+                                            ( ! inf.name.includes("Тип и размер установочной резьбы") ) &&
+
+                                            ( ! inf.name.includes("Номинальное сечение") ) &&
+                                            
+                                            // ( ! inf.name.includes("Мин. радиус изгиба") ) &&
+                                            ( ! inf.name.includes("Муфта") ) &&
+                                            ( ! inf.name.includes("Шланг электромонтажный") ) &&
+                                            
+                                            ( ! inf.name.includes("Тип вводов") ) &&
+                                            ( ! inf.name.includes("Ввод") ) &&
+                                            ( ! inf.name.includes("Заглушка") ) &&
+
+                                            ( ! inf.name.includes("Трубная резьба") ) &&
+                                            ( ! inf.name.includes("Тип и размер резьбы") ) &&
+                                            ( ! inf.name.includes("Высота") ) &&
+
+                                            (inf.name)
+                                         ) return null
+                                        return (
+                                            <td key={indx + "blobloblo"} className="CategoryList_products_infoValue_item">
+                                                {inf.name === "Артикул" || inf.name === "Тип изделия" 
+                                                ? 
+                                                <span onClick={() => { history.push("nzeta/"+product.url); scrollUp()}} style={{color: "green", cursor: "pointer"}}>
+                                                    {inf.value}
+                                                </span>
+                                                :
+                                                    inf.value.replace("&quot;",'"')
+                                                }
+                                            </td>
+                                        )
+                                    })}
+                                    </tr>
+                                )
+                            })}
+                            </tbody>
+                        </table>
+                        }
+
+                        <br />
 
                         {parseHTML(categoryInfo.description)}
                         <br />

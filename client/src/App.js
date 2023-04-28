@@ -74,7 +74,7 @@ const App = observer(() => {
             )
             .catch(error => getError(`Не удалось загрузить данные о брендах!`, error))
                
-        scrollUp(0)
+        // scrollUp(0)
         
     }, [ brandStore, userStore, cartStore ])
 

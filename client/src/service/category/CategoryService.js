@@ -30,19 +30,17 @@ const CategoryService = observer((props) => {
 
     const onClickSelectedCategory = (category) => {
         categoryStore.setSelectedCategory(category)
-        if (props.page !== "brandPage") 
-            history.push(category.url)
-        else 
-            history.push(`${window.location.pathname}?category=${category.id}`)
-        if (window.innerWidth > 991) {
-            scrollUp(SCROLL_TOP)
-        }else {
-            props?.onHide()// if (category.is_product) props?.onHide()
-            scrollUp(SCROLL_TOP_MOBILE)
-        }
+        if (props.page !== "brandPage") history.push(category.url)
+        else history.push(`${window.location.pathname}?category=${category.id}`)
+        scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
         // productStore.setPage(1)
     }
 
+
+    const onClickAllCategory = () => {
+        history.push("/")
+        scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+    }
 
     return (
         <ListGroup 
@@ -50,7 +48,7 @@ const CategoryService = observer((props) => {
         >
             {/* {(props?.page === "brandPage" || props?.page === "categoryPage") &&  */}
             <div title={(props?.page === "brandPage" || props?.page === "categoryPage") ? "Возврат на страницу товаров!" : ""} >
-                <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true, sub_category_id: 0 }} funcOnClick={() => history.push("/")}  />
+                <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true, sub_category_id: 0 }} funcOnClick={onClickAllCategory}  />
             </div>
             {/* } */}
             {categoryStore.categories && Array.isArray(categoryStore.categories) && categoryStore.categories.map(item => { 

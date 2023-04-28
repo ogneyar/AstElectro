@@ -28,10 +28,10 @@ const NavBar = observer(() => {
     }
 
     const onClickAndScroll = (route, scroll = 0) => {
-        if (! scroll) {
-            if (window.innerWidth > 575) scroll = SCROLL_TOP
-            else scroll = SCROLL_TOP_MOBILE
-        }
+        // if (! scroll) {
+        //     if (window.innerWidth > 575) scroll = SCROLL_TOP
+        //     else scroll = SCROLL_TOP_MOBILE
+        // }
         history.push(route)
         scrollUp(scroll) 
     }

@@ -105,20 +105,16 @@ class ProductController {
     
     async getAllForCategories(req, res, next) {
         try {
-            const { categoryId } = req.params
-            // console.log("hgjjjhfghjfghj");
-            const products = await Product.findAll({
+            const { categoryId } = req.query
+            
+            let products = await Product.findAll({
                 where: { categoryId },
                 include: [{model: ProductInfo, as: 'info'}]
             })
 
-            products.map(product => {
-                
-            })
-
             return res.json(products)
         }catch(e) {
-            return next(ApiError.badRequest('Ошибка метода getAllForCategories!'));
+            return next(ApiError.badRequest('Ошибка метода getAllForCategories! ' + e));
         }
     }
 

@@ -10,8 +10,7 @@ export const getProducts = async ({categoryId}) => {
     let { data } = await $host.get('api/product/for_categories', {params: {
         categoryId
     }})    
-    if (data.count === undefined) return { count: 0, rows: [] }
-
+    // if (data.count === undefined) return { count: 0, rows: [] }
     return data
 }
 

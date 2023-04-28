@@ -8,7 +8,7 @@ import { Context } from '../..'
 import './CategoryService.css'
 
 
-const CategoryItemService = observer(({ item, funcOnClick}) => {
+const CategoryItemService = observer(({ item, funcOnClick }) => {
     
     const { categoryStore } = useContext(Context)
     
