@@ -5,12 +5,13 @@ import { observer } from 'mobx-react-lite'
 import HtmlReactParser from 'html-react-parser'
 
 import { fetchOneProduct, fetchOneProductOnUrl } from '../../http/productAPI'
+import { fetchCategoryById } from '../../http/categoryAPI'
 import { URL, API_URL } from '../../utils/consts'
 import Error from '../error/ErrorPage'
 import Loading from '../../components/Loading'
-import ButtonBuy from '../../components/cart/ButtonBuy'
-import Rating from '../../components/rating/Rating'
-import detailDataLayer from '../../service/dataLayer/detail'
+// import ButtonBuy from '../../components/cart/ButtonBuy'
+// import Rating from '../../components/rating/Rating'
+// import detailDataLayer from '../../service/dataLayer/detail'
 import RequestPrice from '../../components/cart/RequestPrice'
 import priceFormater from '../../utils/priceFormater'
 
@@ -55,6 +56,9 @@ const ProductPage =  observer((props) => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
 
+    const [categoryImages, setCategoryImages] = useState(null)
+    const [description, setDescription] = useState(null)
+
     // const [light, setLight] = useState(true)
 
     const alertError = (err) => {
@@ -94,6 +98,16 @@ const ProductPage =  observer((props) => {
     useEffect(() => {
         if (product.img && Array.isArray(product.img) && product.img[0]?.big !== undefined) {
             setImage(API_URL + product.img[0].big)
+        }else if (product.img === "in category") {
+            fetchCategoryById(product.categoryId)
+                .then(data => {
+                    // console.log(data);
+                    let info = data.info
+                    let image = JSON.parse(info.image)
+                    setCategoryImages(image)
+                    setImage(API_URL + image.path + image.files[0])
+                    setDescription(info.description)
+                })
         }
     },[product.img, product.brandId])
     
@@ -180,6 +194,21 @@ const ProductPage =  observer((props) => {
                                 />
                             )
                         })
+                        : 
+                        categoryImages && Array.isArray(categoryImages.files)
+                        ? categoryImages.files.map((item,idx) => {
+                            return (
+                                <Image 
+                                    key={idx + "new Date()"}
+                                    className="ProductImageSmall"
+                                    width={80} 
+                                    onClick={(e) => {
+                                        setImage(API_URL + categoryImages.path + item)
+                                    }}
+                                    src={API_URL + categoryImages.path + item}
+                                />
+                            )
+                        })
                         : null}
                     </div>
                     {/* Ссылка, для того чтобы можно было правой клавишей мыши вызвать контекстное меню */}
@@ -204,7 +233,7 @@ const ProductPage =  observer((props) => {
                 </div>
                 <div md={4}>
                     <Row className="ProductRating">
-                        <Rating product={product} rating={ratingStore.rate} />
+                        {/* <Rating product={product} rating={ratingStore.rate} /> */}
                     </Row>
                 </div>
                 <div md={4} className="ProductColCard">
@@ -233,12 +262,18 @@ const ProductPage =  observer((props) => {
                                     Запросить цену
                                 </RequestPrice>
                             : 
-                                <ButtonBuy 
-                                    className="ProductCardButtonBuy" 
+                                <RequestPrice
                                     product={product}
+                                    action="Заказ"
                                 >
-                                    Добавить в корзину
-                                </ButtonBuy>
+                                    Заказать товар
+                                </RequestPrice>
+                                // <ButtonBuy 
+                                //     className="ProductCardButtonBuy" 
+                                //     product={product}
+                                // >
+                                //     Добавить в корзину
+                                // </ButtonBuy>
                             }
                         </div>
                     </Card>
@@ -262,99 +297,53 @@ const ProductPage =  observer((props) => {
                             ?
                                 HtmlReactParser(info?.body)
                             : 
-                                info?.body.includes(";") 
-                                ? HtmlReactParser(info?.body.split(";").map((i, idx) => {
-                                    let jsx = ""
-                                    if (idx === 0) jsx += `<tbody><tr><td>${i}</td>`
-                                    else if ((idx+1) % 2 === 0) jsx += `<td>${i}</td></tr>` // если чётный элемент
-                                    else jsx += `<tr><td>${i}</td>` // если не чётный элемент
-                                    if ((idx+1) === info?.body.split(";").length) jsx += `</tbody>`
-                                    return jsx
-                                }).join(""))
-                                : info?.body
+                                // info?.body.includes(";") 
+                                // ? HtmlReactParser(info?.body.split(";").map((i, idx) => {
+                                //     let jsx = ""
+                                //     if (idx === 0) jsx += `<tbody><tr><td>${i}</td>`
+                                //     else if ((idx+1) % 2 === 0) jsx += `<td>${i}</td></tr>` // если чётный элемент
+                                //     else jsx += `<tr><td>${i}</td>` // если не чётный элемент
+                                //     if ((idx+1) === info?.body.split(";").length) jsx += `</tbody>`
+                                //     return jsx
+                                // }).join(""))
+                                // : 
+                                typeof(info?.body) === "string" 
+                                ? 
+                                <tbody>
+                                    {JSON.parse(info?.body).map(item  =>  {
+                                        return  (
+                                            <tr>
+                                                <td>
+                                                {item.name}
+                                                </td>
+                                                <td>
+                                                {item.value}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                                : null
                         }
                         </table>    
                         </>
-                        : info?.title === "description" && info?.body.length < 4096 // у бренда "tor" 77 товаров с description > 4096 символов не влезли целиком в БД
-                            ? 
-                            <>
+                        :  null
+                        }
+
+                        {description &&
+                        <>
+                            <br />
+                            <br />
                             <h2>Описание</h2>
-                            <div>
-                            {
-                                HtmlReactParser(info?.body)
-                            }
-                            </div>
-                            </>
-                            : info?.title === "equipment" 
-                                ? 
-                                <>
-                                <h2>Комплектация</h2>
-                                <table>
-                                {
-                                    info?.body.includes("<") && info?.body.includes(">") 
-                                    ?
-                                        HtmlReactParser(info?.body)
-                                    :
-                                        info?.body.includes(";") 
-                                        ? HtmlReactParser(info?.body.split(";").map((i, idx) => {
-                                            let jsx = ""
-                                            if (idx === 0) jsx += `<tbody>`
-                                            jsx += `<tr><td>${i}</td></tr>`
-                                            if ((idx+1) === info?.body.split(";").length) jsx += `</tbody>`
-                                            return jsx
-                                        }).join(""))
-                                        : info?.body
-                                }
-                                </table>
-                                </> 
-                                : null
+                            {HtmlReactParser(description)}
+                        </>
+                        
                         }
                             
                     </div>
                 )
             : null}
             
-            {product.size && product.size.length > 0
-            ?
-            <div className="ProductSize">
-                <h2>Габариты</h2>
-                {product.size[0].weight 
-                ?
-                <>
-                    <div className={light ? "ProductInfoRowLight" : "ProductInfoRowTansparent"}>Вес: {product.size[0].weight} кг</div> 
-                    {light = ! light}
-                </>
-                : null}
-                {product.size[0].length 
-                ?
-                <>
-                    <div className={light ? "ProductInfoRowLight" : "ProductInfoRowTansparent"}>Длина: {product.size[0].length} мм</div>
-                    {light = ! light}
-                </>
-                : null}
-                {product.size[0].width 
-                ?
-                <>
-                    <div className={light ? "ProductInfoRowLight" : "ProductInfoRowTansparent"}>Ширина: {product.size[0].width} мм</div>
-                    {light = ! light}
-                </>
-                : null}
-                {product.size[0].height 
-                ?
-                <>
-                    <div className={light ? "ProductInfoRowLight" : "ProductInfoRowTansparent"}>Высота: {product.size[0].height} мм</div>
-                    {light = ! light}
-                </>
-                : null}
-                {product.size[0].volume 
-                ?
-                <>
-                    <div className={light ? "ProductInfoRowLight" : "ProductInfoRowTansparent"}>Объём: {product.size[0].volume} м.куб</div>
-                    {light = ! light}
-                </>
-                : null}
-            </div>
-            : null}
             
         </Container>
     )

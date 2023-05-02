@@ -55,7 +55,7 @@ const RequestPrice = (props) => {
             window.alert("Необходимо ввести имя.")
         }else if ( ! phone || phone.replace(/\D/g, "").length < 10 ) {
             window.alert("Необходимо ввести номер телефона (10ть чисел).")
-        }else if ( ! email || email.indexOf("@") === -1 || email.indexOf(".") === -1 ) {
+        }else if ( (! email || email.indexOf("@") === -1 || email.indexOf(".") === -1) && props.action !== "Заказ" ) {
             window.alert("Необходимо ввести почту вида email@mail.ru.")
         }else {
             setLoading(true)
@@ -106,8 +106,8 @@ const RequestPrice = (props) => {
             }}
             time="600000" // в милисекундах
             size="lg"
-            title="Запрос цены товара!"
-            titleMore={success ? "Успех" : "Укажите своё имя, номер и почту."}
+            title={props.action === "Заказ" ? "Заказ товара!" : "Запрос цены товара!"}
+            titleMore={success ? "Успех" : loading ? "..." : "Укажите своё имя, номер и почту."}
         >
             {loading ? <Loading /> 
             :
@@ -122,8 +122,8 @@ const RequestPrice = (props) => {
                     onClick={() => {
                         setSuccess(false)
                         setNotificationVisible(false)
-                        history.push(SHOP_ROUTE)
-                        scrollUp(200)
+                        // history.push(SHOP_ROUTE)
+                        // scrollUp(200)
                     }}
                 >
                     Хорошо
@@ -188,7 +188,7 @@ const RequestPrice = (props) => {
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Ваша почта (email)&nbsp;<span style={{color:"red"}}>*</span></label>&nbsp;</td>
+                            <td><label>Ваша почта (email)&nbsp;<span style={{color:"red"}}></span></label>&nbsp;</td>
                             <td>
                                 <Email email={email} setEmail={setEmail} placeholder="Введите email" withLabel={true} />
                             </td>
@@ -204,7 +204,7 @@ const RequestPrice = (props) => {
                         variant="warning"
                         onClick={() => onClickRequestPrice() }
                     >
-                        Сделать запрос!
+                        {props.action === "Заказ" ? "Офомить заказ!" : "Сделать запрос!"}
                     </Button>
                     
                     <Button

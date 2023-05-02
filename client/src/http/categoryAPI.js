@@ -38,3 +38,8 @@ export const updateCategory = async (id, body) => {
     const {data} = await $authHost.put('api/category/' + id, body)
     return data
 }
+
+export const fetchCategoryById = async (id) => {
+    const {data} = await $host.get('api/category/id/' + id)
+    return data
+}

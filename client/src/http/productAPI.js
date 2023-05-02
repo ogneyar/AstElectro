@@ -72,10 +72,9 @@ export const fetchArrayProductsByCategory = async ({category, page, limit, mix_a
 
 export const fetchOneProduct = async (id) => {
     const {data} = await $host.get('api/product/' + id)
-    let img
+    let img = data.img
     try {
         if (typeof(data.img) === "string") img = JSON.parse(data.img)
-        else img = data.img
     }catch(e) {
         img = [{}]
     }
@@ -84,12 +83,11 @@ export const fetchOneProduct = async (id) => {
 
 export const fetchOneProductOnUrl = async (url) => {
     const {data} = await $host.get('api/product/url/' + url)
-    let img
+    let img = data.img
     try {
         if (typeof(data.img) === "string") img = JSON.parse(data.img)
-        else img = data.img
     }catch(e) {
-        img = [{}]
+        if (img !== "in category") img = [{}]
     }
     return {...data, img}
 }

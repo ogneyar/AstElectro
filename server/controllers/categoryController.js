@@ -1,4 +1,5 @@
-const {Category, Brand, Product} = require('../models/models')
+
+const { Category, CategoryInfo } = require('../models/models')
 const ApiError = require('../error/apiError')
 const getCategoryArrays = require('../service/category/getCategoryArrays')
 const getCategoriesForBrand = require('../service/category/getCategoriesForBrand')
@@ -22,6 +23,27 @@ class CategoryController {
             return res.json(categories) // return array
         }catch(e) {
             return next(ApiError.badRequest('Ошибка метода getAll!'));
+        }
+    }
+    
+    async getOne(req, res, next) {
+        try {
+            const { id } = req.params
+            let category = await Category.findOne({
+                where: { id },
+                // include: [{model: CategoryInfo, as: 'info'}]
+            })
+            if (category) {
+                let categoryInfo = await CategoryInfo.findOne({
+                    where: {
+                        id: category.categoryInfoId
+                    } 
+                })
+                category = {...category.dataValues, info: categoryInfo}
+            }
+            return res.json(category) // return array
+        }catch(e) {
+            return next(ApiError.badRequest('Ошибка метода getOne!'));
         }
     }
 
