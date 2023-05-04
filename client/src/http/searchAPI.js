@@ -6,19 +6,8 @@ export const searchValue = async ({ value, limit, page }) => {
     const {data} = await $host.post('api/search', { value, limit, page })
     if ( ! data.count )  return { count: 0, rows: [] }
     if (data.count === undefined) return { count: 0, rows: [] }
-    return { 
-        count: data.count,
-        rows: data.rows.map(i => { 
-            let img
-            try {
-                if (typeof(i.img) === "string") img = JSON.parse(i.img)
-                else img = i.img
-            }catch(e) {
-                img = [{}]
-            }
-            return {...i, img} 
-        })
-    }
+        
+    return data  
 }
 
 export const searchArticle = async (body) => { // body = { text, limit }

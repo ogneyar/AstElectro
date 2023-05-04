@@ -13,6 +13,8 @@ import { searchValue } from '../../http/searchAPI'
 
 import { Context } from '../..'
 import './SearchPage.css'
+import scrollUp from '../../utils/scrollUp'
+import { SCROLL_TOP, SCROLL_TOP_MOBILE } from '../../utils/consts'
 
 
 const SearchPage = observer(() => {
@@ -55,6 +57,11 @@ const SearchPage = observer(() => {
         // eslint-disable-next-line
     },[ value, productStore.page, productStore.limit ])
 
+    const onClickBackToShop = () => {
+        history.push("shop")
+        scrollUp(window.innerWidth < 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+    }
+
 
     if (alertVisible) return <Alert show={alertVisible} onHide={() => setAlertVisible(false)} message={messageAlert} />
 
@@ -67,7 +74,7 @@ const SearchPage = observer(() => {
             <div className="SearchRow">
                 <div className="SearchColCategory">
                     <button
-                        onClick={() => history.push("shop")}
+                        onClick={onClickBackToShop}
                     >
                         Назад в магазин
                     </button>

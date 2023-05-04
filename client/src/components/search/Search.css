@@ -88,7 +88,8 @@
     display: flex;
     justify-content: flex-end;
     font-size: 24px;
-    color: var(--main-orange-color);
+    /* color: var(--main-orange-color); */
+    color: green;
     padding-left: 10px;
     padding-right: 5px;
 }

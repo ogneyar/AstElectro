@@ -1,16 +1,16 @@
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { Spinner } from 'react-bootstrap'
 
 import { API_URL, SCROLL_TOP, SCROLL_TOP_MOBILE } from '../../utils/consts'
+import { searchValue } from '../../http/searchAPI'
 import priceFormater from '../../utils/priceFormater'
 import scrollUp from '../../utils/scrollUp'
 
 import { Context } from '../..'
 import './Search.css'
-import { searchValue } from '../../http/searchAPI'
 
 
 const Search = observer((props) => {
@@ -26,8 +26,23 @@ const Search = observer((props) => {
     // если поиск не дал результатов
     const [ noSearch, setNoSearch ] = useState(false)
 
+    const [ test, setTest ] = useState(null)
+
     const history = useHistory()
 
+    useEffect(() => {
+        // if (list && test !== value) {
+        //     setTest(value)
+        //     setList(list.map( (item,idx) => {
+        //         if (idx === 0) {
+        //             return {
+        //                 ...item, name: "77"
+        //             }
+        //         }
+        //         return item
+        //     }))
+        // }
+    }, [list])
 
     // производим поиск на сервере
     const setChangesSearch = async (search) => {
@@ -41,6 +56,7 @@ const Search = observer((props) => {
 
         searchValue({ value: search, page: productStore.page, limit: productStore.limit })
             .then(data => {
+                // console.log(data.rows)
                 setList(data.rows)
                 setLoading(false)
             })        
@@ -150,6 +166,15 @@ const Search = observer((props) => {
                                 >
                                     <img 
                                         className="SearchListItemImg" 
+                                        src={i.category && i.category.category_info && i.category.category_info.image 
+                                            && Array.isArray(JSON.parse(i.category.category_info.image).files) 
+                                            ? API_URL + JSON.parse(i.category.category_info.image).path + JSON.parse(i.category.category_info.image).files[0]
+                                            : API_URL + "unknown.jpg"
+                                        } 
+                                        alt={i.name}
+                                    />
+                                    {/* <img 
+                                        className="SearchListItemImg" 
                                         src={Array.isArray(i.img) && i.img[0]?.big !== undefined
                                             ? API_URL + i.img[0].small
                                             : typeof(i.img) === "string" 
@@ -159,7 +184,7 @@ const Search = observer((props) => {
                                                 : API_URL + "unknown.jpg"
                                         } 
                                         alt={i.name}
-                                    />
+                                    /> */}
                                     <div
                                         className="SearchListItemBody"
                                     >

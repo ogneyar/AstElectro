@@ -1,11 +1,18 @@
 
-const { Product } = require('../../models/models')
+const { Product, Category, CategoryInfo } = require('../../models/models')
 
 
 const find = async (action, text) => {
     
     let products = await Product.findAll({
-        where: { have: 1 }
+        where: { have: 1 },
+        include: [ 
+            { 
+                model: Category, 
+                as: 'category', 
+                include : [{ model: CategoryInfo }] 
+            }
+        ]
     })
 
     let response = []
@@ -65,6 +72,19 @@ const find = async (action, text) => {
             return false
         })
     }
+
+    // if (response && response[0] !== undefined) {
+    //     response = response.map(async item => {
+    //         let info = await CategoryInfo.findOne({
+    //             where: {
+    //                 id: item.category.categoryInfoId
+    //             }
+    //         })
+    //         return {
+    //             ...item.dataValues, info: info.dataValues
+    //         }
+    //     })
+    // }
 
     return { count: response.length, rows: response }
 }
