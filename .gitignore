@@ -78,5 +78,7 @@ static/feed
 
 # так надо
 client/package.json
-client/rr
-client/rs
+rr
+*/rr
+rs
+*/rs
