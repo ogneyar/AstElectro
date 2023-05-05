@@ -76,3 +76,5 @@ db.js
 static/feed
 */static/feed
 
+# так надо
+client/package.json
