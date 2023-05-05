@@ -4,8 +4,9 @@
   "description": "server ast",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon server_ast.js",
-    "old": "nodemon --max-http-header-size=16384 server_ast.js"
+    "prod": "node server.js",
+    "dev": "nodemon server.js",
+    "old": "nodemon --max-http-header-size=16384 server.js"
   },
   "keywords": [],
   "author": "",
