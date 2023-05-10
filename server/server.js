@@ -20,7 +20,8 @@ const CORS_URL_SECURE = process.env.CORS_URL_SECURE || "https://astelectro.ru"
 
 let whitelist = [
     CORS_URL, CORS_URL_SECURE, 
-	'http://localhost:3000', 'http://www.localhost:3000',
+	'http://localhost:3000', 'https://localhost:3000',
+	'http://89.108.64.18:3000', 'https://89.108.64.18:3000',
     'http://www.astelectro.ru', 'https://www.astelectro.ru'
 ]
 let corsOptionsDelegate = function (req, callback) {
