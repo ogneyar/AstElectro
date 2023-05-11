@@ -1,3 +1,4 @@
+//
 import React, { useEffect, useState, useContext } from 'react'
 import { Card, Container, Image, Row } from 'react-bootstrap'
 import { useParams, useHistory } from 'react-router-dom'
@@ -6,12 +7,9 @@ import HtmlReactParser from 'html-react-parser'
 
 import { fetchOneProduct, fetchOneProductOnUrl } from '../../http/productAPI'
 import { fetchCategoryById } from '../../http/categoryAPI'
-import { URL, API_URL } from '../../utils/consts'
+import { API_URL } from '../../utils/consts'
 import Error from '../error/ErrorPage'
 import Loading from '../../components/Loading'
-// import ButtonBuy from '../../components/cart/ButtonBuy'
-// import Rating from '../../components/rating/Rating'
-// import detailDataLayer from '../../service/dataLayer/detail'
 import RequestPrice from '../../components/cart/RequestPrice'
 import priceFormater from '../../utils/priceFormater'
 
@@ -59,7 +57,6 @@ const ProductPage =  observer((props) => {
     const [categoryImages, setCategoryImages] = useState(null)
     const [description, setDescription] = useState(null)
 
-    // const [light, setLight] = useState(true)
 
     const alertError = (err) => {
         if (typeof(err) === "string") alert(err)
@@ -71,7 +68,6 @@ const ProductPage =  observer((props) => {
             fetchOneProduct(id)
                 .then(data => {
                     if (!data?.id) {
-                        // history.push("/error")
                         window.location.href = "/error"
                     }else {
                         setProduct(data)
@@ -101,12 +97,12 @@ const ProductPage =  observer((props) => {
         }else if (product.img === "in category") {
             fetchCategoryById(product.categoryId)
                 .then(data => {
-                    // console.log(data);
                     let info = data.info
                     let image = JSON.parse(info.image)
                     setCategoryImages(image)
-                    setImage(API_URL + image.path + image.files[0])
-                    setDescription(info.description)
+                    setImage(API_URL + image.path + image.files[0])                    
+                    if (info.description.replace(`<div class="description">`,"").replace(`</div>`,"").trim())
+                        setDescription(info.description)
                 })
         }
     },[product.img, product.brandId])
@@ -115,8 +111,6 @@ const ProductPage =  observer((props) => {
         if (image !== API_URL + "unknown.jpg") {
             const img = document.createElement('img')
             img.onload = e => {
-                // setPropotionX(Math.round(img.width / widthHeightInt - 1))
-                // setPropotionY(Math.round(img.height / widthHeightInt - 1))
                 setPropotionX(img.width / widthHeightInt - 1)
                 setPropotionY(img.height / widthHeightInt - 1)
             }
@@ -233,7 +227,6 @@ const ProductPage =  observer((props) => {
                 </div>
                 <div md={4}>
                     <Row className="ProductRating">
-                        {/* <Rating product={product} rating={ratingStore.rate} /> */}
                     </Row>
                 </div>
                 <div md={4} className="ProductColCard">
@@ -265,15 +258,10 @@ const ProductPage =  observer((props) => {
                                 <RequestPrice
                                     product={product}
                                     action="Заказ"
+                                    // notClose
                                 >
                                     Заказать товар
                                 </RequestPrice>
-                                // <ButtonBuy 
-                                //     className="ProductCardButtonBuy" 
-                                //     product={product}
-                                // >
-                                //     Добавить в корзину
-                                // </ButtonBuy>
                             }
                         </div>
                     </Card>
@@ -297,16 +285,6 @@ const ProductPage =  observer((props) => {
                             ?
                                 HtmlReactParser(info?.body)
                             : 
-                                // info?.body.includes(";") 
-                                // ? HtmlReactParser(info?.body.split(";").map((i, idx) => {
-                                //     let jsx = ""
-                                //     if (idx === 0) jsx += `<tbody><tr><td>${i}</td>`
-                                //     else if ((idx+1) % 2 === 0) jsx += `<td>${i}</td></tr>` // если чётный элемент
-                                //     else jsx += `<tr><td>${i}</td>` // если не чётный элемент
-                                //     if ((idx+1) === info?.body.split(";").length) jsx += `</tbody>`
-                                //     return jsx
-                                // }).join(""))
-                                // : 
                                 typeof(info?.body) === "string" 
                                 ? 
                                 <tbody>

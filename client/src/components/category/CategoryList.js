@@ -5,8 +5,6 @@ import { useHistory } from 'react-router-dom'
 import parseHTML from 'html-react-parser'
 import { Image } from 'react-bootstrap'
 
-// import ContextMenu from '../myBootstrap/context/ContextMenu'
-// import Pagination from '../pagination/Pagination'
 import CategoryItem from './CategoryItem'
 import Loading from '../Loading'
 
@@ -22,11 +20,7 @@ const CategoryList = observer((props) => {
 
     const history = useHistory()
 
-    const { 
-        // productStore, 
-        // brandStore, 
-        categoryStore
-    } = useContext(Context)
+    const { categoryStore } = useContext(Context)
 
     const [ info, setInfo ] = useState(null)
 
@@ -51,7 +45,6 @@ const CategoryList = observer((props) => {
         )
     const [widthHeight] = useState(widthHeightInt + "px")
 
-    // const [image, setImage] = useState(API_URL + "unknown.jpg")
     const [image, setImage] = useState(undefined)
     
     useEffect(() => {
@@ -60,15 +53,6 @@ const CategoryList = observer((props) => {
             getCategoryInfoById(isProducts.categoryInfoId)
             .then(data => {
                 let img = data.image ? JSON.parse(data.image) : null
-                // console.log("categoryInfo.image.path: ", data)
-                // if (img) img = {
-                //     ...img, 
-                //     path: img.path[img.path.length - 1] !== "/" 
-                //     ? 
-                //         img.path = img.path + "/" 
-                //     :
-                //         img.path
-                // }
                 let response = {
                     ...data, 
                     characteristics: JSON.parse(data.characteristics),
@@ -81,14 +65,10 @@ const CategoryList = observer((props) => {
             getProducts({categoryId: props.id})
             .then(data => {
                 setProducts(data)
-                // console.log(data);
             })
         }
     }, [ isProducts ])
 
-     
-
-    // const [ visibleContextMenu, setVisibleContextMenu ] = useState(null)
     
     useEffect(() => {
         if ( ! props?.loading && categoryStore.categories.length  ) { // если уже подгружены категории
@@ -97,15 +77,15 @@ const CategoryList = observer((props) => {
                 if (item.sub_category_id !== props.id || item.id === 1) return false
                 return true
             }))
-            // setInfo(categoryStore.categories)
-            // alert("alert")
         }        
     }, [  props?.loading, categoryStore.categories, history.location.pathname, props?.id ])
 
 
     if (props?.loading) return <Loading variant="warning" text="categoryList_props" />
     if (info === null) return <Loading variant="success" text="categoryList_info" />
-    if (isProducts !== null && categoryInfo === null) return <Loading variant="primary" text="categoryList_products" />
+    if (isProducts !== null && categoryInfo === null && !isProducts.name.includes("ZKabel")) {
+        return <Loading variant="primary" text="categoryList_products" />
+    }
 
 
     return (
@@ -115,14 +95,11 @@ const CategoryList = observer((props) => {
                 <h2>{categoryInfo.title}</h2>
             }
 
-            {/* <Pagination /> */}
-
             <div className='CategoryList'>
 
                 {info && Array.isArray(info) && info[0] !== undefined
                 ?
                     info.map(category => {
-                        // if (category.sub_category_id !== props.id || category.id === 1) return null
                         return (
                             <CategoryItem 
                                 key={category.id} 
@@ -131,9 +108,10 @@ const CategoryList = observer((props) => {
                         )
                     })
                 :
-                    isProducts !== null //&& products !== null
+                    isProducts !== null
                     ?
                     <div className="CategoryList_main">
+                        {categoryInfo && 
                         <div className="CategoryList_main_table">
                             <h4>Технические характеристики</h4>
                             <table>
@@ -152,31 +130,17 @@ const CategoryList = observer((props) => {
                                 })}
                             </tbody>
                             </table>
-                        </div>
+                        </div>}
 
                         <div className="CategoryList_main_images">
                             
                             {image && <div 
                                 className="CategoryList_main_images_big"
                                 style={{background:`url(${image}) 50% 50% / ${widthHeight} auto no-repeat`,width:widthHeight,height:widthHeight}} 
-                                // onMouseOver={(e) => {
-                                //     if (propotionX > 0 && propotionY > 0) e.target.style.cursor = "zoom-in"
-                                //     else e.target.style.cursor = "default"
-                                // }}
-                                // onMouseMove={e => {
-                                //     if (propotionX > 0 && propotionY > 0) {
-                                //         e.target.style.background = `url(${image}) -${(e.pageX - e.target.offsetLeft)*propotionX}px -${(e.pageY - e.target.offsetTop)*propotionY}px no-repeat`
-                                //     }
-                                // }}
-                                // onMouseLeave={(e) => {
-                                //     e.target.style.background = `url(${image}) 50% 50% / ${widthHeight} auto no-repeat`
-                                // }}
                             />}
 
                             <div className="CategoryList_main_images_small">
-                                {/* {console.log("categoryInfo.image.path: ", categoryInfo.image)} */}
                                 {categoryInfo && categoryInfo.image && categoryInfo.image.files.map((item,idx) => {
-                                    // if (idx === 0 && image === API_URL + "unknown.jpg") setImage(API_URL + categoryInfo.image.path + item)
                                     return (
                                         <Image 
                                             key={idx + "blablobla"}
@@ -208,12 +172,8 @@ const CategoryList = observer((props) => {
 
                                             (inf.name !== "Комплект заземления") &&
                                             (inf.name !== "Наличие защитного слоя в кабеле") &&
-                                            // (inf.name !== "Длина разделки") &&
 
-                                            // (inf.name !== "Диапазон наружного диаметра D1, мм") &&
                                             (inf.name !== "Общая длина L, мм") &&
-
-                                            // (inf.name !== "Количество наконечников") &&
                                             
                                             ( ! inf.name.includes("Количество") ) &&
                                             
@@ -228,13 +188,10 @@ const CategoryList = observer((props) => {
 
                                             ( ! inf.name.includes("Условный проход") ) &&
                                             ( ! inf.name.includes("Наружный диаметр") ) &&
-                                            // ( ! inf.name.includes("Вн. диаметр") ) &&
                                             
                                             (inf.name !== "Условный размер трубы мм") &&
-                                            // (inf.name !== "Диапазон наружного диаметра трубы, D мм") &&
                                             (inf.name !== "Совместимый вводной патрубок") &&
                                             
-                                            // ( ! inf.name.includes("Диапазон внешнего диаметра") ) &&
                                             ( ! inf.name.includes("Диапазон") ) &&
                                             ( ! inf.name.includes("Минимальный внутренний диаметр") ) &&
                                             ( ! inf.name.includes("Установочная длина") ) &&
@@ -245,7 +202,6 @@ const CategoryList = observer((props) => {
 
                                             ( ! inf.name.includes("Номинальное сечение") ) &&
 
-                                            // ( ! inf.name.includes("Мин. радиус изгиба") ) &&
                                             ( ! inf.name.includes("Муфта") ) &&
                                             ( ! inf.name.includes("Шланг электромонтажный") ) &&
 
@@ -288,12 +244,8 @@ const CategoryList = observer((props) => {
                                             
                                             (inf.name !== "Комплект заземления") &&
                                             (inf.name !== "Наличие защитного слоя в кабеле") &&
-                                            // (inf.name !== "Длина разделки") &&
                                             
-                                            // (inf.name !== "Диапазон наружного диаметра D1, мм") &&
                                             (inf.name !== "Общая длина L, мм") &&
-
-                                            // (inf.name !== "Количество наконечников") &&
 
                                             ( ! inf.name.includes("Количество") ) &&
 
@@ -308,13 +260,10 @@ const CategoryList = observer((props) => {
                                             
                                             ( ! inf.name.includes("Условный проход") ) &&
                                             ( ! inf.name.includes("Наружный диаметр") ) &&
-                                            // ( ! inf.name.includes("Вн. диаметр") ) &&
 
                                             (inf.name !== "Условный размер трубы мм") &&
-                                            // (inf.name !== "Диапазон наружного диаметра трубы, D мм") &&
                                             (inf.name !== "Совместимый вводной патрубок") &&
 
-                                            // ( ! inf.name.includes("Диапазон внешнего диаметра") ) &&
                                             ( ! inf.name.includes("Диапазон") ) &&
                                             ( ! inf.name.includes("Минимальный внутренний диаметр") ) &&
                                             ( ! inf.name.includes("Установочная длина") ) &&
@@ -325,7 +274,6 @@ const CategoryList = observer((props) => {
 
                                             ( ! inf.name.includes("Номинальное сечение") ) &&
                                             
-                                            // ( ! inf.name.includes("Мин. радиус изгиба") ) &&
                                             ( ! inf.name.includes("Муфта") ) &&
                                             ( ! inf.name.includes("Шланг электромонтажный") ) &&
                                             
@@ -361,7 +309,7 @@ const CategoryList = observer((props) => {
 
                         <br />
 
-                        {parseHTML(categoryInfo.description)}
+                        {categoryInfo && parseHTML(categoryInfo.description)}
                         <br />
                     </div>
                     :
@@ -374,8 +322,6 @@ const CategoryList = observer((props) => {
                 
 
             </div>
-            
-            {/* {info[0] !== undefined && <Pagination />} */}
             
         </>
     )

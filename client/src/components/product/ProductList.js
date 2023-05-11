@@ -2,9 +2,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 
-import ContextMenu from '../myBootstrap/context/ContextMenu'
-import Pagination from '../pagination/Pagination'
-import ProductItem from './ProductItem'
 import Loading from '../Loading'
 
 import { Context } from '../..'
@@ -37,21 +34,6 @@ const ProductList = observer((props) => {
         
     }, [ info ])
 
-    const onClickOpenOnNewPage = () => {
-        let productClick
-        if (visibleContextMenu && visibleContextMenu?.product) {
-            productClick = visibleContextMenu.product
-            let brandName = "milwaukee" // дефолтное состояние
-            brandStore.brands.forEach(i => {
-                if (productClick.brandId === i.id) {
-                    brandName = i.name
-                }
-            })
-            let url = brandName.toLowerCase() + '/' + productClick.url
-            window.open(url)
-            setVisibleContextMenu(null)
-        }
-    }
 
     if (props?.loading) return <Loading variant="warning" />
     if (info === null) return <Loading variant="success" />
@@ -59,22 +41,14 @@ const ProductList = observer((props) => {
 
     return (
         <>
-            {/* <Pagination /> */}
 
             <div className='ProductList'>
 
                 {info && Array.isArray(info) && info[0] !== undefined
                 ?
-                    // info[0].article
                     info.map(product => {
                         return (
                             <div></div>
-                            // <ProductItem 
-                            //     key={product.id} 
-                            //     product={product}
-                            //     // visibleContextMenu={visibleContextMenu}
-                            //     // setVisibleContextMenu={setVisibleContextMenu}
-                            // />
                         )
                     })
                 :
@@ -83,20 +57,7 @@ const ProductList = observer((props) => {
                     </div>
                 }
                 
-                {/* <ContextMenu 
-                    visible={visibleContextMenu}
-                >
-                    <div 
-                        onClick={onClickOpenOnNewPage}
-                        className="ProductList_div_OpenOnNewPage"
-                    >
-                        Открыть в новой вкладке 
-                    </div>
-                </ContextMenu> */}
-
             </div>
-            
-            {/* {info[0] !== undefined && <Pagination />} */}
             
         </>
     )

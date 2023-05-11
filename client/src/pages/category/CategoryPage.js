@@ -4,13 +4,9 @@ import { Container } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
 
 import CategoryBar from '../../components/category/CategoryBar'
-// import BrandBar from '../../components/brand/BrandBar'
-// import ProductList from '../../components/product/ProductList'
-// import Filter from '../../components/filter/Filter'
 import Loading from '../../components/Loading'
 import { Alert } from '../../components/myBootstrap'
 import { fetchAllCategories } from '../../http/categoryAPI'
-// import { fetchArrayProductsByCategory } from '../../http/productAPI'
 
 import { Context } from '../..'
 import './CategoryPage.css'
@@ -19,15 +15,9 @@ import CategoryList from '../../components/category/CategoryList'
 
 const CategoryPage = observer((props) => { 
 
-    const { 
-        // productStore, 
-        categoryStore, 
-        // brandStore 
-    } = useContext(Context)
+    const { categoryStore } = useContext(Context)
 
     const [ loadingCategory, setLoadingCategory ] = useState(true)
-    // const [ loadingBrand, setLoadingBrand ] = useState(true)
-    // const [ loadingProduct, setLoadingProduct ] = useState(true)
     
     const [ nameCategory, setNameCategory ] = useState("")
 
@@ -40,23 +30,18 @@ const CategoryPage = observer((props) => {
         else setMessageAlert(text)
         setAlertVisible(true)
     }
-    
-    // useEffect(() => {
-    //     if (brandStore.brands.length) {
-    //         setLoadingBrand(false)
-    //     }
-    // },[brandStore])
-    
+        
 
     useEffect(() => {
-        // if (categoryStore.categories.length) {
-        //     setLoadingCategory(false)
-        //     setNameCategory(props.name) // от этого стейта зависит юзэффект ниже, поэтому его обновляем после загрузки категорий
-        // }else 
         fetchAllCategories()
             .then(
                 data => {
-                    categoryStore.setCategories(data)//.map(item => {return {...item, open: false}}))
+                    categoryStore.setCategories(data.filter((item,idx) => {
+                        // if (idx === 1) console.log(item)
+                        if (item.isProduct && !item.categoryInfoId) return false
+                        if (item.name.includes("ZKabel")) return false
+                        return true
+                    }))
                     if (categoryStore.selectedCategory.id !== undefined) {// если есть выбраная категория
                         categoryStore.setSelectedCategory({}) // то её нужно обнулить
                     }
@@ -116,29 +101,8 @@ const CategoryPage = observer((props) => {
         }
         
     // eslint-disable-next-line
-    },[ nameCategory, /*categoryStore.categories, categoryStore.selectedCategory*/ ])
+    },[ nameCategory ])
 
-    
-    // useEffect(() => {
-    //     if (props.name) {
-    //         setLoadingProduct(true)
-    //         fetchArrayProductsByCategory({ 
-    //             category: props.name,
-    //             limit: productStore.limit, 
-    //             mix_all: productStore.mixAll, 
-    //             mix_no_img: productStore.mixNoImg, 
-    //             mix_promo: productStore.mixPromo, 
-    //             page: productStore.page 
-    //         })
-    //             .then(data => {
-    //                 productStore.setProducts(data.rows)
-    //                 productStore.setTotalCount(data.count)
-    //                 setLoadingProduct(false)
-    //             }, error => getError(`Не удалось загрузить массив товаров!`, error))
-    //             .catch(error => getError(`Не удалось загрузить массив товаров!`, error))
-    //     }
-    // // eslint-disable-next-line 
-    // },[ props.name, productStore.page ])
 
 
     if (alertVisible) return <Alert show={alertVisible} onHide={() => setAlertVisible(false)} message={messageAlert} />
@@ -149,17 +113,12 @@ const CategoryPage = observer((props) => {
         <Container
             className="CategoryPage Mobile"
         >
-            {/* <h2>Страница категории</h2> */}
             <div className="CategoryPage_Row">
                 <div className="CategoryPage_ColCategory">
-                    {/* {loadingCategory || categoryStore.loading ? <Loading variant="warning" /> : <CategoryBar page="categoryPage" />} */}
                     <CategoryBar page="categoryPage" />
                 </div>
                 <div className="CategoryPage_ColContent">
-                    {/* {loadingBrand ? <Loading variant="warning" /> : <BrandBar page={"categoryPage"} />} */}
-                    {/* <Filter /> */}
                     <div className="CategoryPage_ProductList">
-                        {/* <ProductList loading={loadingProduct} setLoading={setLoadingProduct} categoryUrl={true} /> */}
                         <CategoryList id={categoryStore.selectedCategory.id} />
                     </div>                    
                 </div>

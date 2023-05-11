@@ -29,7 +29,7 @@ const Notification = (props) => {
             }}
             size={props?.size || null}
         >
-            <Modal.Header closeButton>
+            <Modal.Header closeButton={props.notClose ? false : true}>
                 <Modal.Title id="contained-modal-title-vcenter">
                     {props?.title || "Уведомление"}
                     

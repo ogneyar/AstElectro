@@ -51,7 +51,12 @@ const ShopPage = observer(() => {
             fetchAllCategories()
                 .then(
                     data => {
-                        categoryStore.setCategories(data)
+                        categoryStore.setCategories(data.filter((item,idx) => {
+                            // if (idx === 1) console.log(item)
+                            if (item.isProduct && !item.categoryInfoId) return false
+                            if (item.name.includes("ZKabel")) return false
+                            return true
+                        }))
                         setLoadingCategory(false)
                         // if (categoryStore.selectedCategory.id !== undefined) {// если есть выбраная категория
                             categoryStore.setSelectedCategory({id: 0, name: "Все категории", is_product: true}) // то её нужно обнулить
@@ -103,7 +108,8 @@ const ShopPage = observer(() => {
 
     if (alertVisible) return <Alert show={alertVisible} onHide={() => setAlertVisible(false)} message={messageAlert} />
 
-    /*if (name && name !== "shop")*/ return <CategoryPage name={name} /> 
+    /*if (name && name !== "shop")*/ 
+        return <CategoryPage name={name} /> 
 
     if (loadingCategory || categoryStore.loading) return <Loading variant="warning" text="shopPage" />
 

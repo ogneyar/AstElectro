@@ -13,7 +13,7 @@ import './RequestPrice.css'
 import Loading from '../Loading'
 import Phone from '../helpers/phone/Phone'
 import Email from '../helpers/email/Email'
-import { sendRequestPrice } from '../../http/mailAPI'
+import { sendRequestPrice, sendRequestProducts } from '../../http/mailAPI'
 
 
 
@@ -42,6 +42,8 @@ const RequestPrice = (props) => {
     const [ name, setName ] = useState("")
     const [ phone, setPhone ] = useState("")
     const [ email, setEmail ] = useState("")
+
+    const [ quantity ] = useState(1)
     
 
     const history = useHistory()
@@ -59,23 +61,32 @@ const RequestPrice = (props) => {
             window.alert("Необходимо ввести почту вида email@mail.ru.")
         }else {
             setLoading(true)
-            // let phoneNumber = "+7" + phone.replace(/\D/g, "")
-            // console.log(phoneNumber)
 
-            await sendRequestPrice({
-                url: URL + brand.toLowerCase() + "/" + url,
-                name,
-                phone,
-                email,
-                nameProduct,
-                article,
-                brand
-            })
+            if (props.action === "Заказ") {
+                await sendRequestProducts({
+                    url: URL + brand.toLowerCase() + "/" + url,
+                    name,
+                    phone,
+                    email,
+                    nameProduct,
+                    article,
+                    price,
+                    quantity
+                })
+            }else {
+                await sendRequestPrice({
+                    url: URL + brand.toLowerCase() + "/" + url,
+                    name,
+                    phone,
+                    email,
+                    nameProduct,
+                    article,
+                    brand
+                })
+            }
 
-            // setTimeout(()=>{
-                setLoading(false)
-                setSuccess(true)
-            // },[1000])
+            setLoading(false)
+            setSuccess(true)
         }
     } 
 
@@ -103,11 +114,16 @@ const RequestPrice = (props) => {
                 setPhone("")
                 setEmail("")
                 setNotificationVisible(false)
+                if (success) {
+                    history.push(SHOP_ROUTE)
+                    scrollUp(200)
+                }
             }}
             time="600000" // в милисекундах
             size="lg"
             title={props.action === "Заказ" ? "Заказ товара!" : "Запрос цены товара!"}
             titleMore={success ? "Успех" : loading ? "..." : "Укажите своё имя, номер и почту."}
+            // notClose={props?.notClose && success ? true : false}
         >
             {loading ? <Loading /> 
             :
@@ -122,8 +138,8 @@ const RequestPrice = (props) => {
                     onClick={() => {
                         setSuccess(false)
                         setNotificationVisible(false)
-                        // history.push(SHOP_ROUTE)
-                        // scrollUp(200)
+                        history.push(SHOP_ROUTE)
+                        scrollUp(200)
                     }}
                 >
                     Хорошо
@@ -158,8 +174,14 @@ const RequestPrice = (props) => {
                             <div
                                 className="RequestPriceNotification_Cart_product_brand"
                             >
-                                бренд: {brand}
+                                {props.action === "Заказ" 
+                                ? 
+                                    "количество: " + quantity
+                                : 
+                                    "бренд: " + brand
+                                }                                
                             </div>
+                            <br />
                         </div>
                     </div>
                 </div>
