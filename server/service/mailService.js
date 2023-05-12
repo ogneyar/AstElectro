@@ -5,10 +5,10 @@ class MailService {
     constructor() {
         this.transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT_SECURE,
-            // port: process.env.SMTP_PORT,
+            // port: process.env.SMTP_PORT_SECURE,
+            port: process.env.SMTP_PORT,
             // secure: false,
-            secure: true,
+            // secure: true,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
@@ -99,45 +99,45 @@ class MailService {
     
     async sendRequestProducts(to, data) { // to - куда отправлять email, data - { name, phone, email, article, nameProduct, url }
         try {
-            // verify connection configuration
-            this.transporter.verify(function (error, success) {
-                if (error) {
-                console.log(error);
-                } else {
-                console.log("Server is ready to take our messages");
-                }
-            });
-            // let response = await this.transporter.sendMail({
-            //     from: process.env.SMTP_USER,
-            //     to,
-            //     subject: 'Запрос товара на ' + process.env.CORS_URL_SECURE,
-            //     text: '',
-            //     html:
-            //         `
-            //         <div>
-            //             <h1>Клиент запросил товар</h1>
-            //             <hr />
-            //             <a href="${data.url}">${data.url}</a>
-            //             <br /><br />
-            //             <div>
-            //                 <p>Наименование - ${data.nameProduct}</p>
-            //                 <p>Артикул - ${data.article}</p>
-            //                 <p>В упаковке - ${data.multiplier} шт.</p>
-            //                 <p>Цена - ${data.price} р.</p>
-            //                 <p>Количество - ${data.quantity} шт.</p>
-            //                 <p>Итого - ${data.quantity * Number(data.price)} р.</p>
-            //             </div>
-            //             <hr />
-            //             <div>
-            //                 <p>Имя клиента - ${data.name}</p>
-            //                 <p>Номер телефона - ${data.phone}</p>
-            //                 <p>Почта - ${data.email ? data.email : "не указана"}</p>
-            //             </div>
-            //         </div>
-            //         `
-            // })
-            // return response
-            return "response"
+            // // verify connection configuration
+            // this.transporter.verify(function (error, success) {
+            //     if (error) {
+            //         console.log(error);
+            //     } else {
+            //         console.log("Server is ready to take our messages");
+            //     }
+            // });
+            let response = await this.transporter.sendMail({
+                from: process.env.SMTP_USER,
+                to,
+                subject: 'Запрос товара на ' + process.env.CORS_URL_SECURE,
+                text: '',
+                html:
+                    `
+                    <div>
+                        <h1>Клиент запросил товар</h1>
+                        <hr />
+                        <a href="${data.url}">${data.url}</a>
+                        <br /><br />
+                        <div>
+                            <p>Наименование - ${data.nameProduct}</p>
+                            <p>Артикул - ${data.article}</p>
+                            <p>В упаковке - ${data.multiplier} шт.</p>
+                            <p>Цена - ${data.price} р.</p>
+                            <p>Количество - ${data.quantity} шт.</p>
+                            <p>Итого - ${data.quantity * Number(data.price)} р.</p>
+                        </div>
+                        <hr />
+                        <div>
+                            <p>Имя клиента - ${data.name}</p>
+                            <p>Номер телефона - ${data.phone}</p>
+                            <p>Почта - ${data.email ? data.email : "не указана"}</p>
+                        </div>
+                    </div>
+                    `
+            })
+            return response
+            // return "response"
         }catch(e) {
             return e
         }
