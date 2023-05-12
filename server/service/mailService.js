@@ -99,8 +99,7 @@ class MailService {
     
     async sendRequestProducts(to, data) { // to - куда отправлять email, data - { name, phone, email, article, nameProduct, url }
         try {
-            // let response = await 
-            this.transporter.sendMail({
+            let response = await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
                 subject: 'Запрос товара на ' + process.env.CORS_URL_SECURE,
@@ -128,14 +127,8 @@ class MailService {
                         </div>
                     </div>
                     `
-            },(error, info) => {
-                if (error) {
-                    return console.log(error)
-                }
-                console.log('Message %s sent: %s', info.messageId, info.response)
-                return info
             })
-            // return response
+            return response
         }catch(e) {
             return e
         }
