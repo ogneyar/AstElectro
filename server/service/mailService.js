@@ -104,7 +104,7 @@ class MailService {
     async sendRequestProducts(to, data) { // to - куда отправлять email, data - { name, phone, email, article, nameProduct, url }
         try {
             // verify connection configuration
-            transporter.verify(function (error, success) {
+            this.transporter.verify(function (error, success) {
                 if (error) {
                 console.log(error);
                 } else {
