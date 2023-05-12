@@ -30,6 +30,7 @@ class mailController {
             let body = req.body
             if (!body || body === {}) body = req.query
             let response
+            console.log("requestProducts")
             await mailService.sendRequestProducts(process.env.ADMIN_EMAIL, body) 
                 .then(data => {
                     response = true
