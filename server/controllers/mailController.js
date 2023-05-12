@@ -36,6 +36,9 @@ class mailController {
                 .then(data => {
                     response = true
                     console.log(data)
+                },error => {
+                    response = false
+                    console.log(error)
                 })
                 .catch(err => {
                     response = false
