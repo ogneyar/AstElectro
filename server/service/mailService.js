@@ -5,10 +5,10 @@ class MailService {
     constructor() {
         this.transporter = nodemailer.createTransport({
             host: process.env.SMTP_HOST,
-            // port: process.env.SMTP_PORT_SECURE,
-            port: process.env.SMTP_PORT,
-            secure: false,
-            // secure: true,
+            port: process.env.SMTP_PORT_SECURE,
+            // port: process.env.SMTP_PORT,
+            // secure: false,
+            secure: true,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
@@ -114,10 +114,6 @@ class MailService {
                         <div>
                             <p>Наименование - ${data.nameProduct}</p>
                             <p>Артикул - ${data.article}</p>
-                            <p>В упаковке - ${data.multiplier} шт.</p>
-                            <p>Цена - ${data.price} р.</p>
-                            <p>Количество - ${data.quantity} шт.</p>
-                            <p>Итого - ${data.quantity * data.price} р.</p>
                         </div>
                         <hr />
                         <div>
