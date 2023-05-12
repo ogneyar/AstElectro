@@ -12,7 +12,11 @@ class MailService {
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
-            }
+            },
+            tls: {
+              // do not fail on invalid certs
+              rejectUnauthorized: false,
+            },
         })
     }
 
