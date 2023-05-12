@@ -117,7 +117,7 @@ class MailService {
                             <p>В упаковке - ${data.multiplier} шт.</p>
                             <p>Цена - ${data.price} р.</p>
                             <p>Количество - ${data.quantity} шт.</p>
-                            <p>Итого - ${data.quantity * data.price} р.</p>
+                            <p>Итого - ${data.quantity * Number(data.price)} р.</p>
                         </div>
                         <hr />
                         <div>
