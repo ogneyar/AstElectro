@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { useHistory } from 'react-router'
 
@@ -14,6 +14,7 @@ import Loading from '../Loading'
 import Phone from '../helpers/phone/Phone'
 import Email from '../helpers/email/Email'
 import { sendRequestPrice, sendRequestProducts } from '../../http/mailAPI'
+import { fetchCategoryById } from '../../http/categoryAPI'
 
 
 
@@ -26,11 +27,28 @@ const RequestPrice = (props) => {
     const [ loading, setLoading ] = useState(false)
     const [ success, setSuccess ] = useState(false)
 
-    const [ image ] = useState(API_URL + props?.product?.img[0]?.big)
+    // const [ image ] = useState(props?.image)
+    
+    const [image, setImage] = useState(API_URL + "unknown.jpg")
 
-    const [ url ] = useState(props?.product?.url)
-    const [ nameProduct ] = useState(props?.product?.name)
-    const [ article ] = useState(props?.product?.article)
+    // useEffect(() => {
+    //     console.log(props?.image)
+    // },[])
+    
+    useEffect(() => {
+        if (props.product.img === "in category") {
+            fetchCategoryById(props.product.categoryId)
+                .then(data => {
+                    let info = data.info
+                    let image = JSON.parse(info.image)
+                    setImage(API_URL + image.path + image.files[0]) 
+                })
+        }
+    },[props.product.img])
+
+    const [ url ] = useState(props?.product.url)
+    const [ nameProduct ] = useState(props?.product.name)
+    const [ article ] = useState(props?.product.article)
     const [ brand ] = useState(() => {
         let response
         context.brandStore.brands.forEach(i => {
@@ -43,8 +61,19 @@ const RequestPrice = (props) => {
     const [ phone, setPhone ] = useState("")
     const [ email, setEmail ] = useState("")
 
-    const [ quantity ] = useState(1)
+    const [ quantity, setQuantity ] = useState(1)
+    const [ price ] = useState(props?.product.price)
     
+    const [ multiplier, setMultiplier ] = useState(props.multiplier)
+
+    useEffect(() => {
+        if (props.product?.info && Array.isArray(props.product.info) && props.product.info[0] !== undefined) {
+            let data = props.product.info.filter(item => item.title === "multiplier")[0].body
+            // console.log(data)
+            setMultiplier(data)
+            setQuantity(data)
+        }
+    },[props.product?.info])
 
     const history = useHistory()
 
@@ -71,7 +100,9 @@ const RequestPrice = (props) => {
                     nameProduct,
                     article,
                     price,
-                    quantity
+                    quantity,
+                    price,
+                    multiplier
                 })
             }else {
                 await sendRequestPrice({
@@ -89,6 +120,19 @@ const RequestPrice = (props) => {
             setSuccess(true)
         }
     } 
+
+    const onChangeQuantity = (value) => {
+        if (/^-?[\d.]+(?:e-?\d+)?$/.test(value)) setQuantity(`${value}`)
+    }
+
+    const onClickButtonPlus = () => {
+        setQuantity(Number(quantity) + Number(multiplier))
+    }
+
+    const onClickButtonMinus = () => {
+        if (Number(quantity) > multiplier)
+            setQuantity(Number(quantity) - Number(multiplier))
+    }
 
 
     return (
@@ -138,8 +182,8 @@ const RequestPrice = (props) => {
                     onClick={() => {
                         setSuccess(false)
                         setNotificationVisible(false)
-                        history.push(SHOP_ROUTE)
-                        scrollUp(200)
+                        // history.push(SHOP_ROUTE)
+                        // scrollUp(200)
                     }}
                 >
                     Хорошо
@@ -147,7 +191,7 @@ const RequestPrice = (props) => {
             </div>
             : // когда запрос ещё не отправлялся
             <div
-                className="RequestPriceNotification"
+                className="RequestPriceNotification noselect"
             >
                 <div
                     className="RequestPriceNotification_Cart"
@@ -155,7 +199,9 @@ const RequestPrice = (props) => {
                     <div
                         className="RequestPriceNotification_Cart_product"
                     >
-                        <div>
+                        <div
+                            className="RequestPriceNotification_Cart_product_image"
+                        >
                             <img src={image} width="200" alt="изображение товара" />
                         </div>
                         <div>
@@ -168,7 +214,7 @@ const RequestPrice = (props) => {
                             <div
                                 className="RequestPriceNotification_Cart_product_article"
                             >
-                                артикул: {article}
+                                Артикул:&nbsp;{article}
                             </div>
                             <br />
                             <div
@@ -176,10 +222,50 @@ const RequestPrice = (props) => {
                             >
                                 {props.action === "Заказ" 
                                 ? 
-                                    "количество: " + quantity
+                                <>
+                                    <div
+                                        className="RequestPriceNotification_Cart_product_quantity"
+                                    >
+                                        Количество в упаковке: {multiplier} шт.
+                                        <br />
+                                        <br />
+                                        Количество:&nbsp;
+                                        
+                                        <span
+                                            className="RequestPriceNotification_Cart_product_quantity_button"
+                                            onClick={onClickButtonMinus}
+                                        >
+                                            -
+                                        </span>
+                                        <span
+                                            className="RequestPriceNotification_Cart_product_quantity_span1"
+                                        >
+                                            {quantity}
+                                        </span>
+                                        <span
+                                            className="RequestPriceNotification_Cart_product_quantity_button"
+                                            onClick={onClickButtonPlus}
+                                        >
+                                            +
+                                        </span>
+                                        {/* <input 
+                                            type="text" 
+                                            value={quantity * multiplier}
+                                            onChange={(e)=>onChangeQuantity(e.target.value)}
+                                        /> */}
+                                    </div>
+                                    <span style={{color: "red"}}>укажите необходимое количество</span>
+                                </>
                                 : 
                                     "бренд: " + brand
                                 }                                
+                            </div>
+                            <br />
+                            <div
+                                className="RequestPriceNotification_Cart_product_article"
+                            >
+                                Цена за ед.:&nbsp;{price}&nbsp;р.<br /><br />
+                                Итого:&nbsp;{price * quantity}&nbsp;р.
                             </div>
                             <br />
                         </div>

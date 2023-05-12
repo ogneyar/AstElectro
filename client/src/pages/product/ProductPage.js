@@ -56,7 +56,15 @@ const ProductPage =  observer((props) => {
 
     const [categoryImages, setCategoryImages] = useState(null)
     const [description, setDescription] = useState(null)
+    
+    const [multiplier, setMultiplier] = useState(1)
 
+    useEffect(() => {
+        if (product?.info && Array.isArray(product.info) && product.info[0] !== undefined) {
+            // console.log(product.info.filter(item => item.title === "multiplier")[0].body)
+            setMultiplier(product.info.filter(item => item.title === "multiplier")[0].body)
+        }
+    },[product?.info])
 
     const alertError = (err) => {
         if (typeof(err) === "string") alert(err)
@@ -174,22 +182,7 @@ const ProductPage =  observer((props) => {
                     <div
                         className="ProductImageDiv" 
                     >
-                        {product.img && Array.isArray(product.img) && product.img[0]?.big !== undefined
-                        ? product.img.map(i => {
-                            return (
-                                <Image 
-                                    key={i.small + new Date()}
-                                    className="ProductImageSmall"
-                                    width={80} 
-                                    onClick={(e) => {
-                                        setImage(API_URL + i.big)
-                                    }}
-                                    src={API_URL + i.small} 
-                                />
-                            )
-                        })
-                        : 
-                        categoryImages && Array.isArray(categoryImages.files)
+                        {categoryImages && Array.isArray(categoryImages.files)
                         ? categoryImages.files.map((item,idx) => {
                             return (
                                 <Image 
@@ -230,6 +223,7 @@ const ProductPage =  observer((props) => {
                     </Row>
                 </div>
                 <div md={4} className="ProductColCard">
+                    цена за единицу товара
                     <Card className="ProductCard">
                         <div
                             className="ProductCard_Price"
@@ -251,6 +245,7 @@ const ProductPage =  observer((props) => {
                             ?
                                 <RequestPrice
                                     product={product}
+                                    // image={image}
                                 >
                                     Запросить цену
                                 </RequestPrice>
@@ -258,6 +253,8 @@ const ProductPage =  observer((props) => {
                                 <RequestPrice
                                     product={product}
                                     action="Заказ"
+                                    multiplier={multiplier}
+                                    // image={image}
                                     // notClose
                                 >
                                     Заказать товар
@@ -265,12 +262,18 @@ const ProductPage =  observer((props) => {
                             }
                         </div>
                     </Card>
+                    в упаковке: {multiplier} шт. 
                 </div>
             </div>
             
-            {product?.info && Array.isArray(product.info) && product.info[0]?.title !== undefined
+            {product?.info && Array.isArray(product.info) && product.info[0] !== undefined
             ?
-                product.info.map((info, index) =>
+                product.info.map((info, index) => {
+                    // if (info.title === "multiplier") {
+                    //     setMultiplier(info.body)
+                    //     return null
+                    // }
+                    return (
                     <div 
                         className="ProductInfo"
                         key={info?.id}
@@ -288,9 +291,9 @@ const ProductPage =  observer((props) => {
                                 typeof(info?.body) === "string" 
                                 ? 
                                 <tbody>
-                                    {JSON.parse(info?.body).map(item  =>  {
+                                    {JSON.parse(info?.body).map((item,idx) =>  {
                                         return  (
-                                            <tr>
+                                            <tr key={idx+"vokak"}>
                                                 <td>
                                                 {item.name}
                                                 </td>
@@ -305,7 +308,7 @@ const ProductPage =  observer((props) => {
                         }
                         </table>    
                         </>
-                        :  null
+                        : null
                         }
 
                         {description &&
@@ -319,7 +322,7 @@ const ProductPage =  observer((props) => {
                         }
                             
                     </div>
-                )
+                )})
             : null}
             
             

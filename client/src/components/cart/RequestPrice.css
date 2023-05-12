@@ -68,3 +68,26 @@
     font-weight: 700;
 }
 
+.RequestPriceNotification_Cart_product_quantity input {
+    width: 50px;
+    /* padding: 0, 10px; */
+    text-align: center;
+    border-radius: 5px;
+}
+
+.RequestPriceNotification_Cart_product_image {
+    padding-right: 20px;
+}
+
+.RequestPriceNotification_Cart_product_quantity_span1,
+.RequestPriceNotification_Cart_product_quantity_button {
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+.RequestPriceNotification_Cart_product_quantity_button {
+    cursor: pointer;
+    background-color: grey;
+    margin: 0 5px;
+}

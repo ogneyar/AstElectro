@@ -211,7 +211,7 @@ class TesterController {
 
     }
 
-
+    
 	// временный роут 
     // п.с. нет ничего более постоянного, чем временное...	
     async temp(req, res, next) {
@@ -257,7 +257,7 @@ class TesterController {
                     })
                 }
             })
-            return res.json("removing images from the description")
+            // return res.json("removing images from the description")
 
             // - убираю из image.path первый символ '/' и добавляю последний
             info.map(async item => {
@@ -444,13 +444,9 @@ class TesterController {
                             where: { id: item.id }
                         })
 
-                    }
-                
+                    }                
 
             })
-            
-
-
 
             return res.json("editImages")
 
@@ -458,6 +454,60 @@ class TesterController {
             return res.json({error:'Ошибка метода editImages! ' + e})
         }
     }
+
+    
+
+    
+    // CATALOG_MULT
+    async addedMult(req, res, next) {
+        try {
+            
+            let products = await Product.findAll()
+            let { data } = await axios.get(process.env.NZETA_API_2_URL + "product/getProduct")
+
+            if ( ! data.error) {
+
+                products.forEach(async product => {
+                    // let product = products[0]
+                    // let product = await Product.findOne({ where: { article } })
+                    let article = product.article // "zeta30506"
+                    let filter = data.result.filter(item => item.PROPERTY_CML2_ARTICLE_VALUE === article)
+                                    
+                    let body
+                    if (filter[0] !== undefined) {
+                        body = filter[0].CATALOG_MULT
+                    }else {
+                        body = 1
+                    }
+                    console.error("article: ", article);
+                    console.log("CATALOG_MULT: ", body);
+                    let response = await ProductInfo.findOne({
+                        where: {
+                            title: "multiplier",
+                            productId: product.id
+                        }
+                    })
+                    if (!response) {
+                        await ProductInfo.create({
+                            title: "multiplier", 
+                            body,
+                            productId: product.id
+                        })
+                    }
+
+                    // return res.json(filter)                    
+                    
+                })                  
+            }
+
+            return res.json("addedMult")
+
+        }catch(e) {
+            return res.json({error:'Ошибка метода addedMult!'})
+        }
+    }
+	
+
 
 }
 

@@ -19,5 +19,7 @@ router.get('/big_desc/:id', testerController.bigDescriptionEdit)
 
 router.get('/temp', testerController.temp)
 
+router.get('/added_mult', testerController.addedMult)
+
 
 module.exports = router
