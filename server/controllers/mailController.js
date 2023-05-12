@@ -33,13 +33,16 @@ class mailController {
             console.log("requestProducts")
             // console.log(body)
             await mailService.sendRequestProducts(process.env.ADMIN_EMAIL, body) 
-                .then(data => {
-                    response = true
-                    console.log(data)
-                },error => {
-                    response = false
-                    console.log(error)
-                })
+                .then(
+                    data => {
+                        response = true
+                        console.log(data)
+                    },
+                    error => {
+                        response = false
+                        console.log(error)
+                    }
+                )
                 .catch(err => {
                     response = false
                     console.log(err)
