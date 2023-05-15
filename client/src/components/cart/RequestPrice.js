@@ -182,8 +182,8 @@ const RequestPrice = (props) => {
                     onClick={() => {
                         setSuccess(false)
                         setNotificationVisible(false)
-                        // history.push(SHOP_ROUTE)
-                        // scrollUp(200)
+                        history.push(SHOP_ROUTE)
+                        scrollUp(200)
                     }}
                 >
                     Хорошо
