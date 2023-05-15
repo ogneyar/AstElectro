@@ -16,6 +16,6 @@ module.exports = new Sequelize(
             charset: 'utf8',
             collate: 'utf8_general_ci',
         },
-        logging: process.env.DB_LOGGING
+        logging: process.env.DB_LOGGING ? true : false
     }
 )
