@@ -97,6 +97,8 @@ const Pages = observer(() => {
 
 
     return (
+        <>
+        {productStore.totalCount > productStore.limit &&
         <Pagination 
             size={sizePagination} 
             className="Pagination mt-2 mb-2"
@@ -234,7 +236,8 @@ const Pages = observer(() => {
                     disabled={productStore.page === pages.length && true}
                 /> 
             : null}
-        </Pagination>
+        </Pagination>}
+        </>
     )
 })
 

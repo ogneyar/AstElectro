@@ -80,7 +80,7 @@ const SearchPage = observer(() => {
                     </button>
                 </div>
                 <div className="SearchColContent">
-                    <Filter />
+                    {/* <Filter /> */}
                     {loadingProduct ? <Loading />
                     : <>
                         <h3>Поиск - {value}</h3>
@@ -88,6 +88,7 @@ const SearchPage = observer(() => {
                         <h5>Товары, соответствующие критериям поиска</h5>
 
                         <ProductList search />
+
                     </>}
                     
                 </div>

@@ -7,7 +7,7 @@
 }
 
 .ProductList {
-    display:flex;
+    /* display:flex; */
     justify-content:space-between; 
     align-items:center;
     flex-direction: row;
@@ -150,4 +150,13 @@
     background-color: white;
     /* cursor: context-menu; */
     cursor: pointer;
+}
+
+.ProductList_link {
+    cursor: pointer;
+    color: var(--main-blue-color);
+}
+
+.ProductList_link:hover {
+    color: var(--main-red-color);
 }

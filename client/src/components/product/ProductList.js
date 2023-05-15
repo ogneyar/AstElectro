@@ -1,8 +1,10 @@
 
 import React, { useContext, useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
 import Loading from '../Loading'
+import Pagination from '../pagination/Pagination'
 
 import { Context } from '../..'
 import './Product.css'
@@ -14,26 +16,23 @@ const ProductList = observer((props) => {
 
     const [ info, setInfo ] = useState(null)
     
+    const history = useHistory()
 
-    const [ visibleContextMenu, setVisibleContextMenu ] = useState(null)
-    
+
     useEffect(() => {
-
         if ( ! props?.loading || productStore.products.length ) { // если уже подгружены товары
             setInfo(productStore.products)
         }
-        
     }, [  props?.loading, productStore.products, brandStore.selectedBrand ])
     
     
-    useEffect(() => {
-
-        if ( info ) { 
-            console.log(info)
-        }
-        
-    }, [ info ])
-
+    const onClickProducts = (product) => {
+        let brandName
+        brandStore.brands.forEach(i => {
+            if (product.brandId === i.id) brandName = i.name.toLowerCase()
+        })
+        history.push(`/${brandName}/${product.url}`)
+    }
 
     if (props?.loading) return <Loading variant="warning" />
     if (info === null) return <Loading variant="success" />
@@ -42,13 +41,26 @@ const ProductList = observer((props) => {
     return (
         <>
 
+            {info[0] !== undefined && <Pagination />}
+
+            <br />
+
             <div className='ProductList'>
 
                 {info && Array.isArray(info) && info[0] !== undefined
                 ?
-                    info.map(product => {
+                    info.map((product,idx) => {
                         return (
-                            <div></div>
+                            <div key={idx+"pr"}>
+                                <div 
+                                    className='ProductList_link'
+                                    onClick={()=>onClickProducts(product)}
+                                >
+                                    {product.name}                                
+                                </div>
+                                <br />
+                                {/* <br /> */}
+                            </div>
                         )
                     })
                 :
@@ -58,6 +70,10 @@ const ProductList = observer((props) => {
                 }
                 
             </div>
+
+            <br />
+
+            {info[0] !== undefined && <Pagination />}
             
         </>
     )

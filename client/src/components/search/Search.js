@@ -56,7 +56,7 @@ const Search = observer((props) => {
 
         searchValue({ value: search, page: productStore.page, limit: productStore.limit })
             .then(data => {
-                // console.log(data.rows)
+                // console.log(data.rows) 
                 setList(data.rows)
                 setLoading(false)
             })        
@@ -93,9 +93,10 @@ const Search = observer((props) => {
         if (loading) return
         setList([])
         setNoSearch(false)
-        if (key === "value" && val !== "")
+        if (key === "value" && val !== "") {
+            productStore.setPage(1)
             history.push(`/search?${key}=${val}`)
-        else if (key === "article")
+        }else if (key === "article")
             if (admin) history.push(`/product/${val.id}`)
             else {
                 let brandName
