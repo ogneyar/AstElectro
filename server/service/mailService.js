@@ -9,11 +9,16 @@ class MailService {
             // port: process.env.SMTP_PORT,
             // secure: false,
             secure: true,
+            // secureConnection: false,
             auth: {
                 user: process.env.SMTP_USER,
                 pass: process.env.SMTP_PASSWORD
             },
-            logger: true
+            tls: {
+                ciphers:'SSLv3'
+            },
+            logger: true,
+            debug: true
         })
     }
 
