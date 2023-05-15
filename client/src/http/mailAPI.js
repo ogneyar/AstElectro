@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import { $host, $authHost } from './index'
+import { $host, $authHost, $hostL } from './index'
 
 
 export const sendRequestPrice = async (props) => {
@@ -9,5 +9,12 @@ export const sendRequestPrice = async (props) => {
 
 export const sendRequestProducts = async (props) => {
     const {data} = await $host.post('api/mail/request_products', props) 
+    return data  
+}
+
+export const sendRequestProductsL = async (props) => {
+    // props = { ...props, email_from: process.env.REACT_APP_API_EMAIL_FROM }
+    // const {data} = await $hostL.post('api/mail/request_products_ast', props) 
+    const {data} = await $host.post('api/mail/request_products_l', props) 
     return data  
 }

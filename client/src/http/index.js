@@ -7,6 +7,11 @@ const $host = axios.create({
     baseURL: API_URL
 })
 
+const $hostL = axios.create({
+    withCredentials: true,
+    baseURL: process.env.REACT_APP_API_URL_L
+})
+
 const $authHost = axios.create({
     withCredentials: true,
     baseURL: API_URL
@@ -39,5 +44,6 @@ $authHost.interceptors.response.use((config) => {
 
 export {
     $host,
-    $authHost
+    $authHost,
+    $hostL
 }

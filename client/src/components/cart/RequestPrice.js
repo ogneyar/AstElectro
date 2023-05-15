@@ -13,7 +13,7 @@ import './RequestPrice.css'
 import Loading from '../Loading'
 import Phone from '../helpers/phone/Phone'
 import Email from '../helpers/email/Email'
-import { sendRequestPrice, sendRequestProducts } from '../../http/mailAPI'
+import { sendRequestPrice, sendRequestProducts, sendRequestProductsL } from '../../http/mailAPI'
 import { fetchCategoryById } from '../../http/categoryAPI'
 
 
@@ -92,7 +92,7 @@ const RequestPrice = (props) => {
             setLoading(true)
 
             if (props.action === "Заказ") {
-                await sendRequestProducts({
+                await sendRequestProductsL({
                     url: URL + brand.toLowerCase() + "/" + url,
                     name,
                     phone,

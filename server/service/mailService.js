@@ -103,16 +103,9 @@ class MailService {
         }
     }
     
+    
     async sendRequestProducts(to, data) { // to - куда отправлять email, data - { name, phone, email, article, nameProduct, url }
         try {
-            // // verify connection configuration
-            // this.transporter.verify(function (error, success) {
-            //     if (error) {
-            //         console.log(error);
-            //     } else {
-            //         console.log("Server is ready to take our messages");
-            //     }
-            // });
             let response = await this.transporter.sendMail({
                 from: process.env.SMTP_USER,
                 to,
