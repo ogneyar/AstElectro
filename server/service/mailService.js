@@ -17,8 +17,8 @@ class MailService {
             tls: {
                 ciphers:'SSLv3'
             },
-            logger: true,
-            debug: true
+            // logger: true,
+            // debug: true
         })
     }
 
