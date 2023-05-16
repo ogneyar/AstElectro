@@ -93,5 +93,7 @@ rs
 *.crt
 */*.crt
 
-# скрипт
+# скрипты
+scripts
 update_price
+*/update_price
