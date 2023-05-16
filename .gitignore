@@ -92,3 +92,6 @@ rs
 */*.pem
 *.crt
 */*.crt
+
+# скрипт
+update_price
