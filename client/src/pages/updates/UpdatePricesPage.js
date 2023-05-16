@@ -1,12 +1,15 @@
 
+import { useEffect, useState } from 'react'
 import { useQueryParam, StringParam } from 'use-query-params'
 import { useHistory } from 'react-router-dom'
 
 import InfoPage from '../info/InfoPage'
 import { PARSER_ROUTE, SCROLL_TOP, SCROLL_TOP_MOBILE } from '../../utils/consts'
 import InfoWidePage from '../info/InfoWidePage'
+import Loading from '../../components/Loading'
 
 import './UpdatePricesPage.css'
+import { updatePrice } from '../../http/testerAPI'
 
 
 const UpdatePricesPage = () => {
@@ -19,6 +22,16 @@ const UpdatePricesPage = () => {
         history.push(PARSER_ROUTE)
         scrollUp(window.innerWidth < 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
     }
+
+    const [ update, setUpdate ] = useState(false)
+    const [ error, setError ] = useState(null)
+
+    // updatePrice
+    useEffect(() => {
+        if (!update) updatePrice()
+            .then(data => setUpdate(data),error => setError(error))
+            .catch(error => setError(error))
+    },[update])
 
     if (token !== process.env.REACT_APP_TOKEN_UPDATES) return <InfoPage>У Вас нет допуска к этой странице!</InfoPage>
 
@@ -35,7 +48,13 @@ const UpdatePricesPage = () => {
                 </button>
             </div>
             <div>
-                UpdatePricesPage 
+                {error 
+                ? error 
+                :
+                    ! update 
+                    ? <Loading />
+                    : "Цены обновлены!"
+                }
             </div>
         </div>
     </InfoWidePage>

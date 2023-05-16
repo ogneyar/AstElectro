@@ -56,3 +56,8 @@ export const getLengthTmk = async () => {
     const { data } = await $authHost.post('api/parser/tmk')
     return data
 }
+
+export const updatePrice = async () => {
+    const { data } = await $host.get('api/tester/update_prices' + '?token=' + process.env.REACT_APP_TOKEN_UPDATES)
+    return data
+}
