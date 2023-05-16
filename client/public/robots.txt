@@ -1,0 +1,22 @@
+# https://www.robotstxt.org/robotstxt.html
+# User-agent: Yandex
+# Disallow: /admin
+# User-agent: Googlebot
+# Disallow: /admin
+
+User-agent: *
+# Disallow: /
+Disallow: /cart
+Disallow: /error
+Disallow: /create_order
+Disallow: /pay
+Disallow: /success
+Disallow: /congratulation
+Disallow: /product
+Disallow: /admin
+Disallow: /lk
+Disallow: /parser
+Disallow: /update_products
+Disallow: /update_prices
+
+# Sitemap: https://astelectro.ru/sitemap.xml
