@@ -1,0 +1,10 @@
+
+.UpdatePricesPage {
+    display: flex;
+    flex-direction: column;
+}
+
+.UpdatePricesPage_buttonBack {
+    margin-bottom: 20px;
+    border-radius: 5px;
+}

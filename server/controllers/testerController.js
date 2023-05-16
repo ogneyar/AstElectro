@@ -507,6 +507,52 @@ class TesterController {
         }
     }
 	
+    
+    // обновление цен
+    async updatePrices(req, res, next) {
+        try {
+            
+            let products = await Product.findAll()
+            let { data } = await axios.get(process.env.NZETA_API_2_URL + "product/getProduct")
+
+            let response = ""
+
+            if ( ! data.error) {
+                response = []
+                products.forEach(async product => {
+                    let article = product.article // "zeta30506"
+                    let oldPrice = product.price
+                    let filter = data.result.filter(item => item.PROPERTY_CML2_ARTICLE_VALUE === article)
+                                    
+                    let price
+                    if (filter[0] !== undefined) {
+                        price = filter[0].CATALOG_PRICE_OPT
+
+                        console.error("article: ", article)
+                        console.log("oldPrice: ", oldPrice)
+                        console.log("price: ", price)
+                        
+                        if (oldPrice !== price) {
+                            let update = await Product.update({price},{
+                                where: { id: product.id }
+                            })
+                            response.push({ article, oldPrice, price, update })
+                        }else {                            
+                            response.push({ article, price })
+                        }
+                    }
+                })            
+            }else {
+                // отправка в телеграм сообщения об ошибке
+                return res.json("error")
+            }
+
+            return res.json(response)
+
+        }catch(e) {
+            return res.json({error:'Ошибка метода updatePrices!'})
+        }
+    }
 
 
 }

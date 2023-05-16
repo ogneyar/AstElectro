@@ -53,7 +53,7 @@ const Search = observer((props) => {
             setAdmin(true)
             search = search.replace("!","")
         }
-
+        
         searchValue({ value: search, page: productStore.page, limit: productStore.limit })
             .then(data => {
                 // console.log(data.rows) 
@@ -94,6 +94,13 @@ const Search = observer((props) => {
         setList([])
         setNoSearch(false)
         if (key === "value" && val !== "") {
+            if (val === "?") { // переход на страницу админа
+                setValue("")
+                setLoading(false)
+                history.push("admin")
+                scrollUp(window.innerWidth < 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+                return null
+            }
             productStore.setPage(1)
             history.push(`/search?${key}=${val}`)
         }else if (key === "article")
@@ -105,7 +112,7 @@ const Search = observer((props) => {
                 })
                 history.push(`/${brandName}/${val.url}`)
             }
-        scrollUp(SCROLL_TOP || SCROLL_TOP_MOBILE)
+        scrollUp(window.innerWidth < 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
     }
 
     const onKeyDownInput = (e) => {
