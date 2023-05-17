@@ -46,11 +46,9 @@ const CategoryService = observer((props) => {
         <ListGroup 
             className="CategoryService"
         >
-            {/* {(props?.page === "brandPage" || props?.page === "categoryPage") &&  */}
-            <div title={(props?.page === "brandPage" || props?.page === "categoryPage") ? "Возврат на страницу товаров!" : ""} >
+            {/* <div title={(props?.page === "brandPage" || props?.page === "categoryPage") ? "Возврат на страницу товаров!" : ""} >
                 <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true, sub_category_id: 0 }} funcOnClick={onClickAllCategory}  />
-            </div>
-            {/* } */}
+            </div> */}
             {categoryStore.categories && Array.isArray(categoryStore.categories) && categoryStore.categories.map(item => { 
                 if (item.sub_category_id === 0 && item.id !== 1)
                     return <CategoryItemService key={item.id} item={item} funcOnClick={onClickSelectedCategory} />
@@ -61,3 +59,11 @@ const CategoryService = observer((props) => {
 })
 
 export default CategoryService
+
+
+// Проблемные / пустые категории
+//
+// Муфты до 6кВ
+// Кабельные вводы общепромышленные пластиковые
+// Кабельные вводы общепромышленные из нержавеющей стали
+//

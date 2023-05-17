@@ -44,7 +44,8 @@ const CategoryItemService = observer(({ item, funcOnClick }) => {
                 active={item?.id === categoryStore.selectedCategory.id}
                 onClick={() => {
                     funcOnClick(item) // функция выделяет выбранную категорию
-                    onClickListItem("only_open") // функция раскрывает выбранную категорию
+                    // onClickListItem("only_open") // функция только раскрывает выбранную категорию
+                    onClickListItem() // функция раскрывает и закрывает выбранную категорию
                 }}
                 key={item?.id}
             >
@@ -58,7 +59,7 @@ const CategoryItemService = observer(({ item, funcOnClick }) => {
                     <div
                         onClick={(e) => {
                             e.stopPropagation()
-                            onClickListItem() // функция раскрывает выбранную категорию
+                            onClickListItem() // функция раскрывает и закрывает выбранную категорию
                         }}
                     >
                         {item?.open 

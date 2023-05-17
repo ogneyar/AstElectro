@@ -90,7 +90,7 @@
 }
 
 .NavBar_Logo {
-    background-color: var(--main-white-color);
+    /* background-color: var(--main-white-color); */
     padding: 10px;
     width: 150px;
 }

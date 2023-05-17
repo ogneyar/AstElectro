@@ -1,5 +1,6 @@
 //
 import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import { useHistory } from 'react-router-dom'
 import parseHTML from 'html-react-parser'
@@ -19,6 +20,9 @@ import scrollUp from '../../utils/scrollUp'
 const CategoryList = observer((props) => {
 
     const history = useHistory()
+
+    // name - имя категории
+    let { name } = useParams()
 
     const { categoryStore } = useContext(Context)
 
@@ -72,11 +76,22 @@ const CategoryList = observer((props) => {
     
     useEffect(() => {
         if ( ! props?.loading && categoryStore.categories.length  ) { // если уже подгружены категории
-            setInfo(categoryStore.categories.filter(item => {
-                if (item.id === props.id && item.is_product) setIsProducts(item)
-                if (item.sub_category_id !== props.id || item.id === 1) return false
-                return true
-            }))
+            if (name) {
+                // alert(name)
+                setInfo(categoryStore.categories.filter(item => {
+                    if (item.id === props.id && item.is_product) setIsProducts(item)
+                    if (item.sub_category_id !== props.id || item.id === 1) return false
+                    return true
+                }))
+            }else {
+                setInfo(categoryStore.categories.filter(item => 
+                    item.name === "Термоусаживаемые кабельные муфты и аксессуары"
+                    ||
+                    item.name === "Наконечники, гильзы и соединители"
+                    ||
+                    item.name === "Металлорукав и изделия из него"
+                ))
+            }
         }        
     }, [  props?.loading, categoryStore.categories, history.location.pathname, props?.id ])
 
@@ -91,9 +106,12 @@ const CategoryList = observer((props) => {
     return (
         <>
         
-            {categoryInfo && 
-                <h2>{categoryInfo.title}</h2>
-            }
+            {/* {categoryInfo && categoryInfo.title
+            ? <h2>{categoryInfo.title}</h2>
+            : "null"
+            } */}
+            
+            {! name && <h2>Популярные товары:</h2>}
 
             <div className='CategoryList'>
 
@@ -113,6 +131,7 @@ const CategoryList = observer((props) => {
                     <div className="CategoryList_main">
                         {categoryInfo && 
                         <div className="CategoryList_main_table">
+                            <h2>{categoryInfo.title}</h2>
                             <h4>Технические характеристики</h4>
                             <table>
                             <tbody className="CategoryList_main_table_body">
