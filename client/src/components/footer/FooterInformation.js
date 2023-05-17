@@ -2,7 +2,7 @@
 import { NavLink } from '../myBootstrap'
 import {    
     ABOUT_US_ROUTE, DELIVERY_ROUTE, PRIVACY_POLICY_ROUTE, RETURNS_POLICY_ROUTE,
-    TERMS_OF_USE_ROUTE, WARRANTY_ROUTE
+    TERMS_OF_USE_ROUTE, WARRANTY_ROUTE, DRIVING_DIRECTIONS_ROUTE, COMPANY_DETAILS_ROUTE
 } from '../../utils/consts'
 
 import './FooterInformation.css'
@@ -30,43 +30,59 @@ const FooterInformation = () => {
                     <li>
                         <NavLink
                             className="NavLink Footer_NavLink Footer_NavLink_Info"
+                            to={DRIVING_DIRECTIONS_ROUTE}
+                        >
+                            Схема проезда
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            className="NavLink Footer_NavLink Footer_NavLink_Info"
+                            to={COMPANY_DETAILS_ROUTE}
+                        >
+                            Реквизиты компании
+                        </NavLink>
+                    </li>
+                    {/* <li>
+                        <NavLink
+                            className="NavLink Footer_NavLink Footer_NavLink_Info"
                             to={DELIVERY_ROUTE}
                         >
                             О доставке
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <NavLink
                             className="NavLink Footer_NavLink Footer_NavLink_Info"
                             to={RETURNS_POLICY_ROUTE}
                         >
                             Условия возврата
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <NavLink
                             className="NavLink Footer_NavLink Footer_NavLink_Info"
                             to={WARRANTY_ROUTE}
                         >
                             Гарантия и Сервис
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <NavLink
                             className="NavLink Footer_NavLink Footer_NavLink_Info"
                             to={PRIVACY_POLICY_ROUTE}
                         >
                             Политика конфиденциальности
                         </NavLink>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <NavLink
                             className="NavLink Footer_NavLink Footer_NavLink_Info"
                             to={TERMS_OF_USE_ROUTE}
                         >
                             Пользовательское соглашение
                         </NavLink>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </div>

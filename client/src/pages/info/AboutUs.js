@@ -9,7 +9,7 @@ const AboutUs = () => {
     return (
         <InfoPage>
             <div className="AboutUs">
-                <header>Информация о нас!</header>
+                <header>Информация о нас.</header>
 
                 <div className="AboutUsHead">
                     <label>«АСТ»</label>

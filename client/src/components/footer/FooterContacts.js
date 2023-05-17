@@ -16,12 +16,12 @@ const FooterContacts = () => {
 			</div>
             <div className="footer-static-content">
                 <ul className="FooterContactsUl">
-                    <li>
+                    {/* <li>
                         <span className="fa fa-map-marker">&nbsp;</span>
                         <div className="media-body">
                             <p>{ADDRESS_FULL}</p>
                         </div>
-                    </li>
+                    </li> */}
                     <li>
                         <span className="fa fa-mobile">&nbsp;</span>
                         <div className="media-body">
@@ -42,12 +42,12 @@ const FooterContacts = () => {
                             </address>
                         </div>
                     </li>
-                    <li className="last">
+                    {/* <li className="last">
                         <span className="fa fa-clock-o">&nbsp;</span>
                         <div className="media-body">
                             {HtmlReactParser(TIME_TO_WORK)}
                         </div>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </div>

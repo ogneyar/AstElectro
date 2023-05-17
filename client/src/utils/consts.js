@@ -33,6 +33,8 @@ export const MESSAGE_ROUTE = '/message' // страница для сообще�
 
 // отдел Информация
 export const ABOUT_US_ROUTE = '/about_us' // о нас
+export const DRIVING_DIRECTIONS_ROUTE = '/driving_directions' // схема проезда
+export const COMPANY_DETAILS_ROUTE = '/company_details' // реквизиты компании
 export const DELIVERY_ROUTE = '/delivery' // информация о доставке
 export const PAYMENT_ROUTE = '/payment' // информация об оплате
 export const PRIVACY_POLICY_ROUTE = '/privacy_policy' // политика конфиденциальности

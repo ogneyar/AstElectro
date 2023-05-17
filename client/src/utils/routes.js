@@ -10,6 +10,8 @@ import SearchPage from '../pages/search/SearchPage'
 import ErrorPage from '../pages/error/ErrorPage'
 
 import AboutUs from '../pages/info/AboutUs'
+import DrivingDirections from '../pages/info/DrivingDirections'
+import CompanyDetails from '../pages/info/CompanyDetails'
 import Delivery from '../pages/info/Delivery'
 import PrivacyPolicy from '../pages/info/PrivacyPolicy'
 import ReturnsPolicy from '../pages/info/ReturnsPolicy'
@@ -25,7 +27,8 @@ import {
     MAIN_ROUTE, ADMIN_ROUTE, PARSER_ROUTE, TESTER_ROUTE, SHOP_ROUTE, LOGIN_ROUTE,
     PRODUCT_ROUTE, SEARCH_ROUTE, ERROR_ROUTE, ABOUT_US_ROUTE, 
     DELIVERY_ROUTE, PRIVACY_POLICY_ROUTE, RETURNS_POLICY_ROUTE,
-    TERMS_OF_USE_ROUTE, WARRANTY_ROUTE, DELETE_ROUTE, UPDATE_PRODUCTS_ROUTE, UPDATE_PRICES_ROUTE
+    TERMS_OF_USE_ROUTE, WARRANTY_ROUTE, DELETE_ROUTE, UPDATE_PRODUCTS_ROUTE, 
+    UPDATE_PRICES_ROUTE, DRIVING_DIRECTIONS_ROUTE, COMPANY_DETAILS_ROUTE
 } from './consts'
 
 // brandRoutes находится в src/components/AppRouter.js
@@ -77,6 +80,14 @@ export const publicRoutes = [
     {
         path: ABOUT_US_ROUTE, // о нас
         component: AboutUs
+    },
+    {
+        path: DRIVING_DIRECTIONS_ROUTE, // схема проезда
+        component: DrivingDirections
+    },
+    {
+        path: COMPANY_DETAILS_ROUTE, // реквизиты компании
+        component: CompanyDetails
     },
     {
         path: DELIVERY_ROUTE, // о доставке
