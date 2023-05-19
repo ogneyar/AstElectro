@@ -101,7 +101,6 @@ const RequestPrice = (props) => {
                     article,
                     price,
                     quantity,
-                    price,
                     multiplier
                 })
             }else {
@@ -210,7 +209,7 @@ const RequestPrice = (props) => {
                             >
                                 {nameProduct}
                             </div>
-                            {/* <br /> */}
+                            {window.innerWidth > 400 && <br />}
                             <div
                                 className="RequestPriceNotification_Cart_product_article"
                             >
@@ -262,7 +261,7 @@ const RequestPrice = (props) => {
                                 Цена за ед.:&nbsp;{price}&nbsp;р.
                                 <br />
                                 {window.innerWidth > 400 && <br />}
-                                Итого:&nbsp;{price * quantity}&nbsp;р.
+                                Итого:&nbsp;{(price * quantity).toFixed(2)}&nbsp;р.
                             </div>
                             {window.innerWidth > 400 && <br />}
                         </div>

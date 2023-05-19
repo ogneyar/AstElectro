@@ -100,10 +100,5 @@
     }
     .RequestPriceNotification_fields label {
         display: none;
-        /* font-size: 5px; */
-        /* margin-top: 10px; */
-    }
-    .RequestPriceNotification_DivButtons {
-        /* display: none; */
     }
 }

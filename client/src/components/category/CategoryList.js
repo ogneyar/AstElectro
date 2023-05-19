@@ -245,7 +245,13 @@ const CategoryList = observer((props) => {
                                                 }
                                             </th>
                                         )
-                                    })}
+                                    })
+                                    .filter((data,idx) => {
+                                        if (idx < 7) return true
+                                        if (window.innerWidth > 991) return true
+                                        return false
+                                    })
+                                    }
                                 </tr>
                             </thead>
                             <tbody>
@@ -318,7 +324,13 @@ const CategoryList = observer((props) => {
                                                 }
                                             </td>
                                         )
-                                    })}
+                                    })
+                                    .filter((data,idx) => {
+                                        if (idx < 7) return true
+                                        if (window.innerWidth > 991) return true
+                                        return false
+                                    })
+                                    }
                                     </tr>
                                 )
                             })}
