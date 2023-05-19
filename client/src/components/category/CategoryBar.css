@@ -8,6 +8,7 @@
     display: none;
     visibility: hidden;
     opacity: 0;
+    padding-bottom: 10px;
 }
 
 @media (max-width: 991px) { /* < 992px */

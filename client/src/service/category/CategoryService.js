@@ -33,6 +33,7 @@ const CategoryService = observer((props) => {
         if (props.page !== "brandPage") history.push(category.url)
         else history.push(`${window.location.pathname}?category=${category.id}`)
         scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+        props?.onHide()
         // productStore.setPage(1)
     }
 

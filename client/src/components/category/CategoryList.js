@@ -111,7 +111,7 @@ const CategoryList = observer((props) => {
             : "null"
             } */}
             
-            {! name && <h2>Популярные товары:</h2>}
+            {(! name || name === "shop") && <h2>Популярные товары:</h2>}
 
             <div className='CategoryList'>
 
