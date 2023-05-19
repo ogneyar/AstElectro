@@ -20,11 +20,6 @@
     display: flex; 
     justify-content: space-between; 
 }
-@media (max-width: 991px) {
-    .RequestPriceNotification_Cart {
-        flex-wrap: wrap;
-    }
-}
 
 .RequestPriceNotification_Cart_product {
     display: flex; 
@@ -90,4 +85,25 @@
     cursor: pointer;
     background-color: grey;
     margin: 0 5px;
+}
+
+
+@media (max-width: 991px) {
+    .RequestPriceNotification_Cart {
+        flex-wrap: wrap;
+    }
+    .RequestPriceNotification_Cart_product {
+        flex-direction: column;
+    }
+    .RequestPriceNotification_Cart_product_image {
+        width: 100px;
+    }
+    .RequestPriceNotification_fields label {
+        display: none;
+        /* font-size: 5px; */
+        /* margin-top: 10px; */
+    }
+    .RequestPriceNotification_DivButtons {
+        /* display: none; */
+    }
 }

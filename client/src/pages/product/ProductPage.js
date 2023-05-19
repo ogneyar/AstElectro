@@ -110,7 +110,7 @@ const ProductPage =  observer((props) => {
                     setCategoryImages(image)
                     setImage(API_URL + image.path + image.files[0])                    
                     if (info.description.replace(`<div class="description">`,"").replace(`</div>`,"").trim())
-                        setDescription(info.description)
+                        setDescription(info.description.replace(`<div class="description">`,"<div>"))
                 })
         }
     },[product.img, product.brandId])
@@ -309,22 +309,19 @@ const ProductPage =  observer((props) => {
                         </table>    
                         </>
                         : null
-                        }
-
-                        {description &&
-                        <>
-                            <br />
-                            <br />
-                            <h2>Описание</h2>
-                            {HtmlReactParser(description)}
-                        </>
-                        
-                        }
+                        }                        
                             
                     </div>
                 )})
             : null}
-            
+
+            {description &&
+            <>
+                <br />
+                <br />
+                <h2>Описание</h2>
+                {HtmlReactParser(description)}
+            </>}
             
         </Container>
     )

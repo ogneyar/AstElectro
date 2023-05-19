@@ -200,9 +200,9 @@ const RequestPrice = (props) => {
                         className="RequestPriceNotification_Cart_product"
                     >
                         <div
-                            className="RequestPriceNotification_Cart_product_image"
+                            className="RequestPriceNotification_Cart_product_image" 
                         >
-                            <img src={image} width="200" alt="изображение товара" />
+                            <img src={image} width={window.innerWidth < 400 ? "100" : "200"} alt="изображение товара" />
                         </div>
                         <div>
                             <div
@@ -210,13 +210,13 @@ const RequestPrice = (props) => {
                             >
                                 {nameProduct}
                             </div>
-                            <br />
+                            {/* <br /> */}
                             <div
                                 className="RequestPriceNotification_Cart_product_article"
                             >
                                 Артикул:&nbsp;{article}
                             </div>
-                            <br />
+                            {window.innerWidth > 400 && <br />}
                             <div
                                 className="RequestPriceNotification_Cart_product_brand"
                             >
@@ -248,11 +248,6 @@ const RequestPrice = (props) => {
                                         >
                                             +
                                         </span>
-                                        {/* <input 
-                                            type="text" 
-                                            value={quantity * multiplier}
-                                            onChange={(e)=>onChangeQuantity(e.target.value)}
-                                        /> */}
                                     </div>
                                     <span style={{color: "red"}}>укажите необходимое количество</span>
                                 </>
@@ -264,10 +259,12 @@ const RequestPrice = (props) => {
                             <div
                                 className="RequestPriceNotification_Cart_product_article"
                             >
-                                Цена за ед.:&nbsp;{price}&nbsp;р.<br /><br />
+                                Цена за ед.:&nbsp;{price}&nbsp;р.
+                                <br />
+                                {window.innerWidth > 400 && <br />}
                                 Итого:&nbsp;{price * quantity}&nbsp;р.
                             </div>
-                            <br />
+                            {window.innerWidth > 400 && <br />}
                         </div>
                     </div>
                 </div>
@@ -277,7 +274,9 @@ const RequestPrice = (props) => {
                 >
                     <table>
                         <tr>
-                            <td><label>Ваше имя&nbsp;<span style={{color:"red"}}>*</span></label>&nbsp;</td>
+                            <td>
+                                <label>Ваше имя&nbsp;<span style={{color:"red"}}>*</span></label>&nbsp;
+                            </td>
                             <td>
                                 <input 
                                     type="text" 
@@ -290,13 +289,17 @@ const RequestPrice = (props) => {
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Ваш номер телефона&nbsp;<span style={{color:"red"}}>*</span></label>&nbsp;</td>
+                            <td>
+                                <label>Ваш номер телефона&nbsp;<span style={{color:"red"}}>*</span></label>&nbsp;
+                            </td>
                             <td>
                                 <Phone phone={phone} setPhone={setPhone} placeholder="Номер телефона" withLabel={true} />
                             </td>
                         </tr>
                         <tr>
-                            <td><label>Ваша почта (email)&nbsp;<span style={{color:"red"}}></span></label>&nbsp;</td>
+                            <td>
+                                <label>Ваша почта (email)&nbsp;<span style={{color:"red"}}></span></label>&nbsp;
+                            </td>
                             <td>
                                 <Email email={email} setEmail={setEmail} placeholder="Введите email" withLabel={true} />
                             </td>
