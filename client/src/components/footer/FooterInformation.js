@@ -27,14 +27,14 @@ const FooterInformation = () => {
                             О компании
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink
                             className="NavLink Footer_NavLink Footer_NavLink_Info"
                             to={DRIVING_DIRECTIONS_ROUTE}
                         >
                             Схема проезда
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li>
                         <NavLink
                             className="NavLink Footer_NavLink Footer_NavLink_Info"

@@ -20,12 +20,17 @@
 .AboutUs strong,
 .AboutUs span,
 .AboutUs li {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-size: 20px;
 }
 
 .AboutUs li {
-    list-style-type: circle;
+    /* list-style-type: circle; */
+    list-style-type: none;
     padding-left: 10px;
     margin-left: 10px;
+}
+
+.AboutUs img {
+    width: 100%;
 }

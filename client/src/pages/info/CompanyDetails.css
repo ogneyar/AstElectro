@@ -8,3 +8,18 @@
     margin-bottom: 20px;
     font-size: 32px;
 }
+
+.CompanyDetails p,
+.CompanyDetails strong,
+.CompanyDetails span,
+.CompanyDetails li {
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+
+.CompanyDetails li {
+    /* list-style-type: circle; */
+    list-style-type: none;
+    padding-left: 10px;
+    margin-left: 10px;
+}

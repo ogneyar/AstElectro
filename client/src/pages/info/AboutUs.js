@@ -1,44 +1,27 @@
 
 import React from 'react'
 
-import InfoPage from './InfoPage'
+import InfoWidePage from './InfoWidePage'
 import './AboutUs.css'
+import { URL } from '../../utils/consts'
 
 
 const AboutUs = () => {
     return (
-        <InfoPage>
+        <InfoWidePage>
             <div className="AboutUs">
-                <header>Информация о нас.</header>
-
+                <header>О компании.</header>
+                <br />
                 <div className="AboutUsHead">
+                    Наша компания 
                     <label>«АСТ»</label>
                     &nbsp;-&nbsp;
-                    <span>компания с успешным многолетним опытом и большим будущим...</span>
+                    <span>является официальным представителем АКЦИОНЕРНОГО ОБЩЕСТВА "ЗАВОД ЭЛЕКТРОТЕХНИЧЕСКОЙ АРМАТУРЫ"</span>
                 </div>
-                <ul>
-                    {/* <li>Milwaukee (Германия) – электрифицированный и аккумуляторный инструмент;</li>
-                    <li>Gedore (Германия) – ручной инструмент;</li>
-                    <li>Euroboor (Нидерланды) – станки а магнитном основании и оснастка для металлообработки;</li>
-                    <li>Master (Италия) – тепловые пушки и климатическое оборудование;</li>
-                    <li>Husqvarna (Швеция) – алмазное оборудование и уплотнение грунта/бетона, садовая техника;</li>
-                    <li>ESAB (Швеция) – сварочное оборудование;</li>
-                    <li>Sormat (Финляндия) – крепеж и химические анкеры;</li>
-                    <li>Chicago Pneumatic (США) – пневматический инструмент;</li>
-                    <li>Trime (Италия) – осветительные мачты;</li>
-                    <li>Gefest (Россия) – пороховая техника;</li>
-                    <li>ХИЗ (Россия) – станочная оснастка;</li>
-                    <li>Stanley – гидравлический инструмент;</li>
-                    <li>ЗЭТАРУС – кабельная арматура;</li>
-                    <li>Такелажное оборудование;</li>
-                    <li>Геодезическое оборудование;</li>
-                    <li>Контрольно-измерительные приборы;</li>
-                    <li>Кабельная продукция;</li>
-                    <li>Спецодежда, обувь и средства индивидуальной защиты;</li>
-                    <li>Противопожарное оборудование.</li> */}
-                </ul>
+
+                <img src={URL + "/images/certificate/certificate.jpg"} /> 
             </div>
-        </InfoPage>
+        </InfoWidePage>
     )
 }
 
