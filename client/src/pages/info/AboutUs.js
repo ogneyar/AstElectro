@@ -13,9 +13,7 @@ const AboutUs = () => {
                 <header>О компании.</header>
                 <br />
                 <div className="AboutUsHead">
-                    Наша компания 
-                    <label>«АСТ»</label>
-                    &nbsp;-&nbsp;
+                    <label>ООО «АСТ»</label>&nbsp;
                     <span>является официальным представителем АКЦИОНЕРНОГО ОБЩЕСТВА "ЗАВОД ЭЛЕКТРОТЕХНИЧЕСКОЙ АРМАТУРЫ"</span>
                 </div>
 
