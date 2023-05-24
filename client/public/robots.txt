@@ -5,7 +5,8 @@
 # Disallow: /admin
 
 User-agent: *
-# Disallow: /
+Allow: *
+Disallow: /shop
 Disallow: /cart
 Disallow: /error
 Disallow: /create_order

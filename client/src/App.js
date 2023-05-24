@@ -35,7 +35,7 @@ const App = observer(() => {
 
     useEffect(() => {
         if (process.env.REACT_APP_ENV === 'production') {
-            document.getElementById("repair").style.display = "flex"
+            // document.getElementById("repair").style.display = "flex"
         }
         echo()
 			.then(data => {
