@@ -13,4 +13,5 @@ server {
         try_files $uri =404;
         break;
     }
+	return 301 https://$host$request_uri;
 }

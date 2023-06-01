@@ -37,7 +37,7 @@ const App = observer(() => {
         if (process.env.REACT_APP_ENV === 'production') {
             // document.getElementById("repair").style.display = "flex"            
             if (window.location.protocol == 'http:') {
-                window.location.href = window.location.href.replace('http:', 'https:')
+                // window.location.href = window.location.href.replace('http:', 'https:')
             }
         }
         echo()
