@@ -35,7 +35,10 @@ const App = observer(() => {
 
     useEffect(() => {
         if (process.env.REACT_APP_ENV === 'production') {
-            // document.getElementById("repair").style.display = "flex"
+            // document.getElementById("repair").style.display = "flex"            
+            if (window.location.protocol == 'http:') {
+                window.location.href = window.location.href.replace('http:', 'https:')
+            }
         }
         echo()
 			.then(data => {
