@@ -31,9 +31,9 @@ const CategoryItem = observer((props) => {
             if (i.sub_category_id === category.id) return { ...i, open: false }
             return i
         }))
-        history.push(category.url)
+        history.push("/"+category.url+"/")
         scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
-        // console.log("category: ",category)
+        // console.log("category: ",category.url)
     }
 
 

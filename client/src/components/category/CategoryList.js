@@ -316,7 +316,7 @@ const CategoryList = observer((props) => {
                                             <td key={indx + "blobloblo"} className="CategoryList_products_infoValue_item">
                                                 {inf.name === "Артикул" || inf.name === "Тип изделия" 
                                                 ? 
-                                                <span onClick={() => { history.push("nzeta/"+product.url); scrollUp()}} style={{color: "green", cursor: "pointer"}}>
+                                                <span onClick={() => { history.push("/nzeta/"+product.url+"/"); scrollUp()}} style={{color: "green", cursor: "pointer"}}>
                                                     {inf.value}
                                                 </span>
                                                 :
