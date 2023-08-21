@@ -18,3 +18,8 @@ export const sendRequestProductsL = async (props) => {
     const {data} = await $host.post('api/mail/request_products_l', props) 
     return data  
 }
+
+export const sendCallBackL = async (props) => {
+    const {data} = await $host.post('api/mail/callback_l', props) 
+    return data  
+}

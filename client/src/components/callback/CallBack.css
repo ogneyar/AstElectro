@@ -1,0 +1,52 @@
+
+.CallBack {
+    margin: 0 10px;
+    font-weight: 800;
+    padding: 5px 10px;
+}
+
+.CallBack_Success {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.CallBack_Notification {}
+
+.CallBack_Notification_fields {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    border: 1px dashed lightgray;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+.CallBack_Notification_fields label,
+.CallBack_Notification_fields input {
+    font-size: 1.2rem;
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.CallBack_Notification_DivButtons {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.CallBack_Notification_DivButtons Button {
+    margin: 10px;
+    padding: 10px 5px;
+    font-weight: 700;
+}
+
+@media (max-width: 991px) {
+    .CallBack_Notification_fields label {
+        display: none;
+    }
+}

@@ -3,67 +3,67 @@ export const LIMIT = 12
 
 export const MAIN_ROUTE = '/' // главная страница
 
-export const ADMIN_ROUTE = '/admin' // администрация
-export const LOGIN_ROUTE = '/login' // вход
-export const REGISTRATION_ROUTE = '/registration' // регистрация
+export const ADMIN_ROUTE = '/admin/' // администрация
+export const LOGIN_ROUTE = '/login/' // вход
+export const REGISTRATION_ROUTE = '/registration/' // регистрация
 
-export const UPDATE_PRODUCTS_ROUTE = '/update_products' // обновление товаров
-export const UPDATE_PRICES_ROUTE = '/update_prices' // обновление цен
+export const UPDATE_PRODUCTS_ROUTE = '/update_products/' // обновление товаров
+export const UPDATE_PRICES_ROUTE = '/update_prices/' // обновление цен
 
-export const SHOP_ROUTE = '/shop' // магазин
+export const SHOP_ROUTE = '/shop/' // магазин
 
-export const CART_ROUTE = '/cart' // корзина
-export const CREATE_ORDER_ROUTE = '/create_order' // оформление заказа
-export const PRODUCT_ROUTE = '/product' // товар
-export const LK_ROUTE = '/lk' // личный кабинет
-export const FORGOT_PASSWORD_ROUTE = '/forgot_password' // забыл пароль
-export const CHANGE_PASSWORD_ROUTE = '/change_password' // смена пароля
-export const SEARCH_ROUTE = '/search' // поиск
-export const PAYMENT_ORDER_ROUTE = '/payment_order' // страница оплаты заказа
-export const PAY_ROUTE = '/pay' // страница с которой идёт редирект на платёжную страницу Альфа банка
-export const SUCCESS_ROUTE = '/success' // успех
-export const CONGRATULATION_ROUTE = '/congratulation' // поздравления в случае успешной оплаты
-export const ERROR_ROUTE = '/error' // ошибка
-export const PARSER_ROUTE = '/parser' // парсер HTML
-export const TESTER_ROUTE = '/tester' // парсер HTML
-export const CONFIRM_ROUTE = '/confirmation' // подтверждение почты пользователя
-export const CONFIRM_AVAILABILITY_ROUTE = '/confirm_availability' // подтверждение наличия заказа
-export const SUPPORT_ROUTE = '/support' // тех.поддержка
-export const MESSAGE_ROUTE = '/message' // страница для сообщений
+export const CART_ROUTE = '/cart/' // корзина
+export const CREATE_ORDER_ROUTE = '/create_order/' // оформление заказа
+export const PRODUCT_ROUTE = '/product/' // товар
+export const LK_ROUTE = '/lk/' // личный кабинет
+export const FORGOT_PASSWORD_ROUTE = '/forgot_password/' // забыл пароль
+export const CHANGE_PASSWORD_ROUTE = '/change_password/' // смена пароля
+export const SEARCH_ROUTE = '/search/' // поиск
+export const PAYMENT_ORDER_ROUTE = '/payment_order/' // страница оплаты заказа
+export const PAY_ROUTE = '/pay/' // страница с которой идёт редирект на платёжную страницу Альфа банка
+export const SUCCESS_ROUTE = '/success/' // успех
+export const CONGRATULATION_ROUTE = '/congratulation/' // поздравления в случае успешной оплаты
+export const ERROR_ROUTE = '/error/' // ошибка
+export const PARSER_ROUTE = '/parser/' // парсер HTML
+export const TESTER_ROUTE = '/tester/' // парсер HTML
+export const CONFIRM_ROUTE = '/confirmation/' // подтверждение почты пользователя
+export const CONFIRM_AVAILABILITY_ROUTE = '/confirm_availability/' // подтверждение наличия заказа
+export const SUPPORT_ROUTE = '/support/' // тех.поддержка
+export const MESSAGE_ROUTE = '/message/' // страница для сообщений
 
 // отдел Информация
-export const ABOUT_US_ROUTE = '/about_us' // о нас
-export const DRIVING_DIRECTIONS_ROUTE = '/driving_directions' // схема проезда
-export const COMPANY_DETAILS_ROUTE = '/company_details' // реквизиты компании
-export const DELIVERY_ROUTE = '/delivery' // информация о доставке
-export const PAYMENT_ROUTE = '/payment' // информация об оплате
-export const PRIVACY_POLICY_ROUTE = '/privacy_policy' // политика конфиденциальности
-export const RETURNS_POLICY_ROUTE = '/returns_policy' // условия возврата
-export const TERMS_OF_USE_ROUTE = '/terms_of_use' // пользовательское соглашение
-export const WARRANTY_ROUTE = '/warranty' // гарантия и сервис
-export const CONTACTS_ROUTE = '/contacts' // контакты
-export const SPECIALS_ROUTE = '/specials' // акции
-export const DEALER_ROUTE = '/dealers' // дилерам
-export const NEWS_ROUTE = '/news' // новости
+export const ABOUT_US_ROUTE = '/about-us/' // о нас
+export const DRIVING_DIRECTIONS_ROUTE = '/driving_directions/' // схема проезда
+export const COMPANY_DETAILS_ROUTE = '/company-details/' // реквизиты компании
+export const DELIVERY_ROUTE = '/delivery/' // информация о доставке
+export const PAYMENT_ROUTE = '/payment/' // информация об оплате
+export const PRIVACY_POLICY_ROUTE = '/privacy_policy/' // политика конфиденциальности
+export const RETURNS_POLICY_ROUTE = '/returns_policy/' // условия возврата
+export const TERMS_OF_USE_ROUTE = '/terms_of_use/' // пользовательское соглашение
+export const WARRANTY_ROUTE = '/warranty/' // гарантия и сервис
+export const CONTACTS_ROUTE = '/contacts/' // контакты
+export const SPECIALS_ROUTE = '/specials/' // акции
+export const DEALER_ROUTE = '/dealers/' // дилерам
+export const NEWS_ROUTE = '/news/' // новости
 
 // страницы брендов (в порядке добавления продукции на сайт)
-export const MILWAUKEE_ROUTE = '/milwaukee' // milwaukee brand
-export const RGK_ROUTE = '/rgk' // РусГеоКом бренд
-export const HUSQVARNA_ROUTE = '/husqvarna' // husqvarna brand
-export const KVT_ROUTE = '/kvt' // КВТ бренд
-export const GEDORE_ROUTE = '/gedore' // Gedore бренд
-export const TMK_ROUTE = '/tmk' // TMK бренд
-export const LEIDTOGI_ROUTE = '/leidtogi' // LeidTogi бренд
-export const ADVANTA_ROUTE = '/advanta' // Advanta бренд
-export const EUROBOOR_ROUTE = '/euroboor' // Euroboor бренд
-export const TOR_ROUTE = '/tor' // Tor бренд
+export const MILWAUKEE_ROUTE = '/milwaukee/' // milwaukee brand
+export const RGK_ROUTE = '/rgk/' // РусГеоКом бренд
+export const HUSQVARNA_ROUTE = '/husqvarna/' // husqvarna brand
+export const KVT_ROUTE = '/kvt/' // КВТ бренд
+export const GEDORE_ROUTE = '/gedore/' // Gedore бренд
+export const TMK_ROUTE = '/tmk/' // TMK бренд
+export const LEIDTOGI_ROUTE = '/leidtogi/' // LeidTogi бренд
+export const ADVANTA_ROUTE = '/advanta/' // Advanta бренд
+export const EUROBOOR_ROUTE = '/euroboor/' // Euroboor бренд
+export const TOR_ROUTE = '/tor/' // Tor бренд
 // Esab - не заводил
 // AEG - в ручную заводил несколько штук
 // Leon - в ручную заводил несколько штук 
 
 
 // странный юмор программиста
-export const DELETE_ROUTE = '/delete' // удаление сайта
+export const DELETE_ROUTE = '/delete/' // удаление сайта
 
 const URL_PRODUCTION  = process.env.REACT_APP_URL_PRODUCTION || "https://astelectro.ru/"
 const URL_TEST  = process.env.REACT_APP_URL_TEST || "https://localhost:3000/" 

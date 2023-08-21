@@ -5,10 +5,12 @@ import HtmlReactParser from 'html-react-parser'
 import { useHistory } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { NAME, ADDRESS, PHONE_ONE, MAIL, SCROLL_TOP, SCROLL_TOP_MOBILE, LOGIN_ROUTE, MAIN_ROUTE, ADMIN_ROUTE } from '../../../utils/consts'
+import { NAME, ADDRESS, PHONE_ONE, MAIL, MAIN_ROUTE, ADMIN_ROUTE } from '../../../utils/consts'
 import logo from '../../../assets/logo.png'
 import scrollUp from '../../../utils/scrollUp'
 import { logout } from '../../../http/userAPI'
+import CallBack from '../../callback/CallBack'
+
 
 import { Context } from '../../../'
 import './NavBar.css'
@@ -28,10 +30,6 @@ const NavBar = observer(() => {
     }
 
     const onClickAndScroll = (route, scroll = 0) => {
-        // if (! scroll) {
-        //     if (window.innerWidth > 575) scroll = SCROLL_TOP
-        //     else scroll = SCROLL_TOP_MOBILE
-        // }
         history.push(route)
         scrollUp(scroll) 
     }
@@ -65,8 +63,11 @@ const NavBar = observer(() => {
                     >
                         <label className="NavBar_Col_Contacts_Name">{NAME}</label>
                         <label className="NavBar_Col_Contacts_Address">{ADDRESS}</label>
-                        <label className="NavBar_Col_Contacts_Phone">{HtmlReactParser(PHONE_ONE)}</label>
-                        <label className="NavBar_Col_Contacts_Mail">{HtmlReactParser(MAIL)}</label>
+                        <label className="NavBar_Col_Contacts_Phone">
+                            {HtmlReactParser(PHONE_ONE)}
+                            <CallBack /> 
+                        </label>
+                        <label className="NavBar_Col_Contacts_Mail">{HtmlReactParser(MAIL)} </label>
                     </div>
                     <div
                         className="NavBar_Col_Buttons"
@@ -75,7 +76,6 @@ const NavBar = observer(() => {
                             {!userStore.isAuth
                             ?
                             <Button 
-                                // onClick={() => onClickAndScroll(LOGIN_ROUTE + "?returnUrl=admin")}
                                 onClick={() => onClickAndScroll(ADMIN_ROUTE)}
                                 variant="outline-light"
                             >

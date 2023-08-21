@@ -33,9 +33,23 @@ const AppRouter = observer(() => {
     // ожидание загрузки роутов брендов (Этот лоадинг на оранжевом фоне)
     if (brandRoutes[0]?.path === undefined) return <Loading />
 
+    // function forceTrailingSlash(nextState, replace) {
+    //     const path = nextState.location.pathname
+    //     if (path.slice(-1) !== '/') replace({ ...nextState.location, pathname: path + '/' } )
+    //     console.log("ttttrrr");
+    // }
+
+    // function forceTrailingSlashOnChange(prevState, nextState, replace) {
+    //     forceTrailingSlash(nextState, replace);
+    //     console.log("hgjhgjghj");
+    // }
+
 
     return (
         <Switch>
+
+            {/* <Route onEnter={forceTrailingSlash} onChange={forceTrailingSlashOnChange}> */}
+
             {/* роуты зарегистрированных пользователей */}
             {
             // userStore.isAuth && 
@@ -55,14 +69,17 @@ const AppRouter = observer(() => {
 
             {/* роуты товаров, начинаются с имени бренда - /nazvanie-brenda/nazvanie-tovara */}
             {brandRoutes.map(({ path, component, status }) => 
-                <Route key={path + '/:url'} path={path + '/:url'} component={component} status={status || 200} />
+                <Route key={path + '/:url'} path={path + '/:url/'} component={component} status={status || 200} />
             )}
 
             {/* роут категорий - /nazvanie-kategorii */}
-            <Route key={'/:name'} path={'/:name'} component={ShopPage} status={200} exact />
+            <Route key={'/:name'} path={'/:name/'} component={ShopPage} status={200} exact />
 
             {/* <Redirect to={SHOP_ROUTE} />  */}
             <Redirect to={ERROR_ROUTE} /> 
+
+            {/* </Route> */}
+
         </Switch>
     )
 })

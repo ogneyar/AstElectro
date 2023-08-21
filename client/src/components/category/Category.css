@@ -115,7 +115,7 @@
 .CategoryItem_name {
     font-size: 1em;
     text-align: center;
-    height: 50px;
+    height: 70px;
 }
 
 .CategoryItem_name p {
@@ -153,6 +153,10 @@
     width: 85px;
 }
 
+.CategoryList_UTP {
+    padding: 50px;
+    font-size: 1.2rem;
+}
 
 @media (max-width: 1199px) { /* width < 1200px */
     .CategoryItem_card {

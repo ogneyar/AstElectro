@@ -86,6 +86,37 @@ class mailController {
             return next(res.json( { error: 'Ошибка метода requestProductsL!' } ))
         }
     }
+    
+    async callbackL(req, res, next) {
+        try {
+            let body = req.body
+            if (!body || body === {} || body.name === undefined) body = req.query
+            let response
+            body = {
+                ...body,
+                email_from: process.env.SMTP_USER
+            }
+            await axios.post(process.env.API_URL_L + "api/mail/callback_ast", body)
+                .then(
+                    data => {
+                        response = true
+                        console.log(data.data)
+                    },
+                    error => {
+                        response = false
+                        console.log(error)
+                    }
+                )
+                .catch(err => {
+                    response = false
+                    console.log(err)
+                })
+
+            return res.json(response)
+        }catch(e) {
+            return next(res.json( { error: 'Ошибка метода callback!' } ))
+        }
+    }
 
 }
 
