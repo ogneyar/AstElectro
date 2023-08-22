@@ -1,6 +1,9 @@
 .NavBar {}
 
-.NavBar_Container {}
+.NavBar_Container {
+    width: 100%;
+    padding-right: 10px;
+}
 
 .NavBar_Row {
     width: 100%;
@@ -10,11 +13,21 @@
     align-items: center;
     justify-content:space-between;
 }
+
+.NavBar_Col_Description {
+    margin-left: -50px;
+    font-size: 1.5rem;
+    color: var(--main-white-color);
+    text-align: center;
+    padding: 0 20px;
+}
+
 .NavBar_Col_Buttons {
     /* display: flex; */
     display: none;
 }
 .NavBar_Col_Contacts {
+    font-size: 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -32,21 +45,6 @@
 }
 .NavBar_Col_Contacts_City {
     display: none;
-}
-@media(max-width: 991px) {
-    .NavBar_Col_Contacts {
-        font-size: 14px;
-    }
-    .NavBar_Col_Contacts_Name,
-    .NavBar_Col_Contacts_Mail {
-        display: none;
-    }
-}
-@media(max-width: 767px) {
-    .NavBar_Col_Contacts {
-        /* display: none; */
-        padding-left: 20px;
-    }
 }
 
 .NavBar_Cart,
@@ -92,10 +90,23 @@
 .NavBar_Logo {
     /* background-color: var(--main-white-color); */
     padding: 10px;
-    width: 150px;
+    width: 280px;
 }
 
+
+
 @media(max-width:991px) {
+    .NavBar_Col_Contacts {
+        font-size: 1rem;
+    }
+    .NavBar_Col_Description {
+        margin-left: -20px;
+        font-size: 1.2rem;
+    }
+    .NavBar_Col_Contacts_Name,
+    .NavBar_Col_Contacts_Mail {
+        display: none;
+    }
     .NavBar_Row {
         margin: 0;
     }
@@ -107,7 +118,17 @@
     }
     .NavBar_Logo {
         padding: 5px;
-        width: 125px;
+        width: 200px;
+    }
+}
+
+@media(max-width: 767px) {
+    .NavBar_Col_Contacts {
+        /* display: none; */
+        padding-left: 20px;
+    }
+    .NavBar_Col_Description {
+        display: none;
     }
 }
 
@@ -124,7 +145,7 @@
     }
     .NavBar_Logo {
         padding: 2px;
-        width: 115px;
+        width: 150px;
     }
 }
 

@@ -258,10 +258,10 @@ const RequestPrice = (props) => {
                             <div
                                 className="RequestPriceNotification_Cart_product_article"
                             >
-                                Цена за ед.:&nbsp;{price}&nbsp;р.
+                                Цена за ед.:&nbsp;от&nbsp;{price}&nbsp;р.
                                 <br />
                                 {window.innerWidth > 400 && <br />}
-                                Итого:&nbsp;{(price * quantity).toFixed(2)}&nbsp;р.
+                                Итого:&nbsp;от&nbsp;{(price * quantity).toFixed(2)}&nbsp;р.
                             </div>
                             {window.innerWidth > 400 && <br />}
                         </div>

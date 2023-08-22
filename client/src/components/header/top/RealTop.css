@@ -1,0 +1,50 @@
+
+.RealTop {
+    /* width: 100%; */
+    display: none;
+    background-color: aqua;
+}
+
+.RealTop_Container {
+    width: 100%;
+    /* display: none; */
+}
+
+.RealTop_Row {
+    /* width: 100%; */
+}
+
+.RealTop_Col {    
+    font-size: 3rem;
+    color: var(--main-white-color);
+    /* width: 100%; */
+    text-align: center;
+}
+
+
+@media(max-width:991px) {
+    .RealTop_Col {    
+        font-size: 2rem;
+    }
+}
+
+@media(max-width: 767px) {
+    .RealTop_Col {    
+        font-size: 1.5rem;
+    }
+    .RealTop {
+        display: block;
+    }
+}
+
+@media(max-width:410px) {
+    .RealTop_Col {    
+        font-size: 1.2rem;
+    }
+}
+
+@media(max-width:340px) {
+    .RealTop_Col {    
+        font-size: 1rem;
+    }
+}

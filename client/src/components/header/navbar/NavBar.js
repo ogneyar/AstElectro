@@ -6,11 +6,15 @@ import { useHistory } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
 import { NAME, ADDRESS, PHONE_ONE, MAIL, MAIN_ROUTE, ADMIN_ROUTE } from '../../../utils/consts'
-import logo from '../../../assets/logo.png'
 import scrollUp from '../../../utils/scrollUp'
 import { logout } from '../../../http/userAPI'
 import CallBack from '../../callback/CallBack'
 
+// import logo from '../../../assets/logo.png'
+// import logo from '../../../assets/logoSvg/AST1.svg'
+// import logo from '../../../assets/logoSvg/AST2.svg'
+import logo from '../../../assets/logoSvg/AST3.svg'
+// import logo from '../../../assets/logoSvg/AST4.svg'
 
 import { Context } from '../../../'
 import './NavBar.css'
@@ -57,6 +61,12 @@ const NavBar = observer(() => {
                             <Image src={logo} className="NavBar_Logo" />
                         </div>
                     </div>
+
+                    <div 
+                        className="NavBar_Col_Description"
+                    >
+                        <strong>Оптовая</strong> продажа электротехнической продукции
+                    </div> 
 
                     <div
                         className="NavBar_Col_Contacts"

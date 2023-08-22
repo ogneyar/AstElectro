@@ -8,13 +8,23 @@ import { Image } from 'react-bootstrap'
 
 import CategoryItem from './CategoryItem'
 import Loading from '../Loading'
-
-import { Context } from '../..'
-import './Category.css'
+import { Button } from '../myBootstrap'
 import { getCategoryInfoById } from '../../http/categoryInfoAPI'
 import { API_URL } from '../../utils/consts'
 import { getProducts } from '../../http/productAPI'
 import scrollUp from '../../utils/scrollUp'
+import RequestPrice from '../cart/RequestPrice'
+
+import advantageSvg1 from '../../assets/advantagesSvg/1_postavka.svg'
+import advantageSvg2 from '../../assets/advantagesSvg/2_diler.svg'
+import advantageSvg3 from '../../assets/advantagesSvg/3_best-price.svg'
+import advantageSvg4 from '../../assets/advantagesSvg/4_skidki.svg'
+import advantageSvg5 from '../../assets/advantagesSvg/5_dostavka.svg'
+import advantageSvg6 from '../../assets/advantagesSvg/6_5let.svg'
+import advantageSvg7 from '../../assets/advantagesSvg/7_postoplata.svg'
+
+import { Context } from '../..'
+import './Category.css'
 
 
 const CategoryList = observer((props) => {
@@ -133,22 +143,34 @@ const CategoryList = observer((props) => {
                         <div className="CategoryList_main_table">
                             <h2>{categoryInfo.title}</h2>
                             <h4>Технические характеристики</h4>
-                            <table>
-                            <tbody className="CategoryList_main_table_body">
-                                {categoryInfo.characteristics.map((item,idx) => {
-                                    return (
-                                        <tr key={idx + "blablabla"}>
-                                            <td className="CategoryList_main_table_body_name">
-                                                {item.name}
-                                            </td>
-                                            <td>
-                                                {item.value}
-                                            </td>
-                                        </tr>
-                                    )
-                                })}
-                            </tbody>
-                            </table>
+                            <div className="CategoryList_main_table_div">
+                                <table>
+                                <tbody className="CategoryList_main_table_body">
+                                    {categoryInfo.characteristics.map((item,idx) => {
+                                        return (
+                                            <tr key={idx + "blablabla"}>
+                                                <td className="CategoryList_main_table_body_name">
+                                                    {item.name}
+                                                </td>
+                                                <td>
+                                                    {item.value}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                                </table>
+                                <br />
+                                <Button
+                                    variant="warning"
+                                    className="CategoryList_main_table_div_btn"
+                                    onClick={() => {
+                                        document.getElementById('table_products').scrollIntoView();
+                                    }}
+                                >
+                                    Заказать товар
+                                </Button>
+                            </div>
                         </div>}
 
                         <div className="CategoryList_main_images">
@@ -177,7 +199,7 @@ const CategoryList = observer((props) => {
                         </div>
 
                         {products && 
-                        <table className="CategoryList_products">
+                        <table id="table_products" className="CategoryList_products">
                             <thead>                                
                                 <tr className="CategoryList_products_infoName">
                                     {JSON.parse(products[0].info[0].body).map((inf,indx) => {
@@ -314,13 +336,27 @@ const CategoryList = observer((props) => {
                                          ) return null
                                         return (
                                             <td key={indx + "blobloblo"} className="CategoryList_products_infoValue_item">
-                                                {inf.name === "Артикул" || inf.name === "Тип изделия" 
+                                                {inf.name === "Артикул"
                                                 ? 
-                                                <span onClick={() => { history.push("/nzeta/"+product.url+"/"); scrollUp()}} style={{color: "green", cursor: "pointer"}}>
-                                                    {inf.value}
-                                                </span>
+                                                <>
+                                                    <span onClick={() => { history.push("/nzeta/"+product.url+"/"); scrollUp()}} style={{color: "green", cursor: "pointer"}}>
+                                                        {inf.value}
+                                                    </span>
+                                                    <RequestPrice
+                                                        product={product}
+                                                        action="Заказ"
+                                                    >
+                                                        Заказать
+                                                    </RequestPrice>
+                                                </>
                                                 :
-                                                    inf.value.replace("&quot;",'"')
+                                                    inf.name === "Тип изделия"
+                                                    ?
+                                                        <span onClick={() => { history.push("/nzeta/"+product.url+"/"); scrollUp()}} style={{color: "green", cursor: "pointer"}}>
+                                                            {inf.value}
+                                                        </span>
+                                                    :
+                                                        inf.value.replace("&quot;",'"')
                                                 }
                                             </td>
                                         )
@@ -357,13 +393,35 @@ const CategoryList = observer((props) => {
             
             {(! name || name === "shop") && 
             <div className="CategoryList_UTP">
-                <div>- Комплексный поставщик электротехнической продукции</div>
-                <div>- Официальный дилер ООО Зета</div>
-                <div>- Конкурентные цены</div>
-                <div>- Гибкая система скидок</div>
-                <div>- Осуществляем доставку</div>
-                <div>- На рынке электротехнической продукции более 5 лет</div>
-                <div>- Возможна постоплата постоянным клиентам</div>
+                <h2>Наши преимущества:</h2>
+                <div>
+                    <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg1} width="40" />
+                    &nbsp;Комплексный поставщик электротехнической продукции
+                </div>
+                <div>
+                    <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg2} width="40" />
+                    &nbsp;Официальный дилер ООО Зета
+                </div>
+                <div>
+                    <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg3} width="40" />
+                    &nbsp;Конкурентные цены
+                </div>
+                <div>
+                    <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg4} width="40" />
+                    &nbsp;Гибкая система скидок
+                </div>
+                <div>
+                    <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg5} width="40" />
+                    &nbsp;Осуществляем доставку
+                </div>
+                <div>
+                    <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg6} width="40" />
+                    &nbsp;На рынке электротехнической продукции более 5 лет
+                </div>
+                <div>
+                    <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg7} width="40" />
+                    &nbsp;Возможна постоплата постоянным клиентам
+                </div>
             </div>}
             
         </>

@@ -158,6 +158,20 @@
     font-size: 1.2rem;
 }
 
+.CategoryList_UTP div {
+    margin: 10px 0;
+}
+
+.CategoryList_main_table_div {
+    display:flex;
+    justify-content:space-around; 
+    align-items:center;
+}
+
+.CategoryList_main_table_div_btn {    
+    font-weight: 800;
+}
+
 @media (max-width: 1199px) { /* width < 1200px */
     .CategoryItem_card {
         width: var(--product-width-mid);
