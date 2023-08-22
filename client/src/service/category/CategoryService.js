@@ -17,24 +17,21 @@ import './CategoryService.css'
 
 const CategoryService = observer((props) => {
 
-    const { 
-        categoryStore, 
-        // productStore 
-    } = useContext(Context)
+    const { categoryStore } = useContext(Context)
 
     const history = useHistory()
 
-    // useEffect(() => {
-    //     if (categoryStore.selectedCategory.id === undefined) categoryStore.setSelectedCategory({id: 0, name: "Все категории", is_product: true})
-    // }, [categoryStore])
-
     const onClickSelectedCategory = (category) => {
         categoryStore.setSelectedCategory(category)
-        if (props.page !== "brandPage") history.push(category.url)
-        else history.push(`${window.location.pathname}?category=${category.id}`)
+        if (props.page !== "brandPage") {
+            // history.push(category.url)
+            // history.push("/" + category.url)
+            history.push("/" + category.url + "/")
+         } else {
+            history.push(`${window.location.pathname}?category=${category.id}`)
+         }
         scrollUp(window.innerWidth > 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
         props?.onHide()
-        // productStore.setPage(1)
     }
 
 
@@ -47,9 +44,6 @@ const CategoryService = observer((props) => {
         <ListGroup 
             className="CategoryService"
         >
-            {/* <div title={(props?.page === "brandPage" || props?.page === "categoryPage") ? "Возврат на страницу товаров!" : ""} >
-                <CategoryItemService item={{ id: 0, name: "Все категории", is_product: true, sub_category_id: 0 }} funcOnClick={onClickAllCategory}  />
-            </div> */}
             {categoryStore.categories && Array.isArray(categoryStore.categories) && categoryStore.categories.map(item => { 
                 if (item.sub_category_id === 0 && item.id !== 1)
                     return <CategoryItemService key={item.id} item={item} funcOnClick={onClickSelectedCategory} />

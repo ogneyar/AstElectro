@@ -89,8 +89,10 @@ export const API_URL =
         
 
 // прокрутка страницы при нажатии на категорию
-export const SCROLL_TOP = 156 // до aside
-export const SCROLL_TOP_MOBILE = 180 // для мобильной версии сайта
+// export const SCROLL_TOP = 156 // до aside
+export const SCROLL_TOP = 270 // до aside
+// export const SCROLL_TOP_MOBILE = 180 // для мобильной версии сайта
+export const SCROLL_TOP_MOBILE = 300 // для мобильной версии сайта
 
 
 export const NAME = `ООО «АСТ»` // название фирмы
