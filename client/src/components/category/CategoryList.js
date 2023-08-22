@@ -345,6 +345,8 @@ const CategoryList = observer((props) => {
                                                     <RequestPrice
                                                         product={product}
                                                         action="Заказ"
+                                                        variant="warning"
+                                                        className="CategoryList_RequestPrice"
                                                     >
                                                         Заказать
                                                     </RequestPrice>
@@ -392,37 +394,46 @@ const CategoryList = observer((props) => {
 
             
             {(! name || name === "shop") && 
-            <div className="CategoryList_UTP">
-                <h2>Наши преимущества:</h2>
+            <>
+            <h2>Наши преимущества:</h2>
+            <div className="CategoryList_UTP"> 
                 <div>
                     <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg1} width="40" />
+                    <br />
                     &nbsp;Комплексный поставщик электротехнической продукции
                 </div>
                 <div>
                     <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg2} width="40" />
+                    <br />
                     &nbsp;Официальный дилер ООО Зета
                 </div>
                 <div>
                     <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg3} width="40" />
+                    <br />
                     &nbsp;Конкурентные цены
                 </div>
                 <div>
                     <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg4} width="40" />
+                    <br />
                     &nbsp;Гибкая система скидок
                 </div>
                 <div>
                     <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg5} width="40" />
+                    <br />
                     &nbsp;Осуществляем доставку
                 </div>
                 <div>
                     <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg6} width="40" />
+                    <br />
                     &nbsp;На рынке электротехнической продукции более 5 лет
                 </div>
                 <div>
                     <Image className="CategoryList_UTP_advantageSvg" src={advantageSvg7} width="40" />
+                    <br />
                     &nbsp;Возможна постоплата постоянным клиентам
                 </div>
-            </div>}
+            </div>
+            </>}
             
         </>
     )

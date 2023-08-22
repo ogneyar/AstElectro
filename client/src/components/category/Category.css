@@ -145,6 +145,7 @@
     width: 120px;
     padding: 10px 5px;
     text-align: center;
+    border-bottom: 1px lightgray dotted;
 }
 
 .CategoryList_products_infoName_item:first-child,
@@ -156,10 +157,22 @@
 .CategoryList_UTP {
     padding: 50px;
     font-size: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .CategoryList_UTP div {
-    margin: 10px 0;
+    /* margin: 10px 0; */
+    width: 200px;
+    text-align: center;
+    border: 1px lightgray dotted;
+    margin: 5px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
 }
 
 .CategoryList_main_table_div {
@@ -171,6 +184,12 @@
 .CategoryList_main_table_div_btn {    
     font-weight: 800;
 }
+
+.CategoryList_RequestPrice {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
 
 @media (max-width: 1199px) { /* width < 1200px */
     .CategoryItem_card {

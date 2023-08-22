@@ -71,13 +71,19 @@ const NavBar = observer(() => {
                     <div
                         className="NavBar_Col_Contacts"
                     >
-                        <label className="NavBar_Col_Contacts_Name">{NAME}</label>
-                        <label className="NavBar_Col_Contacts_Address">{ADDRESS}</label>
+                        <label className="NavBar_Col_Contacts_Name">
+                            {NAME}
+                        </label>
+                        <label className="NavBar_Col_Contacts_Address">
+                            {ADDRESS}
+                        </label>
                         <label className="NavBar_Col_Contacts_Phone">
                             {HtmlReactParser(PHONE_ONE)}
-                            <CallBack /> 
                         </label>
-                        <label className="NavBar_Col_Contacts_Mail">{HtmlReactParser(MAIL)} </label>
+                        <label className="NavBar_Col_Contacts_Mail">
+                            {HtmlReactParser(MAIL)} 
+                        </label>
+                        <CallBack /> 
                     </div>
                     <div
                         className="NavBar_Col_Buttons"
