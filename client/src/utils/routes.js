@@ -36,15 +36,18 @@ import {
 export const authRoutes = [
     {
         path: ADMIN_ROUTE,
-        component: AdminPage
+        component: AdminPage,
+        name: ""
     },
     {
         path: PARSER_ROUTE,
-        component: ParserPage
+        component: ParserPage,
+        name: ""
     },
     {
         path: TESTER_ROUTE,
-        component: TesterPage
+        component: TesterPage,
+        name: ""
     }
 ]
 
@@ -52,77 +55,94 @@ export const publicRoutes = [
     {
         path: MAIN_ROUTE, // - "/"
         // component: MainPage
-        component: ShopPage
+        component: ShopPage,
+        name: ""
     },
     {
         path: SHOP_ROUTE,
-        component: ShopPage
+        component: ShopPage,
+        name: ""
     },
     {
         path: LOGIN_ROUTE,
-        component: LoginPage
+        component: LoginPage,
+        name: ""
     },
     {
         path: PRODUCT_ROUTE + '/:id',
-        component: ProductPage
+        component: ProductPage,
+        name: ""
     },
     {
         path: SEARCH_ROUTE, // поиск
-        component: SearchPage
+        component: SearchPage,
+        name: ""
     },
     {
         path: ERROR_ROUTE, // ошибка
         component: ErrorPage,
-        status: 404
+        status: 404,
+        name: ""
     },
     
     // отдел Информация
     {
         path: ABOUT_US_ROUTE, // о нас
-        component: AboutUs
+        component: AboutUs,
+        name: "О компании"
     },
     {
         path: DRIVING_DIRECTIONS_ROUTE, // схема проезда
-        component: DrivingDirections
+        component: DrivingDirections,
+        name: ""
     },
     {
         path: COMPANY_DETAILS_ROUTE, // реквизиты компании
-        component: CompanyDetails
+        component: CompanyDetails,
+        name: "Реквизиты компании"
     },
     {
         path: DELIVERY_ROUTE, // о доставке
-        component: Delivery
+        component: Delivery,
+        name: ""
     },
     {
         path: PRIVACY_POLICY_ROUTE, // политика конфиденциальности
-        component: PrivacyPolicy
+        component: PrivacyPolicy,
+        name: ""
     },
     {
         path: RETURNS_POLICY_ROUTE, // условия возврата
-        component: ReturnsPolicy
+        component: ReturnsPolicy,
+        name: ""
     },
     {
         path: TERMS_OF_USE_ROUTE, // пользовательское соглашение
-        component: TermsOfUse
+        component: TermsOfUse,
+        name: ""
     },
     {
         path: WARRANTY_ROUTE, // о гарантии
-        component: Warranty
+        component: Warranty,
+        name: ""
     },
     
     // обновление данных
     {
         path: UPDATE_PRODUCTS_ROUTE,
-        component: UpdateProductsPage
+        component: UpdateProductsPage,
+        name: ""
     },
     {
         path: UPDATE_PRICES_ROUTE,
-        component: UpdatePricesPage
+        component: UpdatePricesPage,
+        name: ""
     },
 
      // юмор It отдела
     {
         path: DELETE_ROUTE, // удаление сайта
-        component: DeletePage 
+        component: DeletePage,
+        name: ""
     }
 ]

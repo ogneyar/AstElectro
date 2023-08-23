@@ -4,12 +4,12 @@ import { NavLink, useHistory, useParams } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
 import { fetchOneProduct, fetchOneProductOnUrl } from '../../../http/productAPI'
+import { fetchAllCategories } from '../../../http/categoryAPI'
 import Container from '../../../components/myBootstrap/container/Container'
 import { authRoutes, publicRoutes } from '../../../utils/routes'
 
 import { Context } from '../../..'
 import './Aside.css'
-import { fetchAllCategories } from '../../../http/categoryAPI'
 
 
 const Aside = observer(() => {
@@ -64,32 +64,55 @@ const Aside = observer(() => {
 
         let path = history.location.pathname.replace("/","") 
 
+        if (path.length > 0) {
+            if (path[path.length-1] === "/") {
+                path = path.substring(0, path.length-1)
+            }
+        }
+
         let number = path.indexOf(`/`)
 
         if (number === -1) {
             let yes = false
 
+            let name = ""
+
             authRoutes.forEach(i => {
                 let pathAuth = i.path.replace("/","")
                 let numberAuth = pathAuth.indexOf(`/`)
                 if (numberAuth !== -1) pathAuth = pathAuth.substring(0, numberAuth)
-                if (pathAuth === path) yes = true
+                if (pathAuth === path) {
+                    yes = true
+                    name = i.name
+                }
             })
             publicRoutes.forEach(i => {
                 let pathPublic = i.path.replace("/","")
                 let numberPublic = pathPublic.indexOf(`/`)
                 if (numberPublic !== -1) pathPublic = pathPublic.substring(0, numberPublic)
-                if (pathPublic === path) yes = true
+                if (pathPublic === path) {
+                    yes = true
+                    name = i.name
+                }
             })
             brandStore.brands.forEach(i => {
                 let pathBrand = i.name.toLowerCase()
                 let numberBrand = pathBrand.indexOf(`/`)
                 if (numberBrand !== -1) pathBrand = pathBrand.substring(0, numberBrand)
-                if (pathBrand === path) yes = true
+                if (pathBrand === path) {
+                    yes = true
+                    name = i.name
+                }
             })
             if (yes) {
-                setBreadCrumbsState([])
-                breadStore.setCrumbs([])
+                if (path !== "" && path !== "shop") {
+                    breadCrumbs = [ {name}, ...breadCrumbs ]
+                    setBreadCrumbsState([...breadCrumbs])
+                    breadStore.setCrumbs([...breadCrumbs])
+                }else {
+                    setBreadCrumbsState([])
+                    breadStore.setCrumbs([])
+                }
             }else {
                 recursiveFunction(path)
             }
@@ -116,6 +139,10 @@ const Aside = observer(() => {
                     fetchOneProductOnUrl(url).then(data => {
                         categories.forEach(cat => {
                             if (cat?.id === data?.categoryId) {
+                                breadCrumbs = [ {name: "article"}, ...breadCrumbs ]
+                                setBreadCrumbsState([...breadCrumbs])
+                                breadStore.setCrumbs([...breadCrumbs])
+                                // console.log("cat: ",cat)
                                 recursiveFunction(cat?.url)
                             }
                         })
@@ -139,7 +166,12 @@ const Aside = observer(() => {
         if (path === "") {
             setBreadCrumbsState([])
             breadStore.setCrumbs([])
-        }else {
+        }else {            
+            if (path.length > 0) {
+                if (path[path.length-1] === "/") {
+                    path = path.substring(0, path.length-1)
+                }
+            }
             breadCrumbs = []
             recursiveFunction(path)
         }
@@ -162,15 +194,33 @@ const Aside = observer(() => {
             <div className="AsideDiv" onClick={onClickAsideDiv}>
                 {breadCrumbsState && 
                 Array.isArray(breadCrumbsState) && 
-                breadCrumbsState.map(i => {
+                breadCrumbsState[0] !== undefined && 
+                <>
+                <div className="AsideDivNavLink">
+                    <NavLink to={"/"} style={{color:"#4cb311"}}>
+                        Главная
+                    </NavLink>
+                </div>
+                {breadCrumbsState.map((i, idx) => {
+                    if (i.name === "article") return
+                    if (idx === (breadCrumbsState.length-1)) {
+                        return (
+                            <div key={i.url+i.name} className="AsideDivNavLink">
+                                <div style={{color:"grey"}}>
+                                    {i.name}
+                                </div>
+                            </div>
+                        )
+                    }
                     return (
                         <div key={i.url+i.name} className="AsideDivNavLink" onClick={()=>onClickAsideDivNavLink(i.category)}>
-                            <NavLink to={"/" + i.url} style={{color:"#4cb311"}}>
+                            <NavLink to={"/" + i.url + "/"} style={{color:"#4cb311"}}>
                                 {i.name}
                             </NavLink>
                         </div>
                     )
-                })
+                })}
+                </>
                 } 
             </div>
         </Container>
