@@ -26,12 +26,7 @@ module.exports = async (body) => {
     xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://leidtogi.ru</loc>
-        <lastmod>${formatDate}</lastmod>
-        <priority>1.0</priority>
-    </url>
-    <url>
-        <loc>https://leidtogi.ru/shop</loc>
+        <loc>https://astelectro.ru/</loc>
         <lastmod>${formatDate}</lastmod>
         <priority>1.0</priority>
     </url>`
@@ -48,7 +43,7 @@ module.exports = async (body) => {
 // такие отступы необходимы для корректной записи в файл
                 if (i !== "/" && i !== "/shop") xml += `
     <url>
-        <loc>https://leidtogi.ru${i}</loc>
+        <loc>https://astelectro.ru${i}/</loc>
         <lastmod>${formatDate}</lastmod>
     </url>`
 
@@ -69,30 +64,15 @@ module.exports = async (body) => {
 
     let products = await Product.findAll()
     const brands = await Brand.findAll()
-            
-    let productsFilter = products.filter(i => {
-        let img                    
-        try {
-            img = JSON.parse(i.img)
-        }catch(e) {}
-        if (img && Array.isArray(img) && img[0].big !== undefined) { 
-            if ( ! i.request && i.price > 0 && i.have) return true 
-        }
-        // если нет изображений
-        // если "цена по запросу" или нет цены
-        // если нет в наличии
-        // тогда убираем из списка
-        return false                
-    })
-
-    productsFilter.forEach((i,idx) => {
+     
+    products.forEach((i,idx) => {
         
         let brandName = "unknown"
         brands.forEach(j => i.brandId === j.id ? brandName = j.name.toLowerCase() : null )
 
         xml += `
     <url>
-        <loc>https://leidtogi.ru/${brandName}/${i.url}</loc>
+        <loc>https://astelectro.ru/${brandName}/${i.url}/</loc>
         <lastmod>${formatDate}</lastmod>
     </url>`
         
@@ -122,7 +102,7 @@ xml = `<?xml version="1.0" encoding="UTF-8"?>
         
             if (yes) xml += `
     <url>
-        <loc>https://leidtogi.ru/${cat.url}</loc>
+        <loc>https://astelectro.ru/${cat.url}/</loc>
         <lastmod>${formatDate}</lastmod>
     </url>`
 
@@ -171,42 +151,6 @@ xml = `<?xml version="1.0" encoding="UTF-8"?>
         return yes
     }
 
-
-// создание brands.xml
-
-// такие отступы необходимы для корректной записи в файл
-    xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`
-
-    brands.forEach(brand => {
-        let yes = false
-        if (brand.name.toLowerCase() !== "aeg"
-            && brand.name.toLowerCase() !== "leon"
-            && brand.name.toLowerCase() !== "advanta"
-            && brand.name.toLowerCase() !== "leidtogi"
-        ) {
-            for (let prod = 0; prod < products.length; prod++) {
-                if (products[prod].brandId === brand.id) {
-                    yes = true
-                    break
-                }
-            }
-        }
-        if (yes) {
-
-            xml += `
-    <url>
-        <loc>https://leidtogi.ru/${brand.name.toLowerCase()}</loc>
-        <lastmod>${formatDate}</lastmod>
-    </url>`
-
-        }
-    })
-    
-    xml += `
-</urlset>`
-
-    fs.writeFileSync(path.resolve(__dirname, '..', '..', 'static', 'sitemaps', 'brands.xml'), xml)
 
     
 

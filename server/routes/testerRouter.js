@@ -19,8 +19,9 @@ router.get('/big_desc/:id', testerController.bigDescriptionEdit)
 
 router.get('/temp', testerController.temp)
 
-
+// добавление множителя (минимального количества заказа товара)
 router.get('/added_mult', testerController.addedMult)
+// обновление цен
 router.get('/update_prices', testerController.updatePrices)
 
 
