@@ -63,7 +63,8 @@ class mailController {
             let response
             body = {
                 ...body,
-                email_from: process.env.SMTP_USER
+                email_from: process.env.SMTP_USER,
+                to_seo: process.env.SEO_EMAIL
             }
             await axios.post(process.env.API_URL_L + "api/mail/request_products_ast", body)
                 .then(
