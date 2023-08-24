@@ -54,8 +54,8 @@ const TesterPage = () => {
 
             let response = await setSiteMap({
                 routes: [
-                    "/about-us/",
-                    "/company-details/",
+                    "/about-us",
+                    "/company-details",
                 ]
             })
 
