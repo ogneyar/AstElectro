@@ -520,7 +520,7 @@ class TesterController {
             }
             
             let products = await Product.findAll()
-            let { data } = await axios.get(process.env.NZETA_API_2_URL + "product/getProduct")
+            let { data } = await axios.get(process.env.NZETA_API_2_URL + "product/getProduct") 
 
             let response = true
             if ( ! data.error) {
@@ -533,7 +533,8 @@ class TesterController {
                                     
                     let price
                     if (filter[0] !== undefined) {
-                        price = filter[0].CATALOG_PRICE_OPT
+                        // price = filter[0].CATALOG_PRICE_OPT
+                        price = filter[0].CATALOG_PRICE_DILER
 
                         // console.error("article: ", article)
                         // console.log("oldPrice: ", oldPrice)
