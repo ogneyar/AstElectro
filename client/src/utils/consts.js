@@ -5,6 +5,7 @@ export const MAIN_ROUTE = '/' // главная страница
 
 export const ADMIN_ROUTE = '/admin/' // администрация
 export const LOGIN_ROUTE = '/login/' // вход
+export const EXIT_ROUTE = '/exit/' // выход
 export const REGISTRATION_ROUTE = '/registration/' // регистрация
 
 export const UPDATE_PRODUCTS_ROUTE = '/update_products/' // обновление товаров

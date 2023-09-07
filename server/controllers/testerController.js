@@ -533,8 +533,10 @@ class TesterController {
                                     
                     let price
                     if (filter[0] !== undefined) {
-                        // price = filter[0].CATALOG_PRICE_OPT
-                        price = filter[0].CATALOG_PRICE_DILER
+                        price = filter[0].CATALOG_PRICE_OPT
+                        // price = filter[0].CATALOG_PRICE_DILER
+
+                        price = (price - (price/100*28)).toFixed(2)
 
                         // console.error("article: ", article)
                         // console.log("oldPrice: ", oldPrice)

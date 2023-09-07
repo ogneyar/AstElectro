@@ -9,9 +9,13 @@ const router = new Router()
 
 if (process.env.URL === "http://localhost:5000") {
     router.get('/retry_mail/:id', userController.retryMail)
+    router.get('/get_users', userController.users)
 }
+// else {
+    
 
 // router.post('/registration', registrationMiddleware, userController.registration)
+router.post('/registration', userController.registration)
 router.post('/create_guest', userController.createGuest)
 router.post('/login', userController.login)
 router.post('/logout', userController.logout)
@@ -23,5 +27,8 @@ router.get('/info', authMiddleware, userController.info)
 router.get('/refresh', userController.refresh)
 router.put('/update/:id', authMiddleware, userController.update)
 
+router.get('/get_users', authMiddleware, userController.users)
+
+// }
 
 module.exports = router

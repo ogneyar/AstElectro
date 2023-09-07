@@ -16,6 +16,16 @@ const oldHost = "pzmarket.ru" // игнорировать этот хост пр
 
 class UserController {
 
+    async users(req, res, next) {
+        try {
+            const users = await User.findAll()
+            return res.json(users)
+        } catch (e) {
+            return next(res.json({error:'Ошибка метода users! ' + e}))
+        }
+    }
+
+
     async registration(req, res, next) {
         try {
             const body = req.body

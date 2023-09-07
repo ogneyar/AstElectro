@@ -5,6 +5,7 @@ import { Container, Button } from 'react-bootstrap'
 import { observer } from 'mobx-react-lite'
 
 import Order from '../../components/admin/OrderAdmin'
+import Price from '../../components/admin/Price'
 import User from '../../components/admin/UserAdmin'
 import { fetchAllCategories } from '../../http/categoryAPI'
 import { Alert } from '../../components/myBootstrap'
@@ -13,13 +14,13 @@ import Brand from '../../components/admin/Brand'
 import Product from '../../components/admin/Product'
 import DeleteSite from '../../components/admin/DeleteSite'
 import scrollUp from '../../utils/scrollUp'
-import { ADMIN_ROUTE, LOGIN_ROUTE, PARSER_ROUTE, SCROLL_TOP, SCROLL_TOP_MOBILE, TESTER_ROUTE } from '../../utils/consts'
+import { ADMIN_ROUTE, EXIT_ROUTE, LOGIN_ROUTE, PARSER_ROUTE, SCROLL_TOP, SCROLL_TOP_MOBILE, TESTER_ROUTE } from '../../utils/consts'
 
 import { Context } from '../..'
 import './AdminPage.css';
 
 
-const Admin = observer(() => {
+const Admin = observer(() => { 
     
     const { userStore, productStore, categoryStore, brandStore } = useContext(Context)
 
@@ -65,6 +66,8 @@ const Admin = observer(() => {
     // eslint-disable-next-line
     },[brandStore.brands])
 
+    const [priceVisible, setPriceVisible] = useState(false)
+
     const [orderVisible, setOrderVisible] = useState(false)
     const [userVisible, setUserVisible] = useState(false)
     
@@ -74,6 +77,9 @@ const Admin = observer(() => {
     
     const [deleteSiteVisible, setDeleteSiteVisible] = useState(false)
 
+    const onClickExit = () => {
+        history.push(EXIT_ROUTE)
+    }
     
     if (alertVisible) return <Alert show={alertVisible} onHide={() => setAlertVisible(false)} message={messageAlert} />
 
@@ -85,13 +91,21 @@ const Admin = observer(() => {
     return (
         <Container className="Content d-flex flex-column Admin Mobile">
             
-            <Button 
+            {(userStore.user?.id === 1 || userStore.user?.id === 2) && <Button 
+                variant={"outline-dark"} 
+                className="m-3 p-2 Admin_button"
+                onClick={() => setPriceVisible(true)}
+            >
+                Настройка цен
+            </Button>}
+            
+            {(userStore.user?.id === 1) && <Button 
                 variant={"outline-dark"} 
                 className="m-3 p-2 Admin_button"
                 onClick={() => setOrderVisible(true)}
             >
                 Заказы
-            </Button>
+            </Button>}
             
             {userStore.user?.id === 1 && <hr/>}
 
@@ -176,6 +190,14 @@ const Admin = observer(() => {
             <hr/>
 
             <Button 
+                variant={"outline-warning"} 
+                className="m-3 p-2 Admin_button"
+                onClick={() => onClickExit()}
+            >
+                Выход!
+            </Button>
+
+            <Button 
                 variant={"outline-danger"} 
                 className="m-3 p-2 Admin_button"
                 onClick={() => setDeleteSiteVisible(true)}
@@ -183,6 +205,8 @@ const Admin = observer(() => {
                 Удалить САЙТ!!!
             </Button>
             
+            <Price show={priceVisible} onHide={() => setPriceVisible(false)}/>
+
             <Order show={orderVisible} onHide={() => setOrderVisible(false)}/>
             <User show={userVisible} onHide={() => setUserVisible(false)}/>
 

@@ -4,6 +4,9 @@ import ParserPage from '../pages/parser/ParserPage'
 import TesterPage from '../pages/tester/TesterPage'
 
 import LoginPage from '../pages/login/LoginPage'
+import ExitPage from '../pages/admin/ExitPage'
+import RegistrationPage from '../pages/registration/RegistrationPage'
+import LkPage from '../pages/lk/LkPage'
 import ShopPage from '../pages/shop/ShopPage'
 import ProductPage from '../pages/product/ProductPage'
 import SearchPage from '../pages/search/SearchPage'
@@ -25,10 +28,11 @@ import DeletePage from '../pages/site/DeletePage'
 
 import {
     MAIN_ROUTE, ADMIN_ROUTE, PARSER_ROUTE, TESTER_ROUTE, SHOP_ROUTE, LOGIN_ROUTE,
-    PRODUCT_ROUTE, SEARCH_ROUTE, ERROR_ROUTE, ABOUT_US_ROUTE, 
-    DELIVERY_ROUTE, PRIVACY_POLICY_ROUTE, RETURNS_POLICY_ROUTE,
+    PRODUCT_ROUTE, SEARCH_ROUTE, ERROR_ROUTE, ABOUT_US_ROUTE, REGISTRATION_ROUTE,
+    DELIVERY_ROUTE, PRIVACY_POLICY_ROUTE, RETURNS_POLICY_ROUTE, LK_ROUTE,
     TERMS_OF_USE_ROUTE, WARRANTY_ROUTE, DELETE_ROUTE, UPDATE_PRODUCTS_ROUTE, 
-    UPDATE_PRICES_ROUTE, DRIVING_DIRECTIONS_ROUTE, COMPANY_DETAILS_ROUTE
+    UPDATE_PRICES_ROUTE, DRIVING_DIRECTIONS_ROUTE, COMPANY_DETAILS_ROUTE,
+    EXIT_ROUTE
 } from './consts'
 
 // brandRoutes находится в src/components/AppRouter.js
@@ -66,6 +70,21 @@ export const publicRoutes = [
     {
         path: LOGIN_ROUTE,
         component: LoginPage,
+        name: ""
+    },
+    {
+        path: EXIT_ROUTE,
+        component: ExitPage,
+        name: ""
+    },
+    {
+        path: REGISTRATION_ROUTE,
+        component: RegistrationPage,
+        name: ""
+    },
+    {
+        path: LK_ROUTE,
+        component: LkPage,
         name: ""
     },
     {
