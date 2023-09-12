@@ -6,6 +6,7 @@
 
 User-agent: *
 Allow: *
+Disallow: /nzeta/
 Disallow: /shop/
 Disallow: /cart/
 Disallow: /error/

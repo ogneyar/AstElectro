@@ -199,7 +199,7 @@ const ProductPage =  observer((props) => {
                         : null}
                     </div>
                     {/* Ссылка, для того чтобы можно было правой клавишей мыши вызвать контекстное меню */}
-                    <a href={product.url}>
+                    <a href={"/nzeta/"+product.url}>
                         <div
                             className={"ProductImage_ImageBig"}
                             style={{background:`url(${image}) 50% 50% / ${widthHeight} auto no-repeat`,width:widthHeight,height:widthHeight}}

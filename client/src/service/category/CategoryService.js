@@ -24,8 +24,6 @@ const CategoryService = observer((props) => {
     const onClickSelectedCategory = (category) => {
         categoryStore.setSelectedCategory(category)
         if (props.page !== "brandPage") {
-            // history.push(category.url)
-            // history.push("/" + category.url)
             history.push("/" + category.url + "/")
          } else {
             history.push(`${window.location.pathname}?category=${category.id}`)
