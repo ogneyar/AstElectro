@@ -9,13 +9,14 @@ import { API_URL, URL, SHOP_ROUTE } from '../../utils/consts'
 import Notification from '../myBootstrap/Notification'
 import { Button } from '../myBootstrap'
 import { Context } from '../..'
-import './RequestPrice.css'
 import Loading from '../Loading'
 import Phone from '../helpers/phone/Phone'
 import Email from '../helpers/email/Email'
 import { sendRequestPrice, sendRequestProducts, sendRequestProductsL } from '../../http/mailAPI'
 import { fetchCategoryById } from '../../http/categoryAPI'
+import { productForm } from '../../service/yandexMetrika/reachGoal'
 
+import './RequestPrice.css'
 
 
 const RequestPrice = (props) => { 
@@ -90,6 +91,8 @@ const RequestPrice = (props) => {
             window.alert("Необходимо ввести почту вида email@mail.ru.")
         }else {
             setLoading(true)
+
+            productForm() // yandexMetrika
 
             if (props.action === "Заказ") {
                 await sendRequestProductsL({

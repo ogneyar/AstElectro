@@ -37,23 +37,17 @@ const CategoryItem = observer((props) => {
     }
 
 
-    return (
+    return (  
+        // SEOшники попросили добавить ; #рукалицо
+        // <a href={"/"+category.url+"/"}>
         <div
             className="CategoryItem"
+            // SEOшники попросили убрать; #рукалицо
             onClick={() => onClickCategoryItem()}
-            // onContextMenu={e => onClickContextMenu(e)}
         >
             <Card 
                 className="CategoryItem_card"
             >
-
-                {/* <Image 
-                    className="CategoryItem_image" 
-                    src={category.img && Array.isArray(category.img)  && category.img[0]?.big !== undefined
-                        ? API_URL + category.img[0].big 
-                        : API_URL + "unknown.jpg"
-                    } 
-                /> */}
 
                 {category?.name === "Термоусаживаемые кабельные муфты и аксессуары" && <Image className="CategoryItem_image" src={temp} />}
                 {category?.name === "Наконечники, гильзы и соединители" && <Image className="CategoryItem_image" src={temp2} />}
@@ -89,6 +83,7 @@ const CategoryItem = observer((props) => {
 
 
         </div>
+        // {/* </a> */}
     )
 })
 

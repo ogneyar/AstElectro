@@ -10,6 +10,7 @@ import { Button } from '../myBootstrap'
 import Loading from '../Loading'
 import Phone from '../helpers/phone/Phone'
 import { sendCallBackL } from '../../http/mailAPI'
+import { callbackForm } from '../../service/yandexMetrika/reachGoal'
 
 import './CallBack.css'
 
@@ -38,6 +39,8 @@ const CallBack = (props) => {
             window.alert("Необходимо ввести номер телефона (10ть чисел).")
         }else {
             setLoading(true)
+
+            callbackForm() // yandexMetrika
 
             await sendCallBackL({
                 name,

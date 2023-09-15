@@ -339,8 +339,19 @@ const CategoryList = observer((props) => {
                                                 {inf.name === "Артикул"
                                                 ? 
                                                 <>
-                                                    <span onClick={() => { history.push("/nzeta/"+product.url+"/"); scrollUp()}} style={{color: "green", cursor: "pointer"}}>
+                                                    <span 
+                                                        onClick={() => { 
+                                                            {/* SEOшники попросили убрать; #рукалицо */}
+                                                            history.push("/nzeta/"+product.url+"/"); scrollUp()
+                                                        }} 
+                                                        style={{color: "green", cursor: "pointer"}}
+                                                    >
+                                                        
+                                                    {/* SEOшники попросили добавить ; #рукалицо */}
+                                                    {/* <a href={"/nzeta/"+product.url+"/"}> */}
                                                         {inf.value}
+                                                    {/* </a> */}
+
                                                     </span>
                                                     <RequestPrice
                                                         product={product}

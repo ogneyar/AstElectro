@@ -16,6 +16,8 @@ import CallBack from '../../callback/CallBack'
 import logo from '../../../assets/logoSvg/AST3.svg'
 // import logo from '../../../assets/logoSvg/AST4.svg'
 
+import { mailClick, telClick } from '../../../service/yandexMetrika/reachGoal'
+
 import { Context } from '../../../'
 import './NavBar.css'
 
@@ -77,13 +79,22 @@ const NavBar = observer(() => {
                         <label className="NavBar_Col_Contacts_Address">
                             {ADDRESS}
                         </label>
-                        <label className="NavBar_Col_Contacts_Phone">
+                        <label 
+                            className="NavBar_Col_Contacts_Phone"
+                            onClick={telClick}
+                        >
                             {HtmlReactParser(PHONE_ONE)}
                         </label>
-                        <label className="NavBar_Col_Contacts_Phone">
+                        <label 
+                            className="NavBar_Col_Contacts_Phone"
+                            onClick={telClick}
+                        >
                             {HtmlReactParser(PHONE_TWO)}
                         </label>
-                        <label className="NavBar_Col_Contacts_Mail">
+                        <label 
+                            className="NavBar_Col_Contacts_Mail"
+                            onClick={mailClick}
+                        >
                             {HtmlReactParser(MAIL)} 
                         </label>
                         <CallBack /> 

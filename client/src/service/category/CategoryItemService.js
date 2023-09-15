@@ -40,11 +40,13 @@ const CategoryItemService = observer(({ item, funcOnClick }) => {
         <div
             className={item?.sub_category_id === 0 ? "" : "CategoryItemService"}
         >
+        {/* SEOшники попросили добавить ; #рукалицо */}
+        {/* <a href={"/" + item?.url + "/"}> */}
             <ListGroup.Item 
                 active={item?.id === categoryStore.selectedCategory.id}
                 onClick={() => {
+                    {/* SEOшники попросили убрать; #рукалицо */}
                     funcOnClick(item) // функция выделяет выбранную категорию
-                    // onClickListItem("only_open") // функция только раскрывает выбранную категорию
                     onClickListItem() // функция раскрывает и закрывает выбранную категорию
                 }}
                 key={item?.id}
@@ -69,6 +71,7 @@ const CategoryItemService = observer(({ item, funcOnClick }) => {
                     
                 </div>}
             </ListGroup.Item>
+        {/* </a> */}
 
             <div
                 className="ml-3"
