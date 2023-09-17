@@ -112,7 +112,7 @@ const Search = observer((props) => {
                 })
                 history.push(`/${brandName}/${val.url}`)
             }
-        scrollUp(window.innerWidth < 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
+        if (val !== "") scrollUp(window.innerWidth < 991 ? SCROLL_TOP : SCROLL_TOP_MOBILE)
     }
 
     const onKeyDownInput = (e) => {

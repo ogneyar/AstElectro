@@ -197,9 +197,12 @@ const Aside = observer(() => {
                 breadCrumbsState[0] !== undefined && 
                 <>
                 <div className="AsideDivNavLink">
-                    <NavLink to={"/"} style={{color:"#4cb311"}}>
+                    {/* // SEOшники попросили добавить ; #рукалицо */}
+                    <a href={"/"} style={{color:"#4cb311"}}>
+                    {/* <NavLink to={"/"} style={{color:"#4cb311"}}> */}
                         Главная
-                    </NavLink>
+                    {/* </NavLink> */}
+                    </a>
                 </div>
                 {breadCrumbsState.map((i, idx) => {
                     if (i.name === "article") return
@@ -214,9 +217,12 @@ const Aside = observer(() => {
                     }
                     return (
                         <div key={i.url+i.name} className="AsideDivNavLink" onClick={()=>onClickAsideDivNavLink(i.category)}>
-                            <NavLink to={"/" + i.url + "/"} style={{color:"#4cb311"}}>
+                            {/* // SEOшники попросили добавить ; #рукалицо */}
+                            <a href={"/" + i.url + "/"} style={{color:"#4cb311"}}>
+                            {/* <NavLink to={"/" + i.url + "/"} style={{color:"#4cb311"}}> */}
                                 {i.name}
-                            </NavLink>
+                            {/* </NavLink> */}
+                            </a>
                         </div>
                     )
                 })}

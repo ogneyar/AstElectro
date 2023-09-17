@@ -39,11 +39,11 @@ const CategoryItem = observer((props) => {
 
     return (  
         // SEOшники попросили добавить ; #рукалицо
-        // <a href={"/"+category.url+"/"}>
+        <a href={"/"+category.url+"/"}>
         <div
             className="CategoryItem"
             // SEOшники попросили убрать; #рукалицо
-            onClick={() => onClickCategoryItem()}
+            // onClick={() => onClickCategoryItem()}
         >
             <Card 
                 className="CategoryItem_card"
@@ -83,7 +83,7 @@ const CategoryItem = observer((props) => {
 
 
         </div>
-        // {/* </a> */}
+        </a>
     )
 })
 

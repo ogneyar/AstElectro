@@ -342,15 +342,15 @@ const CategoryList = observer((props) => {
                                                     <span 
                                                         onClick={() => { 
                                                             {/* SEOшники попросили убрать; #рукалицо */}
-                                                            history.push("/nzeta/"+product.url+"/"); scrollUp()
+                                                            // history.push("/nzeta/"+product.url+"/"); scrollUp()
                                                         }} 
                                                         style={{color: "green", cursor: "pointer"}}
                                                     >
                                                         
                                                     {/* SEOшники попросили добавить ; #рукалицо */}
-                                                    {/* <a href={"/nzeta/"+product.url+"/"}> */}
+                                                    <a href={"/nzeta/"+product.url+"/"}>
                                                         {inf.value}
-                                                    {/* </a> */}
+                                                    </a>
 
                                                     </span>
                                                     <RequestPrice
