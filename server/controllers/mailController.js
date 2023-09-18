@@ -8,7 +8,7 @@ class mailController {
     async requestPrice(req, res, next) {
         try {
             let body = req.body
-            if (!body || body === {}) body = req.query
+            if (!body) body = req.query
             let response
             await mailService.sendRequestPrice(process.env.ADMIN_EMAIL, body) 
                 .then(data => {
@@ -29,7 +29,7 @@ class mailController {
     async requestProducts(req, res, next) {
         try {
             let body = req.body
-            if (!body || body === {} || body.name === undefined) body = req.query
+            if (!body || body.name === undefined) body = req.query
             let response
             // console.log("requestProducts")
             // console.log(body)
@@ -59,11 +59,12 @@ class mailController {
     async requestProductsL(req, res, next) {
         try {
             let body = req.body
-            if (!body || body === {} || body.name === undefined) body = req.query
+            if (!body || body.name === undefined) body = req.query
             let response
             body = {
                 ...body,
                 email_from: process.env.SMTP_USER,
+                to_admin: process.env.ADMIN_EMAIL,
                 to_seo: process.env.SEO_EMAIL
             }
             await axios.post(process.env.API_URL_L + "api/mail/request_products_ast", body)
@@ -91,11 +92,13 @@ class mailController {
     async callbackL(req, res, next) {
         try {
             let body = req.body
-            if (!body || body === {} || body.name === undefined) body = req.query
+            if (!body || body.name === undefined) body = req.query
             let response
             body = {
                 ...body,
-                email_from: process.env.SMTP_USER
+                email_from: process.env.SMTP_USER,
+                to_admin: process.env.ADMIN_EMAIL,
+                to_seo: process.env.SEO_EMAIL
             }
             await axios.post(process.env.API_URL_L + "api/mail/callback_ast", body)
                 .then(
