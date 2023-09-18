@@ -11,11 +11,11 @@ export function mailClick() {
 }
 
 export function callbackForm() {
-    alert('ast_callback_form_send')
+    // alert('ast_callback_form_send')
     ym(94591114,'reachGoal','ast_callback_form_send')
 }
 
 export function productForm() {
-    alert('ast_product_form_send')
+    // alert('ast_product_form_send')
     ym(94591114,'reachGoal','ast_product_form_send')
 }
