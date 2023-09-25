@@ -13,7 +13,7 @@ import CallBack from '../../callback/CallBack'
 // import logo from '../../../assets/logo.png'
 // import logo from '../../../assets/logoSvg/AST1.svg'
 // import logo from '../../../assets/logoSvg/AST2.svg'
-import logo from '../../../assets/logoSvg/AST3.svg'
+import logo from '../../../assets/logoSvg/AST3.svg' 
 // import logo from '../../../assets/logoSvg/AST4.svg'
 
 import { mailClick, telClick } from '../../../service/yandexMetrika/reachGoal'
@@ -43,11 +43,29 @@ const NavBar = observer(() => {
     
 
     return (
-        <Navbar 
+        // <Navbar 
+        <div
             bg="secondary" 
             variant="secondary" 
             className="NavBar"
+
         >
+            <Container
+                    className="RealTop_Container"
+                >
+                    <div className="RealTop_Row">
+                        <div className="RealTop_Image"
+                            onClick={() => onClickAndScroll(MAIN_ROUTE)}
+                        >
+                            <Image src={logo} className="RealTop_Logo" width={"100"} />
+                        </div>
+                        <div 
+                            className="RealTop_Col" 
+                        >
+                            Оптовая продажа электротехнической продукции
+                        </div>
+                    </div>
+            </Container>
             <Container 
                 className="NavBar_Container"
             >
@@ -58,7 +76,7 @@ const NavBar = observer(() => {
                         className="NavBar_Col_Logo"
                     >
                         <div className="NavLink NavBar_NavLink"
-                            onClick={() => onClickAndScroll("/")}
+                            onClick={() => onClickAndScroll(MAIN_ROUTE)}
                         >
                             <Image src={logo} className="NavBar_Logo" />
                         </div>
@@ -99,6 +117,32 @@ const NavBar = observer(() => {
                         </label>
                         <CallBack /> 
                     </div>
+                    
+                    {/* Дополнительный элемент с права, появляющийся в планшетной версии */}
+                    <div 
+                        className="NavBar_Col_DoublePhones NavBar_Col_Contacts"
+                    >
+                        
+                        <label 
+                            className="NavBar_Col_DoublePhones_Phone"
+                            onClick={telClick}
+                        >
+                            {HtmlReactParser(PHONE_ONE)}
+                        </label>
+                        <label 
+                            className="NavBar_Col_DoublePhones_Phone"
+                            onClick={telClick}
+                        >
+                            {HtmlReactParser(PHONE_TWO)}
+                        </label>
+                        <label 
+                            className="NavBar_Col_DoublePhones_Mail"
+                            onClick={mailClick}
+                        >
+                            {HtmlReactParser(MAIL)} 
+                        </label>
+                    </div> 
+
                     <div
                         className="NavBar_Col_Buttons"
                     >
@@ -132,7 +176,8 @@ const NavBar = observer(() => {
 
                 </div>
             </Container>
-        </Navbar>
+        {/* </Navbar> */}
+        </div>
     )
 })
 

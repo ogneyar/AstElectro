@@ -46,8 +46,23 @@
     font-weight: 700;
 }
 
+.CallBack_SpanBr {
+    /* background-color: aquamarine; */
+    height: 0px;
+    display: none;
+}
+
 @media (max-width: 991px) {
     .CallBack_Notification_fields label {
+        display: none;
+    }
+    .CallBack_SpanBr {
+        display: block;
+    }
+}
+
+@media(max-width: 767px) {
+    .CallBack_SpanBr {
         display: none;
     }
 }

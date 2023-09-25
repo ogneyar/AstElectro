@@ -1,13 +1,41 @@
-.NavBar {}
+.NavBar {
+    /* background-color: silver; */
+    background-color: rgb(108, 117, 126);
+    /* background-image: url("../../../assets/header/background.jpg"); */
+    /* background-attachment: fixed; */
+    /* background-repeat: round; */
+}
 
+.RealTop {
+    /* width: 100%; */
+}
+.RealTop_Container {
+    width: 100%;
+    /* background-color: aqua; */
+}
+.RealTop_Row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.RealTop_Col {    
+    font-size: 2.5rem;
+    color: var(--main-white-color);
+    text-align: center;
+}
+.RealTop_Image {
+    display: none;
+}
 .NavBar_Container {
     width: 100%;
     padding-right: 10px;
+    /* background-color: brown; */
 }
 
 .NavBar_Row {
     width: 100%;
-    margin: 20px 0;
+    margin: 0 0 20px 0;
     padding: 0;
     display:flex;
     align-items: center;
@@ -20,6 +48,7 @@
     color: var(--main-white-color);
     text-align: center;
     padding: 0 20px;
+    display: none;
 }
 
 .NavBar_Col_Buttons {
@@ -32,6 +61,7 @@
     flex-direction: column;
     align-items: left;
     color: var(--main-white-color);
+    /* background-color: blueviolet; */
 }
 .NavBar_Col_Contacts label {
     padding: 0;
@@ -46,6 +76,57 @@
 .NavBar_Col_Contacts_City {
     display: none;
 }
+.NavBar_Col_Contacts_Address {
+    text-align: center;
+}
+
+.NavBar_Col_DoublePhones {
+    /* display: none; */
+    text-align: center;
+    align-self: center;
+    margin-left: 10px;
+}
+
+.NavBar_Col_Contacts_Address {
+    text-align: center;
+}
+.NavBar_Col_Contacts_Name,
+.NavBar_Col_Contacts_Phone,
+.NavBar_Col_Contacts_Mail {
+    display: none;
+}
+
+
+
+/* Это для фонового изображения */
+/* .NavBar {
+    background-image: url("../../../assets/header/background.jpg");
+    background-attachment: fixed;
+    background-repeat: round;
+}
+.NavBar_Col_Contacts,
+.RealTop_Col {
+    color: black;
+}
+.NavBar_Col_Contacts label a {
+    color: rgb(15, 136, 10);
+}
+.RealTop_Col,
+.NavBar_Col_DoublePhones,
+.NavBar_Col_Contacts_Name,
+.NavBar_Col_Contacts_Phone,
+.NavBar_Col_Contacts_Mail,
+.NavBar_Col_Contacts_Address {
+    background-color: silver;
+    opacity: 0.8;
+    padding: 0 10px;
+    border-radius: 5px;
+} */
+/* Это для фонового изображения */
+
+
+
+
 
 .NavBar_Cart,
 .NavBar_Spinner {
@@ -90,18 +171,58 @@
 .NavBar_Logo {
     /* background-color: var(--main-white-color); */
     padding: 10px;
-    width: 280px;
+    /* width: 280px; */
+    width: 150px;
 }
 
+
+
+
+@media(max-width:991px) {
+    .RealTop_Col {    
+        font-size: 1.6rem;
+    }
+    .RealTop {
+        display: block;
+    }
+}
+
+@media(max-width: 767px) {
+    .RealTop_Col {    
+        font-size: 1.3rem;
+    }
+    .RealTop_Image {
+        display: block;
+    }
+}
+
+@media(max-width:410px) {
+    .RealTop_Col {    
+        font-size: 1.2rem;
+    }
+}
+
+@media(max-width:340px) {
+    .RealTop_Col {    
+        font-size: 1rem;
+    }
+}
 
 
 @media(max-width:991px) {
     .NavBar_Col_Contacts {
         font-size: 1rem;
+        min-width: 45%;
+    }
+    .NavBar_Col_DoublePhones {
+        min-width: auto;
+        align-self: flex-end;
+        margin-bottom: 7px;
     }
     .NavBar_Col_Description {
-        margin-left: -20px;
-        font-size: 1.2rem;
+        /* margin-left: -20px; */
+        /* font-size: 1.2rem; */
+        display: none;
     }
     .NavBar_Col_Contacts_Name,
     .NavBar_Col_Contacts_Mail {
@@ -118,17 +239,34 @@
     }
     .NavBar_Logo {
         padding: 5px;
-        width: 200px;
+        width: 160px;
+    }
+    .NavBar_Col_DoublePhones {
+        display: block;
+    }
+    .NavBar_Col_Contacts_Phone {
+        display: none;
     }
 }
 
 @media(max-width: 767px) {
     .NavBar_Col_Contacts {
         /* display: none; */
-        padding-left: 20px;
+        /* padding-left: 20px; */
+        align-items: center;
     }
-    .NavBar_Col_Description {
+    .NavBar_Col_Description,
+    .NavBar_Col_Logo {
         display: none;
+    }
+    .NavBar_Row {
+        justify-content:center;
+    }
+    .NavBar_Col_DoublePhones {
+        display: none;
+    }
+    .NavBar_Col_Contacts_Phone {
+        display: block;
     }
 }
 

@@ -65,7 +65,8 @@ const CallBack = (props) => {
                 setNotificationVisible(true)
             }}
         >
-            Заказать обратный звонок
+            {/* Заказать обратный звонок */}
+            Получить <span className='CallBack_SpanBr'><br /></span>оптовый лист
         </Button>
 
         <Notification 

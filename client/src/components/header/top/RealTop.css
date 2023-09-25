@@ -1,38 +1,49 @@
 
 .RealTop {
     /* width: 100%; */
-    display: none;
-    background-color: aqua;
+    /* display: none; */
+    background-color: silver;
 }
 
 .RealTop_Container {
     width: 100%;
     /* display: none; */
+    /* background-color: aqua; */
 }
 
 .RealTop_Row {
     /* width: 100%; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .RealTop_Col {    
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--main-white-color);
     /* width: 100%; */
     text-align: center;
 }
 
+.RealTop_Image {
+    display: none;
+}
 
 @media(max-width:991px) {
     .RealTop_Col {    
-        font-size: 2rem;
+        font-size: 1.6rem;
+    }
+    .RealTop {
+        display: block;
     }
 }
 
 @media(max-width: 767px) {
     .RealTop_Col {    
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
-    .RealTop {
+    .RealTop_Image {
         display: block;
     }
 }
