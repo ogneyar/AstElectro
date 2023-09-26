@@ -23,3 +23,9 @@ export const sendCallBackL = async (props) => {
     const {data} = await $host.post('api/mail/callback_l', props) 
     return data  
 }
+
+export const sendMessageL = async (props) => {
+    // props = { to_seo, subject, html } // to_seo - необязателен
+    const {data} = await $host.post('api/mail/send_message_l', props) 
+    return data  
+}

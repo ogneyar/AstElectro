@@ -10,7 +10,7 @@ export function mailClick() {
     ym(94591114,'reachGoal','ast_mail_click')
 }
 
-export function callbackForm() {
+export function callbackForm() { // теперь WholesaleSheet
     // alert('ast_callback_form_send')
     ym(94591114,'reachGoal','ast_callback_form_send')
 }

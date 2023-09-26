@@ -4,19 +4,20 @@ import { observer } from 'mobx-react-lite'
 import { useHistory } from 'react-router'
 
 import scrollUp from '../../utils/scrollUp'
-import { MAIN_ROUTE } from '../../utils/consts'
+import { MAIN_ROUTE, SHOP_ROUTE } from '../../utils/consts'
 import Notification from '../myBootstrap/Notification'
 import { Button } from '../myBootstrap'
 import Loading from '../Loading'
 import Phone from '../helpers/phone/Phone'
-import { sendCallBackL } from '../../http/mailAPI'
+import Email from '../helpers/email/Email'
+import { sendMessageL } from '../../http/mailAPI'
 import { callbackForm } from '../../service/yandexMetrika/reachGoal'
 
 import './CallBack.css'
 
 
 
-const CallBack = (props) => { 
+const WholesaleSheet = (props) => { 
     
     const [ notificationVisible, setNotificationVisible ] = useState(false)
 
@@ -25,6 +26,7 @@ const CallBack = (props) => {
     
     const [ name, setName ] = useState("")
     const [ phone, setPhone ] = useState("")
+    const [ email, setEmail ] = useState("")
 
     const history = useHistory()
 
@@ -32,7 +34,7 @@ const CallBack = (props) => {
     if (props?.className) className = props?.className
 
 
-    const onClickCallBack = async () => {
+    const onClickGetWholesaleSheet = async () => {
         if ( ! name ) {
             window.alert("Необходимо ввести имя.")
         }else if ( ! phone || phone.replace(/\D/g, "").length < 10 ) {
@@ -42,10 +44,33 @@ const CallBack = (props) => {
 
             callbackForm() // yandexMetrika
 
-            await sendCallBackL({
-                name,
-                phone
-            })
+            let subject = 'Запрос оптового листа.'
+
+            let dataEmail = ""
+            
+            if (email) {
+                dataEmail = `<p>Почта - ${email}</p>`
+            }
+
+            let html = `
+                <div>
+                    <h1>Клиент запросил оптовый лист</h1>
+                    <hr />                    
+                    <div>
+                        <p>Имя клиента - ${name}</p>
+                        <p>Номер телефона - ${phone}</p>
+                        ${dataEmail}
+                    </div>
+                </div>
+                `
+
+            let data = { 
+                to_seo: true, // отправка дублирующего письма SEOшникам 
+                subject,
+                html
+            } 
+
+            await sendMessageL(data) // { to_seo, subject, html }
 
             setLoading(false)
             setSuccess(true)
@@ -65,7 +90,6 @@ const CallBack = (props) => {
                 setNotificationVisible(true)
             }}
         >
-            {/* Заказать обратный звонок */}
             Получить <span className='CallBack_SpanBr'><br /></span>оптовый лист
         </Button>
 
@@ -76,6 +100,7 @@ const CallBack = (props) => {
                 setLoading(false)
                 setName("")
                 setPhone("")
+                setEmail("")
                 setNotificationVisible(false)
                 if (success) {
                     history.push(MAIN_ROUTE)
@@ -84,13 +109,13 @@ const CallBack = (props) => {
             }}
             time="600000" // в милисекундах
             size="lg"
-            title={props.action === "Заказ обратного звонка!"}
-            titleMore={success ? "Успех" : loading ? "..." : "Укажите своё имя и номер телефона."}
+            title={props.action === "Заказ оптового листа!"}
+            titleMore={success ? "Успех" : loading ? "..." : "Укажите своё имя, номер телефона и почту."}
         >
 
             {loading ? <Loading /> 
             :
-            success ? // если запрос звонка отправлен 
+            success ? // если запрос оптового прайса отправлен
             <div
                 className="CallBack_Success"
             >
@@ -140,6 +165,14 @@ const CallBack = (props) => {
                                 <Phone phone={phone} setPhone={setPhone} placeholder="Номер телефона" withLabel={true} />
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <label>Ваша почта (email)</label>&nbsp;
+                            </td>
+                            <td>
+                                <Email email={email} setEmail={setEmail} placeholder="Введите email" withLabel={true} />
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
@@ -149,9 +182,9 @@ const CallBack = (props) => {
                 >
                     <Button
                         variant="warning"
-                        onClick={() => onClickCallBack() }
+                        onClick={() => onClickGetWholesaleSheet() }
                     >
-                        Заказать звонок!
+                        Получить оптовый прайс
                     </Button>
                     
                     <Button
@@ -170,4 +203,4 @@ const CallBack = (props) => {
     )
 }
 
-export default observer(CallBack)
+export default observer(WholesaleSheet)

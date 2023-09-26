@@ -20,6 +20,7 @@ import { mailClick, telClick } from '../../../service/yandexMetrika/reachGoal'
 
 import { Context } from '../../../'
 import './NavBar.css'
+import WholesaleSheet from '../../callback/WholesaleSheet'
 
 
 const NavBar = observer(() => {
@@ -115,7 +116,8 @@ const NavBar = observer(() => {
                         >
                             {HtmlReactParser(MAIL)} 
                         </label>
-                        <CallBack /> 
+                        {/* <CallBack /> */}
+                        <WholesaleSheet />
                     </div>
                     
                     {/* Дополнительный элемент с права, появляющийся в планшетной версии */}

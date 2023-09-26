@@ -5,7 +5,7 @@ import { useHistory } from 'react-router'
 
 import scrollUp from '../../utils/scrollUp'
 // import { onClickButtonBuy } from '../../service/cart/CartBuyService'
-import { API_URL, URL, SHOP_ROUTE } from '../../utils/consts'
+import { API_URL, URL, MAIN_ROUTE } from '../../utils/consts'
 import Notification from '../myBootstrap/Notification'
 import { Button } from '../myBootstrap'
 import { Context } from '../..'
@@ -161,7 +161,7 @@ const RequestPrice = (props) => {
                 setEmail("")
                 setNotificationVisible(false)
                 if (success) {
-                    history.push(SHOP_ROUTE)
+                    history.push(MAIN_ROUTE)
                     scrollUp(200)
                 }
             }}
@@ -184,7 +184,7 @@ const RequestPrice = (props) => {
                     onClick={() => {
                         setSuccess(false)
                         setNotificationVisible(false)
-                        history.push(SHOP_ROUTE)
+                        history.push(MAIN_ROUTE)
                         scrollUp(200)
                     }}
                 >
