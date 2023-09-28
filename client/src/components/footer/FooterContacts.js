@@ -1,7 +1,7 @@
 
 import HtmlReactParser from 'html-react-parser'
 
-import { MAIL, ADDRESS_FULL, PHONE_ONE, PHONE_TWO, TIME_TO_WORK } from '../../utils/consts'
+import { MAIL, ADDRESS_FULL, PHONE_ONE, PHONE_TWO, TIME_TO_WORK, MAIL_TWO } from '../../utils/consts'
 import { mailClick, telClick } from '../../service/yandexMetrika/reachGoal'
 
 import './FooterContacts.css'
@@ -39,6 +39,17 @@ const FooterContacts = () => {
                             onClick={telClick}
                         >
                             <p>{HtmlReactParser(PHONE_TWO)}</p>
+                        </div>
+                    </li>
+                    <li>
+                        <span className="fa fa-envelope-o">&nbsp;</span>
+                        <div 
+                            className="media-body"
+                            onClick={mailClick}
+                        >
+                            <address>
+                                {HtmlReactParser(MAIL_TWO)}
+                            </address>
                         </div>
                     </li>
                     <li>

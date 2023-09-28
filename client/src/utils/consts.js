@@ -103,6 +103,7 @@ export const ADDRESS_FULL = "195009, Санкт-Петербург г, Конд�
 export const PHONE_ONE = `<a href="tel:+78122092331">+7 (812) 209-23-31</a>` // городской телефон
 export const PHONE_TWO = `<a href="tel:+79681803613">+7 (968) 180-36-13</a>` // 
 export const MAIL = `<a href="mailto:astoffice.spb@yandex.ru">astoffice.spb@yandex.ru</a>` // основной почтовый ящик
+export const MAIL_TWO = `<a href="mailto:ast@astelectro.ru">ast@astelectro.ru</a>` // дополнительный почтовый ящик
 export const TIME_TO_WORK = `<div><p>пн - пт: 09:00 - 18:00</p><p>сб - вс: выходной</p></div>` // время работы
 
 

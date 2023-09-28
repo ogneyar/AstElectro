@@ -5,7 +5,7 @@ import HtmlReactParser from 'html-react-parser'
 import { useHistory } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 
-import { NAME, ADDRESS, PHONE_ONE, PHONE_TWO, MAIL, MAIN_ROUTE, ADMIN_ROUTE } from '../../../utils/consts'
+import { NAME, ADDRESS, PHONE_ONE, PHONE_TWO, MAIL, MAIL_TWO, MAIN_ROUTE, ADMIN_ROUTE } from '../../../utils/consts'
 import scrollUp from '../../../utils/scrollUp'
 import { logout } from '../../../http/userAPI'
 import CallBack from '../../callback/CallBack'
@@ -99,19 +99,25 @@ const NavBar = observer(() => {
                             {ADDRESS}
                         </label>
                         <label 
-                            className="NavBar_Col_Contacts_Phone"
+                            className="NavBar_Col_Contacts_Phone NavBar_phone"
                             onClick={telClick}
                         >
                             {HtmlReactParser(PHONE_ONE)}
                         </label>
                         <label 
-                            className="NavBar_Col_Contacts_Phone"
+                            className="NavBar_Col_Contacts_Phone NavBar_phoneTwo"
                             onClick={telClick}
                         >
                             {HtmlReactParser(PHONE_TWO)}
                         </label>
                         <label 
-                            className="NavBar_Col_Contacts_Mail"
+                            className="NavBar_Col_Contacts_Mail NavBar_mailTwo"
+                            onClick={mailClick}
+                        >
+                            {HtmlReactParser(MAIL_TWO)} 
+                        </label>
+                        <label 
+                            className="NavBar_Col_Contacts_Mail NavBar_mail"
                             onClick={mailClick}
                         >
                             {HtmlReactParser(MAIL)} 
@@ -136,6 +142,12 @@ const NavBar = observer(() => {
                             onClick={telClick}
                         >
                             {HtmlReactParser(PHONE_TWO)}
+                        </label>
+                        <label 
+                            className="NavBar_Col_DoublePhones_Mail"
+                            onClick={mailClick}
+                        >
+                            {HtmlReactParser(MAIL_TWO)} 
                         </label>
                         <label 
                             className="NavBar_Col_DoublePhones_Mail"

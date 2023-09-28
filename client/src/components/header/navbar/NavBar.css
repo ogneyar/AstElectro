@@ -105,6 +105,8 @@
     background-attachment: fixed;
     /* повтор во все стороны */
     background-repeat: repeat;
+    /* растягивание во все стороны */
+    /* background-repeat: round; */
 }
 .NavBar_Col_Contacts,
 .RealTop_Col {
@@ -176,7 +178,8 @@
     /* background-color: var(--main-white-color); */
     padding: 10px;
     /* width: 280px; */
-    width: 150px;
+    width: 200px;
+    margin-top: -15px;
 }
 
 
@@ -244,6 +247,7 @@
     .NavBar_Logo {
         padding: 5px;
         width: 160px;
+        margin-top: 0;
     }
     .NavBar_Col_DoublePhones {
         display: block;
@@ -270,6 +274,12 @@
         display: none;
     }
     .NavBar_Col_Contacts_Phone {
+        display: block;
+    }
+    .NavBar_phoneTwo {
+        display: none;
+    }
+    .NavBar_mailTwo {
         display: block;
     }
 }
