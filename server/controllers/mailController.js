@@ -118,7 +118,7 @@ class mailController {
 
             return res.json(response)
         }catch(e) {
-            return next(res.json( { error: 'Ошибка метода callbackL!' } ))
+            return next(res.json( { error:  `Ошибка метода callbackL! ${e}` } ))
         }
     }
     
@@ -130,7 +130,7 @@ class mailController {
             let response
 
             let to = [ process.env.ADMIN_EMAIL ]
-            if (to_seo) to.push(process.env.SEO_EMAIL)
+            if (body.to_seo) to.push(process.env.SEO_EMAIL)
 
             body = {
                 email_from: process.env.SMTP_USER, // от кого
@@ -157,7 +157,7 @@ class mailController {
 
             return res.json(response)
         }catch(e) {
-            return next(res.json( { error: 'Ошибка метода sendMessageL!' } ))
+            return next(res.json( { error: `Ошибка метода sendMessageL! ${e}` } ))
         }
     }
 

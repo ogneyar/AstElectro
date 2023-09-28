@@ -90,7 +90,7 @@ const WholesaleSheet = (props) => {
                 setNotificationVisible(true)
             }}
         >
-            Получить <span className='CallBack_SpanBr'><br /></span>оптовый лист
+            Получить <span className='CallBack_SpanBr'><br /></span>оптовый прайс
         </Button>
 
         <Notification 

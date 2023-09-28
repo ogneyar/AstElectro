@@ -136,7 +136,7 @@ const BrandPage = (props) => {
             <div className="BrandPageHeader">
                 <div className="BrandPage_image">
                     {/* Пропорции лого бренда 7:1 */}
-                    {brandName && <img src={`images/brands/${brandName}/${brandName}_logo.jpg`}  alt={`logo_${brandName}`} />}
+                    {brandName && <img src={`/images/brands/${brandName}/${brandName}_logo.jpg`}  alt={`logo_${brandName}`} />}
                 </div>
             </div>
             <div className="BrandPageBody">
