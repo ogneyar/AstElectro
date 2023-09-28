@@ -44,7 +44,7 @@ const WholesaleSheet = (props) => {
 
             callbackForm() // yandexMetrika
 
-            let subject = 'Запрос оптового листа.'
+            let subject = 'Запрос оптового прайса.'
 
             let dataEmail = ""
             
@@ -54,7 +54,7 @@ const WholesaleSheet = (props) => {
 
             let html = `
                 <div>
-                    <h1>Клиент запросил оптовый лист</h1>
+                    <h1>Клиент запросил оптовый прайс</h1>
                     <hr />                    
                     <div>
                         <p>Имя клиента - ${name}</p>

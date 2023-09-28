@@ -125,7 +125,7 @@ class mailController {
     async sendMessageL(req, res, next) {
         try {
             let body = req.body // { to_seo, subject, html } // to_seo - необязателен
-            if (!body || body.name === undefined) body = req.query
+            if (!body || body.subject === undefined) body = req.query 
 
             let response
 
@@ -138,7 +138,7 @@ class mailController {
                 subject: body.subject, // тема письма
                 html: body.html // тело письма
             }
-
+                        
             await axios.post(process.env.API_URL_L + "api/mail/send_message_ast", body)
                 .then(
                     data => {
