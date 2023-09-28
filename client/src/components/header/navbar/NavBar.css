@@ -99,17 +99,19 @@
 
 
 /* Это для фонового изображения */
-/* .NavBar {
+.NavBar {
     background-image: url("../../../assets/header/background.jpg");
+    /* паралакс */
     background-attachment: fixed;
-    background-repeat: round;
+    /* повтор во все стороны */
+    background-repeat: repeat;
 }
 .NavBar_Col_Contacts,
 .RealTop_Col {
-    color: black;
+    /* color: black; */
 }
 .NavBar_Col_Contacts label a {
-    color: rgb(15, 136, 10);
+    /* color: rgb(15, 136, 10); */
 }
 .RealTop_Col,
 .NavBar_Col_DoublePhones,
@@ -117,11 +119,13 @@
 .NavBar_Col_Contacts_Phone,
 .NavBar_Col_Contacts_Mail,
 .NavBar_Col_Contacts_Address {
-    background-color: silver;
-    opacity: 0.8;
-    padding: 0 10px;
-    border-radius: 5px;
-} */
+    /* background-color: silver; */
+    /* opacity: 0.8; */
+    /* padding: 0 10px; */
+    /* border-radius: 5px; */    
+    text-shadow: rgb(0, 0, 0) 0 0 2px;
+    text-shadow: rgb(17, 0, 255) 0 0 5px;
+}
 /* Это для фонового изображения */
 
 
