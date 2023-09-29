@@ -111,16 +111,16 @@ const NavBar = observer(() => {
                             {HtmlReactParser(PHONE_TWO)}
                         </label>
                         <label 
-                            className="NavBar_Col_Contacts_Mail NavBar_mailTwo"
-                            onClick={mailClick}
-                        >
-                            {HtmlReactParser(MAIL_TWO)} 
-                        </label>
-                        <label 
                             className="NavBar_Col_Contacts_Mail NavBar_mail"
                             onClick={mailClick}
                         >
                             {HtmlReactParser(MAIL)} 
+                        </label>
+                        <label 
+                            className="NavBar_Col_Contacts_Mail NavBar_mailTwo"
+                            onClick={mailClick}
+                        >
+                            {HtmlReactParser(MAIL_TWO)} 
                         </label>
                         {/* <CallBack /> */}
                         <WholesaleSheet />
@@ -147,13 +147,13 @@ const NavBar = observer(() => {
                             className="NavBar_Col_DoublePhones_Mail"
                             onClick={mailClick}
                         >
-                            {HtmlReactParser(MAIL_TWO)} 
+                            {HtmlReactParser(MAIL)} 
                         </label>
                         <label 
                             className="NavBar_Col_DoublePhones_Mail"
                             onClick={mailClick}
                         >
-                            {HtmlReactParser(MAIL)} 
+                            {HtmlReactParser(MAIL_TWO)} 
                         </label>
                     </div> 
 

@@ -178,12 +178,17 @@
     /* background-color: var(--main-white-color); */
     padding: 10px;
     /* width: 280px; */
-    width: 200px;
+    width: 250px;
     margin-top: -15px;
 }
 
 
 
+@media(min-width:1400px) {
+    .NavBar_Logo {
+    margin-top: -50px;
+    }
+}
 
 @media(max-width:991px) {
     .RealTop_Col {    
@@ -279,7 +284,7 @@
     .NavBar_phoneTwo {
         display: none;
     }
-    .NavBar_mailTwo {
+    .NavBar_mail {
         display: block;
     }
 }

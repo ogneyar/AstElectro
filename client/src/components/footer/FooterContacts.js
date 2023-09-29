@@ -48,7 +48,7 @@ const FooterContacts = () => {
                             onClick={mailClick}
                         >
                             <address>
-                                {HtmlReactParser(MAIL_TWO)}
+                                {HtmlReactParser(MAIL)}
                             </address>
                         </div>
                     </li>
@@ -59,7 +59,7 @@ const FooterContacts = () => {
                             onClick={mailClick}
                         >
                             <address>
-                                {HtmlReactParser(MAIL)}
+                                {HtmlReactParser(MAIL_TWO)}
                             </address>
                         </div>
                     </li>
